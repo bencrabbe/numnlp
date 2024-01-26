@@ -1,0 +1,70 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 168, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 641, in run_until_complete
+    return future.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from myst_nb import glue
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+
+X     = np.array( [ [1,1],[1,-1],[-1,1],[-1,-1],  [0.,1],[0.,-1],[-1.,0.],[1,-0.]]  ).T
+A     = np.array([[3,0.5],[0.5,3]])
+dia,P = np.linalg.eig(A)
+D = np.diag(dia)
+
+fig,axes = plt.subplots(ncols=2)
+axes[0].scatter(X[0],X[1],color='blue')
+axes[0].legend()
+axes[0].set_xlim(-6,6)
+axes[0].set_ylim(-4,7)
+axes[0].set_title("$\mathbf{X}$")
+
+Y = P.T @ X
+axes[1].scatter(Y[0],Y[1],color='blue')
+axes[1].legend()
+axes[1].set_xlim(-6,6)
+axes[1].set_ylim(-4,7)
+axes[1].set_title("$\mathbf{P}^T\mathbf{X}$")
+
+Y = D @ P.T @ X
+axes[2].scatter(Y[0],Y[1],color='blue')
+axes[2].legend()
+axes[2].set_xlim(-6,6)
+axes[2].set_ylim(-4,7)
+axes[2].set_title("$\mathbf{P}^T\mathbf{X}$")
+
+
+glue("eigen-figures", fig, display=False)
+------------------
+
+----- stderr -----
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+----- stderr -----
+No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mIndexError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[3], line 27[0m
+[1;32m     24[0m axes[[38;5;241m1[39m][38;5;241m.[39mset_title([38;5;124m"[39m[38;5;124m$[39m[38;5;124m\[39m[38;5;124mmathbf[39m[38;5;132;01m{P}[39;00m[38;5;124m^T[39m[38;5;124m\[39m[38;5;124mmathbf[39m[38;5;132;01m{X}[39;00m[38;5;124m$[39m[38;5;124m"[39m)
+[1;32m     26[0m Y [38;5;241m=[39m D [38;5;241m@[39m P[38;5;241m.[39mT [38;5;241m@[39m X
+[0;32m---> 27[0m [43maxes[49m[43m[[49m[38;5;241;43m2[39;49m[43m][49m[38;5;241m.[39mscatter(Y[[38;5;241m0[39m],Y[[38;5;241m1[39m],color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m)
+[1;32m     28[0m axes[[38;5;241m2[39m][38;5;241m.[39mlegend()
+[1;32m     29[0m axes[[38;5;241m2[39m][38;5;241m.[39mset_xlim([38;5;241m-[39m[38;5;241m6[39m,[38;5;241m6[39m)
+
+[0;31mIndexError[0m: index 2 is out of bounds for axis 0 with size 2
+
