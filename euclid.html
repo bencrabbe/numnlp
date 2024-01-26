@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>The euclidean space &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'euclid';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Euclidean spaces : exercises" href="Euclid_exercises.html" />
+    <link rel="prev" title="Numpy exercises" href="numpy_exercises.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Numerical methods for Natural Language Processing
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">The euclidean space</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bencrabbe/numnlp.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bencrabbe/numnlp.github.io/issues/new?title=Issue%20on%20page%20%2Feuclid.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/euclid.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The euclidean space</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">Dot product</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-norm">Euclidean norm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">Euclidean distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angles">Angles</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-euclidean-space">
+<h1>The euclidean space<a class="headerlink" href="#the-euclidean-space" title="Permalink to this heading">#</a></h1>
+<p>This chapter  establishes a link between the notion of vector space with elementary notions of geometry. It is by introducing the dot product operation that we get the notions of norm, distance and angle. An <strong>euclidean space</strong> is a finite-dimensional vector space constructed over <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> which is provided with an operation called the dot product. The dot product makes it possible to construct a formalization of the notions of vector length and angles between vectors. All this makes classical geometry (Euclid’s geometry) computable and generalizable to cases of more than 2 and 3 dimensions.</p>
+<p>In a context of language modeling, the notions described in this chapter make it possible to formalize notions such as similarity or dissimilarity between language units, such as words, sentences, documents when represented by high dimensional vectors.
+This chapter eventually illustrates the application of high dimensional euclidean geometry to elementary information retrieval.</p>
+<section id="dot-product">
+<h2>Dot product<a class="headerlink" href="#dot-product" title="Permalink to this heading">#</a></h2>
+<p>Given vectors <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y} \in \mathbb{R}^n\)</span> the <strong>dot product</strong> is a function of <span class="math notranslate nohighlight">\(\mathbb{R} \times \mathbb{R} \mapsto \mathbb{R}\)</span> defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}^\top \mathbf{y} = x_1 y_1 + \ldots + x_n y_n =  \sum_{i=1}^n x_i y_i
+\]</div>
+<p>Most of the time we write the dot product <span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{y}\)</span> but we’ll sometimes also use  <span class="math notranslate nohighlight">\(\mathbf{x} \cdot \mathbf{y}\)</span> and we also find
+<span class="math notranslate nohighlight">\(\langle \mathbf{x},\mathbf{y} \rangle\)</span>.
+The dot product is <strong>commutative</strong> thus <span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{y} = \mathbf{y}^\top \mathbf{x}\)</span>, it is <strong>positive definite</strong> that is <span class="math notranslate nohighlight">\(\mathbf{x} ^\top \mathbf{x} \geq 0\)</span> and equals 0 if and only if <span class="math notranslate nohighlight">\(\mathbf{x}=\mathbf{0}\)</span>. Finally it is <strong>bilinear</strong>, that is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+  a (\mathbf{x} \top \mathbf{y}) &amp;=  (a \mathbf{x}^\top \mathbf{y})
+                                    = (\mathbf{x}^\top a\mathbf{y})\\
+      (\mathbf{x} + \mathbf{y})^\top \mathbf{z}   &amp;=    (\mathbf{x}^\top
+                                                      \mathbf{z}) +   (\mathbf{y}^\top
+                                                      \mathbf{z}) \\
+\mathbf{x}^\top  (\mathbf{y} + \mathbf{z})   &amp;=    (\mathbf{x}^\top
+                                                      \mathbf{y}) +   (\mathbf{x}^\top
+                                                      \mathbf{z}) 
+\end{align}
+\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Here’s an example:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+-1\\
+2\\
+2
+\end{bmatrix}^\top 
+\begin{bmatrix}
+1\\
+0\\
+-3
+\end{bmatrix}
+=-1 + 0 + -6 = -7
+\end{split}\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example (lookup)</p>
+<p>The dot product <span class="math notranslate nohighlight">\(\mathbf{e}\cdot \mathbf{x}\)</span> involving a unit vector <span class="math notranslate nohighlight">\(\mathbf{e}\)</span> valued at 1 at position <span class="math notranslate nohighlight">\(j\)</span> has the effect of <strong>looking up</strong> the value at position <span class="math notranslate nohighlight">\(j\)</span> in <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. For example:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{bmatrix}
+   0\\1\\0\\0
+ \end{bmatrix}^T
+ \begin{bmatrix}
+   21\\12\\-7\\3
+ \end{bmatrix}
+ =  0 +  12 +0 + 0= 12
+\end{split}\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example (mean and average)</p>
+<p>We get the <strong>sum</strong> of the vector components by computing the dot product with vector <span class="math notranslate nohighlight">\(\mathbf{1}\)</span>. For instance:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{bmatrix}
+   1\\1\\1\\1 
+ \end{bmatrix}^T
+ \begin{bmatrix}
+   21\\12\\-7\\3 
+ \end{bmatrix}
+ =
+21+12-7+3 = 29
+\end{split}\]</div>
+<p>We can also compute the <strong>average</strong> of vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with size <span class="math notranslate nohighlight">\(k\)</span> by computing
+<span class="math notranslate nohighlight">\(\frac{1}{k} \mathbf{1}^T \mathbf{x} \)</span>, as illustrated here~:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{1}{4}
+  \begin{bmatrix}
+   1\\ 1 \\\ 1 \\ 1 
+ \end{bmatrix}^T
+ \begin{bmatrix}
+   24\\16\\4\\0 
+ \end{bmatrix}
+ =
+\frac{1}{4}(24+16+4+0) = 11
+\end{split}\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example (sum of squares)</p>
+<p>We get the <strong>sum of squares</strong> of a vector’s elements by computing <span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{x}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+    7\\2\\-3
+  \end{bmatrix}^T
+  \begin{bmatrix}
+    7\\2\\-3
+  \end{bmatrix}
+  =
+  49+4+9 = 62
+\end{split}\]</div>
+</div>
+</section>
+<section id="euclidean-norm">
+<h2>Euclidean norm<a class="headerlink" href="#euclidean-norm" title="Permalink to this heading">#</a></h2>
+<p>The <strong>euclidean norm</strong> of vector <span class="math notranslate nohighlight">\(\mathbf{x}\in\mathbb{R}^n\)</span>, written <span class="math notranslate nohighlight">\(||\mathbf{x}||\)</span>
+is the map <span class="math notranslate nohighlight">\(\mathbb{R}^n \mapsto \mathbb{R}_+\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[
+||\mathbf{x}|| = \sqrt{x_1^2+\ldots + x_n^2}
+\]</div>
+<p>This is the square root of the sum of squares of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. The following definition is equivalent:</p>
+<div class="math notranslate nohighlight">
+\[
+||\mathbf{x}|| = \sqrt{\mathbf{x}^T\mathbf{x}}
+\]</div>
+<p>The norm is <strong>positive definite</strong>, that is <span class="math notranslate nohighlight">\(||\mathbf{x}|| \geq 0\)</span> and <span class="math notranslate nohighlight">\(||\mathbf{x}|| = 0\)</span> if and only if <span class="math notranslate nohighlight">\(\mathbf{x} = 0\)</span>. The norm is <strong>homogeneous</strong>, that is <span class="math notranslate nohighlight">\(||\lambda \mathbf{x} || = |\lambda|\, || \mathbf{x} || \)</span>. And critically the norm satisfies the <strong>triangular inequality</strong>, that is <span class="math notranslate nohighlight">\(||\mathbf{x} + \mathbf{y}|| \leq ||\mathbf{x}|| + ||\mathbf{y}||\)</span>.</p>
+<div class="admonition-note-norm-and-pythagoras-theorem admonition">
+<p class="admonition-title">Note (norm and Pythagoras theorem)</p>
+<p>The norm is a quantity that can be interpreted as the length of a vector. This can be illustrated from the 2D case where the norm of a vector is the square root of the hypothenuse of  a right-angle triangle. Thus the norm definition is just an application of  Pythagoras theorem for the 2D case.  Here is how it works:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbf{x} &amp;= \begin{bmatrix}x_1\\x_2\end{bmatrix}\\
+||\mathbf{x}|| &amp;= \sqrt{x^2_1 + x^2_2}
+\end{align}
+\end{split}\]</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/e4113c83e940b730d9bcf700ae4e91efbfee4f928a586c34385d1742d9c6ea62.png" src="_images/e4113c83e940b730d9bcf700ae4e91efbfee4f928a586c34385d1742d9c6ea62.png" />
+</div>
+</div>
+<div class="admonition-note-triangular-inequality admonition">
+<p class="admonition-title">Note (triangular inequality)</p>
+<p>The triangular inequality is a formalization of the statement : “the shortest past between two points is the straight line”</p>
+<p><span class="math notranslate nohighlight">\(||\mathbf{x} + \mathbf{y}|| \leq ||\mathbf{x}|| + ||\mathbf{y}||\)</span>.</p>
+<p>The inequality becomes an equality when <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are colinear. Here is an illustration for the 2D case</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/1f57456b98e09adf4950c356b55a3695ce4f85c44d51a5e2c4ad4726cf5f4c20.png" src="_images/1f57456b98e09adf4950c356b55a3695ce4f85c44d51a5e2c4ad4726cf5f4c20.png" />
+</div>
+</div>
+</section>
+<section id="euclidean-distance">
+<h2>Euclidean distance<a class="headerlink" href="#euclidean-distance" title="Permalink to this heading">#</a></h2>
+<p>Informally the euclidean distance is defined as the distance between the two endpoints of the vectors.
+The vector linking two vectors <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is the vector <span class="math notranslate nohighlight">\(\mathbf{x}-\mathbf{y}\)</span>.
+Then the <strong>euclidean distance</strong> is the norm of this vector:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{DIST}(\mathbf{x},\mathbf{y}) = || \mathbf{x}-\mathbf{y} ||
+\]</div>
+<div class="admonition-note-parallelogram-law-of-vector-substraction admonition">
+<p class="admonition-title">Note (parallelogram law of vector substraction)</p>
+<p>The distance definition is intuitive again in the 2D case. It consists of expressing the
+parallelogram law of vector substraction.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbf{x} - \mathbf{y} &amp; =\begin{bmatrix} x_1\\x_2 \end{bmatrix} - \begin{bmatrix} y_1\\y_2 \end{bmatrix} \\
+&amp; =\begin{bmatrix}
+x_1 - y_1\\
+x_2 - y_2 
+\end{bmatrix}
+\end{align}
+\end{split}\]</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/dcc89ab7b4f664e87186e3b0a52d02b88e741f3fc2c9f422150fe0f449d9fa2e.png" src="_images/dcc89ab7b4f664e87186e3b0a52d02b88e741f3fc2c9f422150fe0f449d9fa2e.png" />
+</div>
+</div>
+</section>
+<section id="angles">
+<h2>Angles<a class="headerlink" href="#angles" title="Permalink to this heading">#</a></h2>
+<p>The <strong>angle</strong> <span class="math notranslate nohighlight">\(\theta\)</span> between two vectors <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is defined from its cosine, which is the ratio between the dot product of the two vectors and their respective norms:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos\theta = \frac{\mathbf{x}^\top \mathbf{y}}{||\mathbf{x}|| ||\mathbf{y}||}
+\]</div>
+<p>The remainder of this section aims at justifying this definition.  The main result justifying this definition in generality is the
+<strong>Cauchy-Schwarz</strong> inequality that upper bounds the absolute value of the dot product:</p>
+<div class="math notranslate nohighlight">
+\[
+| \mathbf{x}^\top \mathbf{y} |   \leq ||\mathbf{x}|| \, ||\mathbf{y}||
+\]</div>
+<p>this inequality proven for any euclidean space, irrespective of its dimension, implies that <span class="math notranslate nohighlight">\( \frac{\mathbf{x}^\top \mathbf{y}}{||\mathbf{x}|| ||\mathbf{y}||}\)</span>
+has values in <span class="math notranslate nohighlight">\([-1,1]\)</span> and can therefore be interpreted as a cosine function that also returns values in this interval.</p>
+<div class="admonition-note-vector-similarity admonition">
+<p class="admonition-title">Note (vector similarity)</p>
+<p>From trigonometry, we know that acute angles have <span class="math notranslate nohighlight">\(\cos\theta \in ]0,1]\)</span> while obtuse angles have  <span class="math notranslate nohighlight">\(\cos\theta \in [-1,0[\)</span>,
+and from the definition of the cosine we can deduce that when <span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{y} &gt; 0\)</span> the two vectors have an acute angle and head in the same direction. When <span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{y} &lt; 0\)</span> the two vectors have an obtuse angle and head in opposite directions.
+The greater the dot product (or the cosine) the most similar the vectors, the lesser the dot product (or the cosine) the most dissimilar are the vectors.
+Thus when the dot product is positive the angle is acute (an acute angle has cos &gt; 0) and both vectors head in the same direction
+when dot product is negative, the angle is obtuse and vectors head in opposite directions. When dot product is 0, vectors are orthogonal.</p>
+</div>
+<p>The proof of Cauchy-Schwarz inequality is non intuititive, however we can illustrate how the cosine definition given here makes sense in the 2D case. To do that we establish two preliminary results: the  law of cosines, that generalizes Pythagoras theorem to triangles without right angle, and a square identity.</p>
+<div class="proof definition admonition" id="trigonometry">
+<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(a,b,c\)</span> be the sides length of triangle whose right angle is between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>
+and let <span class="math notranslate nohighlight">\(\theta\)</span> be the angle between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(c\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\sin\theta &amp;= \frac{b}{c}\\
+\cos\theta &amp;=\frac{a}{c}\\
+\tan\theta &amp;=\frac{b}{a}
+\end{align}
+\end{split}\]</div>
+</section>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/870d77c050ff5103ee4c63b07a2a4bc461fe87f71d6e46c04d254966bdc407e9.png" src="_images/870d77c050ff5103ee4c63b07a2a4bc461fe87f71d6e46c04d254966bdc407e9.png" />
+</div>
+</div>
+<div class="proof lemma admonition" id="sqsinusoids">
+<p class="admonition-title"><span class="caption-number">Lemma 1 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>We prove that <span class="math notranslate nohighlight">\(\cos^2\theta + \sin^2\theta = 1\)</span> in a right angled triangle.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\cos^2\theta + \sin^2\theta &amp;= \frac{a^2}{c^2} + \frac{b^2}{c^2}\\
+&amp;=  \frac{a^2}{a^2+b^2} + \frac{b^2}{a^2+b^2}&amp;(\text{Pythagoras})\\
+&amp;= \frac {a^2+b^2}{a^2+b^2}\\
+&amp;= 1
+\end{align}
+\end{split}\]</div>
+</section>
+</div><div class="proof lemma admonition" id="lawcosines">
+<p class="admonition-title"><span class="caption-number">Lemma 2 </span> (Law of Cosines)</p>
+<section class="lemma-content" id="proof-content">
+<p>We prove that <span class="math notranslate nohighlight">\(c^2 = a^2 + b^2 - 2ab\cos\theta\)</span> when <span class="math notranslate nohighlight">\(\theta\)</span> is an acute angle between sides of length <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>.
+The law of cosines generalizes Pythagoras since the triangle is not required to have a right angle.
+To establish the proof we first make explicit two right angled triangles in our original triangle (dotted line).
+Then we compute the blue quantities with the trigonometric definitions given above. Then we can express <span class="math notranslate nohighlight">\(c\)</span>
+as a function of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> and establish the result:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+c^2 &amp;= a^2\sin^2\theta + (b-a\cos\theta)^2&amp; (\text{Pythagoras})\\
+&amp;=  a^2\sin^2\theta +b^2-2ab\cos\theta+a^2\cos^2\theta\\
+&amp;= a^2(\cos^2\theta+\sin^2\theta)+b^2-2ab\cos\theta\\
+&amp;= a^2+b^2-2ab\cos\theta 
+\end{align}
+\end{split}\]</div>
+<p>where the last line is obtained with <a class="reference internal" href="#sqsinusoids">Lemma 1</a>. The law of cosines holds also when <span class="math notranslate nohighlight">\(\theta\)</span> is an obtuse angle, this part of the proof is left to the reader.</p>
+</section>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/dce0570cc068e5092aba29552332fd4fcb2a5d377016ea89ab9113d6803d420d.png" src="_images/dce0570cc068e5092aba29552332fd4fcb2a5d377016ea89ab9113d6803d420d.png" />
+</div>
+</div>
+<div class="proof lemma admonition" id="perfsquareneg">
+<p class="admonition-title"><span class="caption-number">Lemma 3 </span></p>
+<section class="lemma-content" id="proof-content">
+<p>We establish that <span class="math notranslate nohighlight">\(||\mathbf{x} - \mathbf{y} ||^2 = ||\mathbf{x}||^2 + ||\mathbf{y}||^2 - 2\mathbf{x}^\top \mathbf{y}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+||\mathbf{x} - \mathbf{y} ||^2 &amp;= (\mathbf{x} - \mathbf{y})^\top (\mathbf{x} - \mathbf{y})\\
+&amp;= (\mathbf{x} - \mathbf{y})^\top  \mathbf{x}  \quad - \quad   (\mathbf{x} - \mathbf{y})^\top  \mathbf{y} &amp; (\text{Dot product is bilinear})\\
+&amp;=  \mathbf{x}^\top \mathbf{x} - \mathbf{x}^\top \mathbf{y} - \mathbf{x}^\top \mathbf{y} +  \mathbf{y}^\top \mathbf{y}&amp;(\text{Dot product is bilinear})\\
+&amp;= ||\mathbf{x} ||^2 - 2\mathbf{x}^\top\mathbf{y} + ||\mathbf{y}||^2
+\end{align}
+\end{split}\]</div>
+</section>
+</div><div class="proof proposition admonition" id="proposition-4">
+<p class="admonition-title"><span class="caption-number">Proposition 1 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>We now establish that <span class="math notranslate nohighlight">\(\cos\theta = \frac{\mathbf{x}^\top \mathbf{y}}{||\mathbf{x}|| \, ||\mathbf{y}|| }\)</span> for the 2D case.</p>
+<p>From the triangle used in <a class="reference internal" href="#lawcosines">Lemma 2</a>, we set <span class="math notranslate nohighlight">\(a = ||\mathbf{x}||, b = || \mathbf{y} || \)</span> and <span class="math notranslate nohighlight">\(c = ||\mathbf{x} - \mathbf{y} ||\)</span>,
+By rewriting <a class="reference internal" href="#lawcosines">Lemma 2</a> with those substitutions we have that :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+ ||\mathbf{x} - \mathbf{y} ||^2 &amp;= ||\mathbf{x}||^2 + ||\mathbf{y}||^2 - 2 || \mathbf{x} ||\, ||\mathbf{y}|| \, \cos\theta \\
+\end{align}
+\end{split}\]</div>
+<p>Calling to <a class="reference internal" href="#perfsquareneg">Lemma 3</a> we rewrite to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+ ||\mathbf{x}||^2 -2\mathbf{x}^\top\mathbf{y} + ||\mathbf{y} ||^2 &amp;= ||\mathbf{x}||^2 + ||\mathbf{y}||^2 - 2 || \mathbf{x} ||\, ||\mathbf{y}|| \, \cos\theta \\
+- 2 || \mathbf{x} ||\, ||\mathbf{y}|| \, \cos\theta &amp;= -2\mathbf{x}^\top\mathbf{y} \\
+\cos\theta &amp;= \frac{\mathbf{x}^\top\mathbf{y} }{  || \mathbf{x} ||\, ||\mathbf{y}||  }
+\end{align}
+\end{split}\]</div>
+</section>
+</div><p>We can finally provide a generalized formulation of <strong>Pythagoras theorem</strong> by setting the sides of a right angle triangle to <span class="math notranslate nohighlight">\(a = ||\mathbf{x} ||, b = ||\mathbf{y} ||, c=||\mathbf{x}+\mathbf{y}||\)</span>. An expansion from <span class="math notranslate nohighlight">\(c\)</span> provides the theorem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+  ||\mathbf{x}+\mathbf{y}||^2 &amp;= (\mathbf{x}+\mathbf{y})^T (\mathbf{x}+\mathbf{y}) \\
+                                        &amp;=  (\mathbf{x}+\mathbf{y})^T \mathbf{x} + (\mathbf{x}+\mathbf{y})^T \mathbf{y} &amp; \text{ (bilinearity of dot product)}\\
+                                   &amp;= \mathbf{x}^T\mathbf{x} + \mathbf{x}^T \mathbf{y} + \mathbf{y}^T \mathbf{x} + \mathbf{y}^T\mathbf{y} &amp;  \text{(bilinearity of dot product)}\\
+                                     &amp;= || \mathbf{x} ||^2 +2 \mathbf{x}^T \mathbf{y} + || \mathbf{y} ||^2
+\end{align*}
+\end{split}\]</div>
+<p>As a right angle has <span class="math notranslate nohighlight">\(\cos\theta = 0\)</span>, it implies that vectors are <strong>orthogonal</strong> when their dot product <span class="math notranslate nohighlight">\(\mathbf{x}^\top\mathbf{y} = 0\)</span>. This allows us to establish the theorem:</p>
+<div class="math notranslate nohighlight">
+\[
+||\mathbf{x}+\mathbf{y}||^2 = || \mathbf{x} ||^2 + || \mathbf{y} ||^2
+\]</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="numpy_exercises.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Numpy exercises</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Euclid_exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Euclidean spaces : exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-product">Dot product</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-norm">Euclidean norm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">Euclidean distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angles">Angles</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

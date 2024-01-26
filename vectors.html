@@ -1,0 +1,982 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Vectors and vector spaces &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vectors';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Numpy exercises" href="numpy_exercises.html" />
+    <link rel="prev" title="Numerical methods for Natural Language Processing" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Numerical methods for Natural Language Processing
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Vectors and vector spaces</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bencrabbe/numnlp.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bencrabbe/numnlp.github.io/issues/new?title=Issue%20on%20page%20%2Fvectors.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/vectors.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vectors and vector spaces</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors">Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors-and-geometry">Vectors and geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-vectors-come-from">Where do vectors come from ?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition">Vector addition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-interpretation-of-the-addition">Geometric interpretation of the addition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-by-a-scalar">Multiplication by a scalar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space">Vector space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="vectors-and-vector-spaces">
+<h1>Vectors and vector spaces<a class="headerlink" href="#vectors-and-vector-spaces" title="Permalink to this heading">#</a></h1>
+<p>In this chapter, we focus on the notion of vector and motivate
+their use through various examples.</p>
+<section id="vectors">
+<h2>Vectors<a class="headerlink" href="#vectors" title="Permalink to this heading">#</a></h2>
+<p>A <strong>vector</strong> is an <span class="math notranslate nohighlight">\(n-\)</span>tuple of real numbers. In this
+course, we’ll be dealing exclusively with <span class="math notranslate nohighlight">\(n\)</span>-tuples of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, even if other possibilities exist.
+For example, a vector <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^4\)</span> will be noted as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x} = 
+\begin{bmatrix}
+x_1\\x_2\\x_3\\x_4
+\end{bmatrix}
+\end{split}\]</div>
+<p>where each of the <span class="math notranslate nohighlight">\(x_i\)</span> is an <strong>element</strong>, a <strong>coefficient</strong> or a <strong>coordinate</strong> of the vector</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Let us consider the vector <span class="math notranslate nohighlight">\(\mathbf{x}\in\mathbb{R}^3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x} = 
+\begin{bmatrix}
+1\\0\\\sqrt{2}
+\end{bmatrix}
+\end{split}\]</div>
+<p>We have that <span class="math notranslate nohighlight">\(x_1 = 1, x_2 = 0\)</span> and <span class="math notranslate nohighlight">\(x_3 = \sqrt{2}\)</span>. Observe also
+that the order of the vector elements matters:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1\\0\\\sqrt{2}
+\end{bmatrix}
+\not = 
+\begin{bmatrix}
+1\\\sqrt{2}\\0
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<p>Alternatively, we sometimes use a horizontal notation and we write
+<span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, x_2, x_3, x_4)\)</span> or even abbreviated as <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1 \ldots x_4)\)</span></p>
+<p>In general, we note a vector in bold and a scalar (a number) in
+standard font. Then an element of a vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> at position <span class="math notranslate nohighlight">\(i\)</span> is denoted by
+<span class="math notranslate nohighlight">\(x_i\)</span> and the <strong>slice</strong> of a vector <span class="math notranslate nohighlight">\(\mathbf{x}  = x_1 \ldots x_i
+\ldots x_j \ldots x_n\)</span> between indices
+<span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> is the vector <span class="math notranslate nohighlight">\(\mathbf{x}_{i:j} = x_i\ldots x_j\)</span></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Contrary to classical mathematical notation, it should be noted that Python tuples, lists and most computer libraries
+like <em>numpy</em> start indexing at 0, example:</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="p">,</span><span class="mf">4.</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Programming languages and libraries, when they allow slices, they do
+so by including <span class="math notranslate nohighlight">\(i\)</span> and excluding <span class="math notranslate nohighlight">\(j\)</span> from the slice, example:</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="p">,</span><span class="mf">4.</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.0, 4.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also use a notation for the concatenation of vectors. If <span class="math notranslate nohighlight">\(a = (a_1
+\ldots a_i),\)</span> <span class="math notranslate nohighlight">\(b = (b_1 \ldots b_j),\)</span> <span class="math notranslate nohighlight">\(c = (c_1 \ldots c_k)\)</span> then the concatenation is written :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+\mathbf{a} \\\mathbf{b}\\\mathbf{c}
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_1\\\vdots\\a_i\\ b_1\\ \vdots\\ b_j\\\vdots\\ c_1\\\vdots\\ c_k
+\end{bmatrix}
+\end{split}\]</div>
+<p>We further distinguish a few remarkable vectors. The <strong>null vector</strong>,
+written <span class="math notranslate nohighlight">\(\mathbf{0}\)</span> is a vector whose all elements have the
+value 0. We sometimes note the size <span class="math notranslate nohighlight">\(n\)</span> of the vector in subscript <span class="math notranslate nohighlight">\((
+\mathbf{0}_n)\)</span> to be more explicit. The <strong>one-hot</strong> vector
+is the vector whose values are all zero except for one value at
+position <span class="math notranslate nohighlight">\(i\)</span>, which is 1. Finally, we note with <span class="math notranslate nohighlight">\(\mathbf{1}\)</span> the
+vector whose elements are all equal to 1.</p>
+<section id="vectors-and-geometry">
+<h3>Vectors and geometry<a class="headerlink" href="#vectors-and-geometry" title="Permalink to this heading">#</a></h3>
+<p>In 2 and 3 dimensions,  vectors may be viewed as a movement from
+the origin of a coordinate system to its coordinates. It may also be
+viewed as the coordinates of its destination. This is illustrated with the
+following plot for the 2-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{x} = \begin{bmatrix}3\\2\end{bmatrix}\)</span>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/c954a1ff1ecafad54c43537394d45278fa84e5a4e2423676abd648746aa79006.png" src="_images/c954a1ff1ecafad54c43537394d45278fa84e5a4e2423676abd648746aa79006.png" />
+</div>
+</div>
+<p>In this class we will manipulate vectors of dimensions definitely higher than 2
+or 3. Although the visualisation of these vectors is less obvious, the
+geometric notions (angle,distance) that we will define for those vectors are not only valid for the
+specific 2D and 3D cases but also generalize for those higher dimensions.</p>
+</section>
+<section id="where-do-vectors-come-from">
+<h3>Where do vectors come from ?<a class="headerlink" href="#where-do-vectors-come-from" title="Permalink to this heading">#</a></h3>
+<p>Besides geometry, vectors are used in various fields of science.
+For language, they appear most often in a context of statistical
+analysis or data representation. We list here a few cases where you
+are likely to meet high dimensional vectors:</p>
+<p><strong>As measures of an object</strong> Let us start with some non-linguistic examples. The first comes from
+Iris. The dataset contains a sequence of measurements on each line
+measures that describe a flower instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Sepal</span><span class="o">.</span><span class="n">Length</span> <span class="n">Sepal</span><span class="o">.</span><span class="n">Width</span> <span class="n">Petal</span><span class="o">.</span><span class="n">Length</span> <span class="n">Petal</span><span class="o">.</span><span class="n">Width</span>
+<span class="mi">1</span>     <span class="mf">5.1</span>          <span class="mf">3.5</span>         <span class="mf">1.4</span>          <span class="mf">0.2</span>
+<span class="mi">2</span>     <span class="mf">4.9</span>          <span class="mf">3.0</span>         <span class="mf">1.4</span>          <span class="mf">0.2</span>
+<span class="mi">3</span>     <span class="mf">4.7</span>          <span class="mf">3.2</span>         <span class="mf">1.3</span>          <span class="mf">0.2</span>
+<span class="mi">4</span>     <span class="mf">4.6</span>          <span class="mf">3.1</span>         <span class="mf">1.5</span>          <span class="mf">0.2</span>
+</pre></div>
+</div>
+<p>Each of these measurement sequences is interpreted as a vector.
+For example, <span class="math notranslate nohighlight">\(\mathbf{x}^{(1)} = (5.1,3.5 ,1.4,0.2)\)</span> and
+<span class="math notranslate nohighlight">\(\mathbf{x}^{(3)} = (4.7,3.2,1.3,0.2)\)</span> are vectors</p>
+<p><strong>Color coding</strong> Vectors of size 3 can be used to encode colors
+(RGB coding). Each element of the vector is an integer between 0
+and 255, indicating respectively the quantity of red, green and blue
+to create a color. Thus, vector <span class="math notranslate nohighlight">\((255,0,0)\)</span>
+represents red, vector <span class="math notranslate nohighlight">\((0,0,0)\)</span> represents black and
+vector <span class="math notranslate nohighlight">\((120,120,120)\)</span> represents gray.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/1d79565f465f3734891fdd81c77a7236acf08eed7a006e1c7dca0ce49096ca6d.png" src="_images/1d79565f465f3734891fdd81c77a7236acf08eed7a006e1c7dca0ce49096ca6d.png" />
+</div>
+</div>
+<p><strong>Counting occurrences</strong> In a language context, numbers naturally appear
+when counting in texts. For example, we can
+collect statistical counts on vowels in several texts, such as :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">a</span>    <span class="n">e</span>    <span class="n">i</span>    <span class="n">o</span>    <span class="n">u</span>
+<span class="mi">1</span> <span class="mi">15</span>   <span class="mi">30</span>   <span class="mi">12</span>   <span class="mi">0</span>    <span class="mi">5</span>
+<span class="mi">2</span> <span class="mi">5</span>    <span class="mi">12</span>   <span class="mi">3</span>    <span class="mi">7</span>    <span class="mi">5</span>
+<span class="mi">3</span> <span class="mi">9</span>    <span class="mi">15</span>   <span class="mi">2</span>    <span class="mi">6</span>    <span class="mi">6</span>
+<span class="mi">4</span> <span class="mi">8</span>    <span class="mi">7</span>    <span class="mi">3</span>    <span class="mi">1</span>    <span class="mi">1</span> 
+</pre></div>
+</div>
+<p>Thus text number 1 is represented by a vector <span class="math notranslate nohighlight">\(\mathbf{x}^{(1)} =
+(15,30,12,0,5)\)</span> whose size equals the number of vowels, whereas text number 4 is represented by the vector <span class="math notranslate nohighlight">\(\mathbf{x}^{(4)} =
+( 8,7,3,1,1)\)</span></p>
+<p><strong>Listing the vocabulary used in a text</strong> A variant
+of the previous case is when the vector is valued by
+booleans. For instance each element of such a vector equals 1 if the corresponding letter appears in the text and 0
+otherwise:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_i  = \left\{
+\begin{array}{lcl}
+1&amp;\text{if}&amp; \text{letter in text}\\
+0&amp;&amp;\text{otherwise}
+\end{array}
+\right .
+\end{split}\]</div>
+<p>Assuming the vowel  count data again, we’ll code <span class="math notranslate nohighlight">\(\mathbf{x}^{(1)} = (1,1,1,0,1)\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}^{(1)} = (1,1,1,0,1)\)</span>.
+and <span class="math notranslate nohighlight">\(\mathbf{x}^{(4)} = (1,1,1,1,1)\)</span>. Such vectors are called
+boolean vectors.</p>
+<p><strong>One hot representation for written language</strong> Besides counting problems, when it comes to analyzing
+textual data analysis, data sets do not naturally include numerical
+but rather discrete symbols such as letters, words and symbolic annotations.
+It is very common in machine learning and statistics for language
+to encode such symbols by vectors. This amounts to
+building a dictionary (a map) that associates each such symbol with a
+distinct vector.</p>
+<p>The simplest case is that of one-hot coding, which we illustrate
+for vowels. We assume a
+dictionary that associates each letter with a vector:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{lccccccc}
+\mathbf{x}(a) &amp;=&amp; 1 &amp; 0 &amp;0 &amp; 0 &amp; 0\\ 
+\mathbf{x}(e) &amp;=&amp; 0 &amp; 1 &amp;0 &amp; 0 &amp; 0\\ 
+\mathbf{x}(i) &amp;=&amp; 0 &amp; 0 &amp;1 &amp; 0 &amp; 0\\
+\mathbf{x}(o) &amp;=&amp; 0 &amp; 0 &amp;0 &amp; 1 &amp; 0\\ 
+\mathbf{x}(u) &amp;=&amp; 0 &amp; 0 &amp;0 &amp; 0 &amp; 1\\ 
+\end{array}
+\end{split}\]</div>
+<p>To code a word like  <em>oui</em>  from the letters that make it up
+for example, we can concatenate the vectors of each of its letters:</p>
+<div class="math notranslate nohighlight">
+\[
+( \mathbf{x}(o) , \mathbf{x}(u) , \mathbf{x}(i)) = (0,0,0,1,0,0 ,0,0,0,1, 0,0,1,0,0) 
+\]</div>
+<p>This coding underpins many models used in language language processing.</p>
+<p>Most of the time words are encoded as one  hot vectors.
+You can actually create a dictionary that encodes
+each of the words in a vocabulary by a
+one-hot vector. This encoding underlies many language models used in language processing.</p>
+<p><strong>Mathematical objects</strong> Vectors are very general mathematical
+objects that may arise in a variety of contexts: <em>Word embeddings</em> are nowadays ubiquitous in Natural Language
+Processing and are nothing else than vectors ;  <em>Neural networks</em> are
+models that operate often on vectors ; vectors may arise in other
+mathematical contexts, for example as <em>gradient vectors</em> that are
+vectors of partial derivatives.</p>
+</section>
+</section>
+<section id="vector-addition">
+<h2>Vector addition<a class="headerlink" href="#vector-addition" title="Permalink to this heading">#</a></h2>
+<p>Just as arithmetic expressions allow you to perform calculations with
+real numbers,  just as boolean expressions can be used to perform
+calculations with booleans, we can also formalize a calculation with
+vectors of such numbers.</p>
+<p>Two vectors of the same size can be added together. The
+<strong>vector addition</strong> generates a vector in which each element at position <span class="math notranslate nohighlight">\(i\)</span>
+is the sum of the two elements at position <span class="math notranslate nohighlight">\(i\)</span> in each argument.
+This operation is formalized as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x} + \mathbf{y} = 
+\begin{bmatrix}
+x_1 \\  \vdots \\ x_n
+\end{bmatrix}
++
+\begin{bmatrix}
+y_1\\ \vdots \\y_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+x_1+y_1\\ \vdots  \\ x_n+y_n
+\end{bmatrix}
+\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>For example, in RGB, adding red and green gives yellow:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+255\\ 0\\ 0
+\end{bmatrix}
++
+\begin{bmatrix}
+0 \\ 255\\ 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+255 \\ 255 \\ 0
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Assuming that we have counted the occurrences of vowels
+in two different texts, the addition of the two vectors yields
+the number of occurrences in both texts:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}  
+  1 \\15 \\ 30 \\ 12 \\ 0 \\ 5
+\end{bmatrix}
++
+\begin{bmatrix}  
+  2 \\ 5\\ 12 \\ 3 \\ 7 \\ 5
+\end{bmatrix}
+=
+\begin{bmatrix}  
+  3 \\ 20\\ 42 \\ 15 \\ 7 \\ 10
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<section id="geometric-interpretation-of-the-addition">
+<h3>Geometric interpretation of the addition<a class="headerlink" href="#geometric-interpretation-of-the-addition" title="Permalink to this heading">#</a></h3>
+<p>The addition of two vectors in 2D as a geometric interpretation known
+as the parallelogram law of vector addition which states that if two
+vectors can be represented as two sides of a parallelogram, their
+addition is represented by the diagonal of the parallelogram.</p>
+<p>Here is an example:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+2\\ 1
+\end{bmatrix}
++
+\begin{bmatrix}
+1\\ 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+3\\ 2
+\end{bmatrix}
+\end{split}\]</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/b10ff84e50427feed7639b1d421b1261e2598c117eb30991878564e13005ef7f.png" src="_images/b10ff84e50427feed7639b1d421b1261e2598c117eb30991878564e13005ef7f.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="multiplication-by-a-scalar">
+<h2>Multiplication by a scalar<a class="headerlink" href="#multiplication-by-a-scalar" title="Permalink to this heading">#</a></h2>
+<p>The other operation is the <strong>multiplication of a vector
+vector by a scalar</strong>.
+Let <span class="math notranslate nohighlight">\(r\)</span> be a real number and <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a vector.
+<span class="math notranslate nohighlight">\(r\,\mathbf{x}\)</span> is
+formalized as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+r\, \mathbf{x} =  r \,
+\begin{bmatrix}
+x_1\\ \vdots\\ x_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+r x_1\\ \vdots\\ r x_n
+\end{bmatrix}
+\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>This is illustrated concretely on an example like:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+-2
+\begin{bmatrix}
+12\\6\\77
+\end{bmatrix}
+=
+\begin{bmatrix}
+-24\\-12\\-154
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+</section>
+<section id="vector-space">
+<h2>Vector space<a class="headerlink" href="#vector-space" title="Permalink to this heading">#</a></h2>
+<p>A vector space is a set <span class="math notranslate nohighlight">\(S^n\)</span> of vectors (or tuples) whose elements are from set
+<span class="math notranslate nohighlight">\(S\)</span>. The vectors can be added together and multiplied by scalars
+<span class="math notranslate nohighlight">\(s\in S\)</span>.</p>
+<ul class="simple">
+<li><p>Vector addition is commutative, associative and has identity element
+the vector <span class="math notranslate nohighlight">\(\mathbf{0}\)</span></p></li>
+<li><p>Scalar multiplication is commutative, associative and has identity
+element the scalar 1</p></li>
+<li><p>The scalar multiplication distributes over vector addition : <span class="math notranslate nohighlight">\(s
+(\mathbf{x}+\mathbf{y}) = s\mathbf{x} + s\mathbf{y}\)</span>. The
+vector multiplication distributes over scalar addition: <span class="math notranslate nohighlight">\((s+t)
+\mathbf{x} = s\mathbf{x} + t \mathbf{x}\)</span></p></li>
+</ul>
+<p>Given these algebraic properties, let us focus on the case of <strong>linear
+combination</strong>.
+If <span class="math notranslate nohighlight">\(\mathbf{x}_1\ldots \mathbf{x}_k\)</span> are vectors and <span class="math notranslate nohighlight">\(s_1\ldots s_k\)</span>
+are scalars, then the vector :</p>
+<div class="math notranslate nohighlight">
+\[
+s_1 \mathbf{x}_1+\ldots + s_k \mathbf{x}_k
+\]</div>
+<p>is a  linear combination of the vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1\ldots
+\mathbf{x}_k\)</span>. The scalars <span class="math notranslate nohighlight">\(s_1\ldots s_k\)</span> are called coefficients
+of the linear combination.</p>
+<p>Note that in the special case where the vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1\ldots
+\mathbf{x}_k\)</span> are one hot, the coefficient <span class="math notranslate nohighlight">\(s\ldots s_k\)</span> is the coefficient of the linear combination.
+are unitary, the coefficient <span class="math notranslate nohighlight">\(s_i\)</span> occupies position <span class="math notranslate nohighlight">\(i\)</span> in the
+resulting vector:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+-3
+  \begin{bmatrix}
+    1\\0\\0
+  \end{bmatrix}
+  +
+  2
+    \begin{bmatrix}
+    0\\1\\0
+  \end{bmatrix}
+  +
+  \frac{1}{5}
+    \begin{bmatrix}
+    0\\0\\1
+  \end{bmatrix}
+  =
+    \begin{bmatrix}
+    -3\\2\\ \frac{1}{5}
+  \end{bmatrix}
+\end{split}\]</div>
+<p>When each <span class="math notranslate nohighlight">\(s_i\)</span> coefficient is equal to 1, the linear combination amounts
+to summing the vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1\ldots
+\mathbf{x}_k\)</span>. When each coefficient <span class="math notranslate nohighlight">\(s_i = \frac{1}{k}\)</span> the linear
+linear combination is equivalent to averaging the vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1\ldots
+\mathbf{x}_k\)</span>. Finally, if the coefficients <span class="math notranslate nohighlight">\(s_i\)</span> can be interpreted as
+probabilities (<span class="math notranslate nohighlight">\(s_1+\ldots + s_k = 1\)</span>, <span class="math notranslate nohighlight">\(s_i\geq 0\)</span>), we say that the
+linear combination is a
+<strong>weighted sum</strong> or <strong>mixture</strong>.</p>
+<p>A set of vectors is called <strong>linearly independent</strong> if no object in
+the set can be written as a linear combination of the other objects
+in the set.
+A set of vectors that is not linearly independent is <strong>linearly dependent</strong>.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Define explicitly the operation of substraction <span class="math notranslate nohighlight">\(\mathbf{x} -
+\mathbf{y}\)</span>. Choose a 2D example and draw the parallelogram law for vector substraction.</p></li>
+<li><p>What is the 2D geometric interpretation of the scalar
+multiplication <span class="math notranslate nohighlight">\(r\,\mathbf{x}\)</span> ? Illustrate with an example.</p></li>
+<li><p>Given the vectors</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align} 
+\mathbf{x} ^{(1)} &amp; = \begin{bmatrix}1\\0\\0\end{bmatrix}\\
+\mathbf{x} ^{(2)} &amp;=  \begin{bmatrix}4\\0\\4\end{bmatrix}\\
+\mathbf{x} ^{(3)} &amp; = \begin{bmatrix}0\\2\\0\end{bmatrix}\\
+\mathbf{x}^{(4)} &amp; = \begin{bmatrix}0\\0\\3\end{bmatrix}
+\end{align}
+\end{split}\]</div>
+<p>Three of them are linearly independent. Which ones ? Find a vector
+that is linearly dependent of other vectors in this set and explain
+why.  Is this vector unique ?</p>
+<ol class="arabic simple" start="4">
+<li><p>Create a naive one hot encoding in numpy</p></li>
+</ol>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Numerical methods for Natural Language Processing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="numpy_exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Numpy exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors">Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors-and-geometry">Vectors and geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-vectors-come-from">Where do vectors come from ?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-addition">Vector addition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-interpretation-of-the-addition">Geometric interpretation of the addition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-by-a-scalar">Multiplication by a scalar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space">Vector space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

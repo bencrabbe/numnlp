@@ -1,0 +1,92 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 168, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 641, in run_until_complete
+    return future.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from myst_nb import glue
+import numpy as np
+import matplotlib.pyplot as plt
+f,ax = plt.subplots()
+ax.set_xlim([0,4])
+ax.set_ylim([0,2])
+x  = [2,1]
+y  = [1,1]
+xy = [3,2]
+ax.quiver(0, 0, x[0], x[1], angles='xy', scale_units='xy', scale=1, color='r')
+ax.quiver(0, 0, y[0], y[1], angles='xy', scale_units='xy', scale=1, color='b')
+ax.quiver(0, 0, xy[0], xy[1], angles='xy', scale_units='xy', scale=1,color='m')
+ax.quiver(2, 1, 1, 1,'--',capstyle="butt", angles='xy', scale_units='xy', scale=1, color='b')
+
+
+ax.annotate("(0,0)",(0,0),verticalalignment='bottom',horizontalalignment='right')
+ax.annotate("(2,1)",(2,1))
+ax.annotate("(1,1)",(1,1))
+ax.annotate("(3,2)",(3,2))
+
+ax.set_axis_off()
+
+glue("geom_vector", f, display=False)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[5], line 13[0m
+[1;32m     11[0m ax[38;5;241m.[39mquiver([38;5;241m0[39m, [38;5;241m0[39m, y[[38;5;241m0[39m], y[[38;5;241m1[39m], angles[38;5;241m=[39m[38;5;124m'[39m[38;5;124mxy[39m[38;5;124m'[39m, scale_units[38;5;241m=[39m[38;5;124m'[39m[38;5;124mxy[39m[38;5;124m'[39m, scale[38;5;241m=[39m[38;5;241m1[39m, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mb[39m[38;5;124m'[39m)
+[1;32m     12[0m ax[38;5;241m.[39mquiver([38;5;241m0[39m, [38;5;241m0[39m, xy[[38;5;241m0[39m], xy[[38;5;241m1[39m], angles[38;5;241m=[39m[38;5;124m'[39m[38;5;124mxy[39m[38;5;124m'[39m, scale_units[38;5;241m=[39m[38;5;124m'[39m[38;5;124mxy[39m[38;5;124m'[39m, scale[38;5;241m=[39m[38;5;241m1[39m,color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mm[39m[38;5;124m'[39m)
+[0;32m---> 13[0m [43max[49m[38;5;241;43m.[39;49m[43mquiver[49m[43m([49m[38;5;241;43m2[39;49m[43m,[49m[43m [49m[38;5;241;43m1[39;49m[43m,[49m[43m [49m[38;5;241;43m1[39;49m[43m,[49m[43m [49m[38;5;241;43m1[39;49m[43m,[49m[38;5;124;43m'[39;49m[38;5;124;43m--[39;49m[38;5;124;43m'[39;49m[43m,[49m[43mcapstyle[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mbutt[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mangles[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mxy[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mscale_units[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mxy[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mscale[49m[38;5;241;43m=[39;49m[38;5;241;43m1[39;49m[43m,[49m[43m [49m[43mcolor[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mb[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m     16[0m ax[38;5;241m.[39mannotate([38;5;124m"[39m[38;5;124m(0,0)[39m[38;5;124m"[39m,([38;5;241m0[39m,[38;5;241m0[39m),verticalalignment[38;5;241m=[39m[38;5;124m'[39m[38;5;124mbottom[39m[38;5;124m'[39m,horizontalalignment[38;5;241m=[39m[38;5;124m'[39m[38;5;124mright[39m[38;5;124m'[39m)
+[1;32m     17[0m ax[38;5;241m.[39mannotate([38;5;124m"[39m[38;5;124m(2,1)[39m[38;5;124m"[39m,([38;5;241m2[39m,[38;5;241m1[39m))
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/matplotlib/__init__.py:1412[0m, in [0;36m_preprocess_data.<locals>.inner[0;34m(ax, data, *args, **kwargs)[0m
+[1;32m   1409[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(func)
+[1;32m   1410[0m [38;5;28;01mdef[39;00m [38;5;21minner[39m(ax, [38;5;241m*[39margs, data[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m   1411[0m     [38;5;28;01mif[39;00m data [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m-> 1412[0m         [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[43max[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;28;43mmap[39;49m[43m([49m[43msanitize_sequence[49m[43m,[49m[43m [49m[43margs[49m[43m)[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   1414[0m     bound [38;5;241m=[39m new_sig[38;5;241m.[39mbind(ax, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[1;32m   1415[0m     auto_label [38;5;241m=[39m (bound[38;5;241m.[39marguments[38;5;241m.[39mget(label_namer)
+[1;32m   1416[0m                   [38;5;129;01mor[39;00m bound[38;5;241m.[39mkwargs[38;5;241m.[39mget(label_namer))
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/matplotlib/axes/_axes.py:4942[0m, in [0;36mAxes.quiver[0;34m(self, *args, **kwargs)[0m
+[1;32m   4940[0m [38;5;66;03m# Make sure units are handled for x and y values[39;00m
+[1;32m   4941[0m args [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_quiver_units(args, kwargs)
+[0;32m-> 4942[0m q [38;5;241m=[39m [43mmquiver[49m[38;5;241;43m.[39;49m[43mQuiver[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   4943[0m [38;5;28mself[39m[38;5;241m.[39madd_collection(q, autolim[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m   4944[0m [38;5;28mself[39m[38;5;241m.[39m_request_autoscale_view()
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/matplotlib/quiver.py:510[0m, in [0;36mQuiver.__init__[0;34m(self, ax, scale, headwidth, headlength, headaxislength, minshaft, minlength, units, scale_units, angles, width, color, pivot, *args, **kw)[0m
+[1;32m    507[0m [38;5;28msuper[39m()[38;5;241m.[39m[38;5;21m__init__[39m([], offsets[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mXY, transOffset[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mtransform,
+[1;32m    508[0m                  closed[38;5;241m=[39m[38;5;28;01mFalse[39;00m, [38;5;241m*[39m[38;5;241m*[39mkw)
+[1;32m    509[0m [38;5;28mself[39m[38;5;241m.[39mpolykw [38;5;241m=[39m kw
+[0;32m--> 510[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mset_UVC[49m[43m([49m[43mU[49m[43m,[49m[43m [49m[43mV[49m[43m,[49m[43m [49m[43mC[49m[43m)[49m
+[1;32m    511[0m [38;5;28mself[39m[38;5;241m.[39m_initialized [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    513[0m weak_self [38;5;241m=[39m weakref[38;5;241m.[39mref([38;5;28mself[39m)  [38;5;66;03m# Prevent closure over the real self.[39;00m
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/matplotlib/quiver.py:576[0m, in [0;36mQuiver.set_UVC[0;34m(self, U, V, C)[0m
+[1;32m    574[0m V [38;5;241m=[39m ma[38;5;241m.[39mmasked_invalid(V, copy[38;5;241m=[39m[38;5;28;01mTrue[39;00m)[38;5;241m.[39mravel()
+[1;32m    575[0m [38;5;28;01mif[39;00m C [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m--> 576[0m     C [38;5;241m=[39m [43mma[49m[38;5;241;43m.[39;49m[43mmasked_invalid[49m[43m([49m[43mC[49m[43m,[49m[43m [49m[43mcopy[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m[38;5;241m.[39mravel()
+[1;32m    577[0m [38;5;28;01mfor[39;00m name, var [38;5;129;01min[39;00m [38;5;28mzip[39m(([38;5;124m'[39m[38;5;124mU[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mV[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mC[39m[38;5;124m'[39m), (U, V, C)):
+[1;32m    578[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m (var [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mor[39;00m var[38;5;241m.[39msize [38;5;241m==[39m [38;5;28mself[39m[38;5;241m.[39mN [38;5;129;01mor[39;00m var[38;5;241m.[39msize [38;5;241m==[39m [38;5;241m1[39m):
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/numpy/ma/core.py:2369[0m, in [0;36mmasked_invalid[0;34m(a, copy)[0m
+[1;32m   2367[0m     [38;5;28mcls[39m [38;5;241m=[39m [38;5;28mtype[39m(a)
+[1;32m   2368[0m [38;5;28;01melse[39;00m:
+[0;32m-> 2369[0m     condition [38;5;241m=[39m [38;5;241m~[39m([43mnp[49m[38;5;241;43m.[39;49m[43misfinite[49m[43m([49m[43ma[49m[43m)[49m)
+[1;32m   2370[0m     [38;5;28mcls[39m [38;5;241m=[39m MaskedArray
+[1;32m   2371[0m result [38;5;241m=[39m a[38;5;241m.[39mview([38;5;28mcls[39m)
+
+[0;31mTypeError[0m: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+
