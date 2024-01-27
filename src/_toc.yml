@@ -10,6 +10,7 @@ chapters:
 - file: euclid
   sections:
   - file: Euclid_exercises
+  - file: euclid_appendix
 - file: vec2text
 - file: matrices
 - file: graphs
