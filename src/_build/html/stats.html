@@ -535,18 +535,7 @@ the scatter plot given in the figure below:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;seaborn&#39;
-</pre></div>
-</div>
+<img alt="_images/185327790c8e67e6c80670986ed26011f47125e414f57f752f355bebb768119c.png" src="_images/185327790c8e67e6c80670986ed26011f47125e414f57f752f355bebb768119c.png" />
 </div>
 </div>
 <p>Another covariance matrix can be computed  by picking data line vectors  <span class="math notranslate nohighlight">\(\mathbf{x}_1 \ldots \mathbf{x}_m\)</span>, the resulting matrix is then:</p>
@@ -674,6 +663,9 @@ For both covariance matrices, we can conclude that <span class="math notranslate
 Since singular values are square roots of the eigenvalues, they also represent variance: the larger the singular value, the larger the intrinsic variance of the variable.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/d2d47ad67fe1fd4a0a166edc104a6999c39617329a4c3a5161d6bea8760538c7.png" src="_images/d2d47ad67fe1fd4a0a166edc104a6999c39617329a4c3a5161d6bea8760538c7.png" />
+</div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
 The left plot is a dataset whose covariance matrix is diagonal : the covariance between variables is zero and the eigenvalues are found on the diagonal of the actual covariance matrix.
@@ -752,6 +744,9 @@ It entails that few words are highly frequent and most of the vocabulary has low
 It is a typical Zipf pattern. The x axis is ordered according to the word rank and y axis is the word frequency (logarithmic scale).</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/79e6d378ffe42591d38c67f8c0e0468c8e968baa64ba2deab0c3c78da93eadc5.png" src="_images/79e6d378ffe42591d38c67f8c0e0468c8e968baa64ba2deab0c3c78da93eadc5.png" />
+</div>
 </div>
 <p>The <strong>TF-IDF</strong>  aims at filling term document matrices by transforming the raw frequency counts.
 The transformation builds on two submetrics: True Frequency and Inverse Document Frequency.</p>
@@ -780,6 +775,9 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 <p>Observe the IDF function for a collection <span class="math notranslate nohighlight">\(D\)</span> of 100 documents. The more a word occurs in many different documents the more the IDF function downweights  its True Frequency towards 0</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/c1af47c99478d0151531d298ffbb3fd55e980ee758c4cf4b36067cc213ac6bf4.png" src="_images/c1af47c99478d0151531d298ffbb3fd55e980ee758c4cf4b36067cc213ac6bf4.png" />
+</div>
 </div>
 </section>
 <section id="example-in-python">
@@ -845,6 +843,25 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.0166138  0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.02530888 0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.02530888 0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.01228579
+  0.02204709 0.         0.         0.         0.         0.
+  0.01117665 0.         0.        ]
+ [0.02036128 0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>that’s it ! We have both the term document matrix with TF-IDF values and the SVD decomposition.</p>
 <section id="lsa-and-visualisation">
@@ -887,6 +904,9 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d776c023989757bbb29e2dc5d8b30bbf232db56371bd73aa9755e25b12c018a0.png" src="_images/d776c023989757bbb29e2dc5d8b30bbf232db56371bd73aa9755e25b12c018a0.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -931,6 +951,9 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/d058ffc35fd0fe021924b05a7802e455284c9e41f4d16eda329c37e8d12d29fd.png" src="_images/d058ffc35fd0fe021924b05a7802e455284c9e41f4d16eda329c37e8d12d29fd.png" />
+</div>
 </div>
 </section>
 <section id="topic-analysis">
@@ -948,6 +971,9 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 <span class="n">title</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Latent topics in the document &quot;Milky Way&quot;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/79b153bf86e762cdd722e6b801d50ebe42333b2d5d27d15e0ba7a54fa6483c3c.png" src="_images/79b153bf86e762cdd722e6b801d50ebe42333b2d5d27d15e0ba7a54fa6483c3c.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -970,6 +996,33 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;* Topic-9 top </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> terms *&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">score</span><span class="p">,</span><span class="n">term</span> <span class="ow">in</span>  <span class="nb">sorted</span><span class="p">(</span><span class="n">scored_terms</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">k</span><span class="p">]:</span>
    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">term</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
+wine : 0.3033514958840332
+tropical : 0.11144972173144539
+typhoon : 0.07439588867472334
+largest : 0.05825220550519103
+pacific : 0.055510657630480215
+cyclone : 0.050646220431638266
+viticulture : 0.050558582647338854
+varieties : 0.050558582647338854
+styles : 0.050558582647338854
+connection : 0.050558582647338854
+
+* Topic-9 top 10 terms *
+ai : 0.1430614266153546
+harry : 0.13541873949582026
+linguistics : 0.13533958005690047
+potter : 0.10532568627452682
+books : 0.09179982989380875
+study : 0.07727523197690818
+lord : 0.06866138715676967
+rings : 0.06620149518497279
+language : 0.0564363711575866
+typhoon : 0.05518197933510383
 </pre></div>
 </div>
 </div>
