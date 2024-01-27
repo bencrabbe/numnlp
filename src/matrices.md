@@ -942,7 +942,7 @@ a_{11}&\cdots&a_{1n}\\
 a_{m1} & \cdots & a_{mn}
 \end{Vmatrix}
 =
-\sqrt{\sum_{ij} a^2_ij}
+\sqrt{\sum_{ij} a^2_{ij}}
 $$
 
 The **condition number** is defined as:

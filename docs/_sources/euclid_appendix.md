@@ -77,7 +77,7 @@ $$
 \begin{align}
 c^2 &= (b+e)^2 + h^2& (\text{Pythagoras})\\
 &= b^2+2be + e^2 + h^2\\
-&= a^2 + b^2+ 2 be & (b^2 + h^2) = a^2\\
+&= a^2 + b^2+ 2 be & (e^2 + h^2) = a^2\\
 &=  a^2 + b^2- 2 ab\cos\theta &
 \end{align}
 $$
@@ -91,7 +91,7 @@ where the last line is obtained by observing that $\cos\theta' = \frac{e}{a}$. C
 ## Proof of Cauchy Schwarz
 
 The Cauchy Schwarz inequality justifies the definition of cosines for the n-dimensional case.
-Several proofs exist, but are in general non intuitive. We provide a proof that relies on two algebraic properties
+Several proofs exist, but are in general non intuitive. We provide such a proof that relies on two algebraic properties
 of norms:
 
 1. The squared norm is positive or null:  $||\mathbf{v}||^2\geq 0$ for $\mathbf{v} \in \mathbb{R}^n$
