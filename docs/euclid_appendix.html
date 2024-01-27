@@ -420,37 +420,38 @@ Several proofs exist, but are in general non intuitive. We provide a proof that 
 of norms:</p>
 <ol class="arabic simple">
 <li><p>The squared norm is positive or null:  <span class="math notranslate nohighlight">\(||\mathbf{v}||^2\geq 0\)</span> for <span class="math notranslate nohighlight">\(\mathbf{v} \in \mathbb{R}^n\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(||\mathbf{x}-\mathbf{y}||^2  = || \mathbf{x}^2 || - 2\mathbf{x}^\top \mathbf{y} + ||\mathbf{y}||^2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(||\mathbf{x}+\mathbf{y}||^2  = || \mathbf{x} ||^2 + 2\mathbf{x}^\top \mathbf{y} + ||\mathbf{y}||^2\)</span></p></li>
 </ol>
 <div class="proof theorem admonition" id="cs">
 <p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Cauchy Schwarz)</p>
 <section class="theorem-content" id="proof-content">
-<p>We prove that <span class="math notranslate nohighlight">\(|\mathbf{x}^\top\mathbf{y}| \leq ||\mathbf{x}|| \, || \mathbf{y} ||\)</span>. Considering the rescaled vectors <span class="math notranslate nohighlight">\(||\mathbf{x}||\, \mathbf{y}\)</span> and <span class="math notranslate nohighlight">\(||\mathbf{y}||\, \mathbf{x}\)</span>, whose difference
-is <span class="math notranslate nohighlight">\(||\mathbf{x}||\, \mathbf{y} - ||\mathbf{y}||\, \mathbf{x}\)</span>. Then the squared norm  of this vector evaluates as:</p>
+<p>We prove that <span class="math notranslate nohighlight">\(|\mathbf{x}^\top\mathbf{y}| \leq ||\mathbf{x}|| \, || \mathbf{y} ||\)</span>.
+Consider the vectors <span class="math notranslate nohighlight">\(\mathbf{x},\mathbf{y} \in \mathbb{R}^n\)</span> and the scalar <span class="math notranslate nohighlight">\(k \mathbb{R}\)</span>.
+The proof takes advantage of the properties of the norm <span class="math notranslate nohighlight">\(||\mathbf{x}+k\mathbf{y} ||\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+|| \mathbf{x} +k \mathbf{y}||^2 = || \mathbf{x} ||^2 + 2\mathbf{x}^\top \mathbf{y} k  +  k^2 || \mathbf{y} ||^2 \\
+\end{split}\]</div>
+<p>By definition <span class="math notranslate nohighlight">\(|| \mathbf{x} +k \mathbf{y}||^2 \geq 0\)</span>. Therefore we can choose any real value for <span class="math notranslate nohighlight">\(k\)</span>.
+By choosing <span class="math notranslate nohighlight">\(k = \frac{-\mathbf{x}^\top \mathbf{y}}{ ||\mathbf{y}||^2}\)</span> we get:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\big\lVert\, ||\mathbf{x}||\, \mathbf{y} - ||\mathbf{y}||\, \mathbf{x} \,\big\rVert^2 &amp;=(||\mathbf{x}||\, \mathbf{y} - ||\mathbf{y}||\, \mathbf{x})^\top (||\mathbf{x}||\, \mathbf{y} - ||\mathbf{y}||\, \mathbf{x} )\\ 
-&amp;= ||\mathbf{x}||^2 (\mathbf{y}^\top\mathbf{y}) - 2 ||\mathbf{x} || \, ||\mathbf{y} ||  (\mathbf{x}^\top \mathbf{y})+ (\mathbf{x}^\top \mathbf{x}) ||\mathbf{y}||^2\\
-&amp;=||\mathbf{x}||^2 ||\mathbf{y}||^2- 2 ||\mathbf{x} || \, ||\mathbf{y} || (\mathbf{x}^\top \mathbf{y})+ ||\mathbf{x}||^2||\mathbf{y}||^2\\ 
-&amp;= 2 ||\mathbf{x}||^2 ||\mathbf{y}||^2 - 2 ||\mathbf{x} || \, ||\mathbf{y} || (\mathbf{x}^\top \mathbf{y}) 
+|| \mathbf{x} +k \mathbf{y}||^2 &amp;= || \mathbf{x} ||^2 + 2(\mathbf{x}^\top\mathbf{y})^\top  \frac{-\mathbf{x}^\top \mathbf{y}}{ ||\mathbf{y}||^2} +    \frac{(\mathbf{x}^\top \mathbf{y})^2}{ ||\mathbf{y}||^4}|| \mathbf{y} ||^2  \\
+&amp;= || \mathbf{x} ||^2 - 2\frac{(\mathbf{x}^\top\mathbf{y})^2}{ ||\mathbf{y}||^2} +    \frac{(\mathbf{x}^\top \mathbf{y})^2}{ ||\mathbf{y}||^2} \\
+&amp;= || \mathbf{x} ||^2 - \frac{(\mathbf{x}^\top \mathbf{y})^2}{ ||\mathbf{y}||^2} \\
 \end{align*}
 \end{split}\]</div>
-<p>Since the squared norm is <span class="math notranslate nohighlight">\(\geq 0\)</span> we have:</p>
+<p>As the norm is positive or null, we further have:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-2 ||\mathbf{x}||^2 ||\mathbf{y}||^2 - 2 ||\mathbf{x} || \, ||\mathbf{y} || (\mathbf{x}^\top \mathbf{y})&amp; \geq 0\\
-2 ||\mathbf{x}||^2 ||\mathbf{y}||^2 &amp; \geq 2 ||\mathbf{x} || \, ||\mathbf{y} || (\mathbf{x}^\top \mathbf{y})\\
- ||\mathbf{x}||^2 ||\mathbf{y}||^2 &amp; \geq  ||\mathbf{x} || \, ||\mathbf{y} || (\mathbf{x}^\top \mathbf{y})\\
- ||\mathbf{x}||\, ||\mathbf{y}|| &amp; \geq  \mathbf{x}^\top \mathbf{y}\\
+0 &amp; \leq || \mathbf{x} ||^2 - \frac{(\mathbf{x}^\top \mathbf{y})^2}{ ||\mathbf{y}||^2}  \\ 
+ \frac{(\mathbf{x}^\top \mathbf{y})^2}{ ||\mathbf{y}||^2}  &amp;\leq || \mathbf{x} ||^2 \\
+(\mathbf{x}^\top \mathbf{y})^2 &amp; \leq || \mathbf{x} ||^2  \, ||\mathbf{y}||^2\\
+|  \mathbf{x}^\top \mathbf{y} | &amp;\leq ||\mathbf{x} ||  \, ||\mathbf{y}||
 \end{align*}
 \end{split}\]</div>
-<p>The reader can check that  mirroring the same development from the norm <span class="math notranslate nohighlight">\( \big\lVert\, ||\mathbf{x}||\, \mathbf{y} + ||\mathbf{y}||\, \mathbf{x} \,\big\rVert^2\)</span> leads to the inequality <span class="math notranslate nohighlight">\(||\mathbf{x}||\, ||\mathbf{y}|| \geq  -\mathbf{x}^\top \mathbf{y}\)</span>. Thus we conclude:</p>
-<div class="math notranslate nohighlight">
-\[
-| \mathbf{x}^\top \mathbf{y} | \leq ||\mathbf{x}||\, ||\mathbf{y}|| 
-\]</div>
 </section>
 </div></section>
 </section>
