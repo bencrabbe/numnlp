@@ -101,7 +101,7 @@ of norms:
 :label: cs
 
 We prove that $|\mathbf{x}^\top\mathbf{y}| \leq ||\mathbf{x}|| \, || \mathbf{y} ||$. 
-Consider the vectors $\mathbf{x},\mathbf{y} \in \mathbb{R}^n$ and the scalar $k \mathbb{R}$.
+Consider the vectors $\mathbf{x},\mathbf{y} \in \mathbb{R}^n$ and the scalar $k \in \mathbb{R}$.
 The proof takes advantage of the properties of the norm $||\mathbf{x}+k\mathbf{y} ||$:
 
 $$
