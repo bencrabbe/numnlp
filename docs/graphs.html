@@ -1,0 +1,904 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Applications to graph analysis : the PageRank algorithm &#8212; Numerical methods in NLP (foundations)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'graphs';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Applications to statistical analysis : latent semantic analysis" href="stats.html" />
+    <link rel="prev" title="Matrices" href="matrices.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <header>
+  
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
+  
+  </header>
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Numerical methods in NLP (foundations) - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Numerical methods in NLP (foundations) - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Numerical methods for Natural Language Processing
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Applications to graph analysis : the PageRank algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bencrabbe/numnlp.github.io" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bencrabbe/numnlp.github.io/issues/new?title=Issue%20on%20page%20%2Fgraphs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/graphs.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Applications to graph analysis : the PageRank algorithm</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-the-web-as-a-graph">Representation: the web as a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chains-and-random-walks">Markov chains and random walks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pagerank">PageRank</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-in-python">Example in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks">Final remarks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="applications-to-graph-analysis-the-pagerank-algorithm">
+<h1>Applications to graph analysis : the PageRank algorithm<a class="headerlink" href="#applications-to-graph-analysis-the-pagerank-algorithm" title="Permalink to this heading">#</a></h1>
+<p>This chapter illustrates an application of eigenvalues and eigenvectors to graph analytics with the PageRank algorithm. PageRank is an algorithm that maps a set of web pages to real numbers that can be used to <strong>rank</strong> them.</p>
+<p>The algorithm views the web as a graph whose nodes are web pages and whose edges are hyperlinks leading from one page to another. It views the structure of the web graph as a matrix. The algorithm outputs a vector of scores, with one score for each web page and it turns out that the output vector is actually the first eigenvector of the graph adjacency matrix.</p>
+<section id="representation-the-web-as-a-graph">
+<h2>Representation: the web as a graph<a class="headerlink" href="#representation-the-web-as-a-graph" title="Permalink to this heading">#</a></h2>
+<p>A set of web pages can be represented as a directed graph <span class="math notranslate nohighlight">\(G=\langle V, E\rangle\)</span> whose vertices are the actual web pages.
+The edges relating the vertices are inferred from hyperlinks: a link sending an internet surfer from page <span class="math notranslate nohighlight">\(p_1\)</span> to page <span class="math notranslate nohighlight">\(p_2\)</span> is thus an edge <span class="math notranslate nohighlight">\((p_1,p_2) \in E\)</span> of the directed graph.</p>
+<p>PageRank is an algorithm that takes advantage of the graph structure to rank the pages rathen than the page contents. It  builds upon the idea
+that a web page is important if many pages are pointing to it. In graph terminology we could use the in degree of the nodes to compute their importance. But PageRank goes one step further. It not only counts the incoming edges on the nodes but also weights their importance by the importance of the source node. Thus the page rank is a global computation on the network</p>
+<figure class="align-default" id="pagerank-fig">
+<a class="reference internal image-reference" href="_images/pr.png"><img alt="_images/pr.png" src="_images/pr.png" style="height: 250px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">The PageRank algorithm weights each node as a function of its incoming edges and the importance of the their source nodes.</span><a class="headerlink" href="#pagerank-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="markov-chains-and-random-walks">
+<h2>Markov chains and random walks<a class="headerlink" href="#markov-chains-and-random-walks" title="Permalink to this heading">#</a></h2>
+<p>Graphs can be conveniently represented by matrices.
+A graphs’s <strong>adjacency matrix</strong> is a matrix   <span class="math notranslate nohighlight">\(\mathbf{A}\in \mathbb{R}^{n\times n}\)</span> with <span class="math notranslate nohighlight">\(n\)</span> the number of graph vertices.
+A coefficient <span class="math notranslate nohighlight">\(a_{ij}\)</span> is set to 1 if there is an edge from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span> in the graph and to 0 otherwise.</p>
+<p>Here is a sample graph together with its adjacency matrix:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/ab7fb48cafc5f8bd70ce568e2160528f9cd7fbc48c5f3db5fd0d4d8612d9dc8e.png"><img alt="graph" src="_images/ab7fb48cafc5f8bd70ce568e2160528f9cd7fbc48c5f3db5fd0d4d8612d9dc8e.png" style="width: 250px;" /></a>
+</div>
+</div>
+<p>each row (or each column) of the matrix represents a source (resp. target) state of the graph.</p>
+<p>Given a starting point, a <strong>random walk</strong> on a graph is a succession of moves made randomly by the walker.
+At each step, the random walker has to choose an edge <span class="math notranslate nohighlight">\((i,j)\)</span> among the outgoing edges leaving from the current node <span class="math notranslate nohighlight">\(i\)</span> and then ends up
+at node <span class="math notranslate nohighlight">\(j\)</span>. The choice of the edge is made randomly. A walker in node <span class="math notranslate nohighlight">\(i\)</span> moves to node <span class="math notranslate nohighlight">\(j\)</span> with probability:</p>
+<div class="math notranslate nohighlight">
+\[
+P(j | i) = \frac{1}{\text{outdegree}(i)}
+\]</div>
+<p>If we let the random walker perform an infinite number of steps, we will be able to count how many times he visits a given node.
+This is the core idea of the PageRank algorithm. The more the random walker visits a node, the more this node is important.
+There are a few caveats however: in some graphs, as the one given here, the walker could end up being trapped on some node without any outgoing edge. It may also be the case that a subset of nodes in the graph traps the walker without leaving him the opportunity to leave this particular subset (e.g. cycles without exit). Thus the study of random walks is essentially of interest when the graph is strongly connected, that is there is a path from every node in the graph to every other node in the graph.</p>
+<p>We can now formalize this intuitive idea with a particular class of dynamic process called markov chains.
+Given an adjacency matrix, we can turn it into a row stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> by normalizing row counts so that each row
+sums to 1. Let <span class="math notranslate nohighlight">\(\mathbf{a}_i\)</span> be a row of an adjacency matrix then we build <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[
+P(j|i) = s_{ij} = \frac{a_{ij}}{\sum_j a_{ij}}
+\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>For the graph given above we get the row stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> by normalizing the rows of matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{S} 
+= \begin{bmatrix}
+ 0&amp;1/2&amp;1/2&amp;0\\
+ 1/3&amp;0&amp;1/3&amp;1/3\\
+ 0&amp;0&amp;0&amp;1\\
+ 0&amp;0&amp;1&amp;0 
+ \end{bmatrix}
+\end{split}\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example (matrix power)</p>
+<p>Consider a stochastic vector <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span>, assume the values:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{M} = \mathbf{S}^\top 
+= \begin{bmatrix}
+ 0  &amp;1/3&amp;0  &amp;0\\
+ 1/2&amp;0  &amp;0  &amp;0\\
+ 1/2&amp;1/3&amp; 0 &amp;1\\
+ 0  &amp;1/3&amp; 1&amp;0 
+ \end{bmatrix}\qquad
+ \mathbf{x}_0 = 
+ \begin{bmatrix}
+	1\\0\\0\\0
+ \end{bmatrix}
+\end{split}\]</div>
+<p>Now observe the effect ot the successive multiplications <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}= \mathbf{M} \mathbf{x}_t\)</span> for the first few values of <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x}_1 =
+\begin{bmatrix}
+0\\
+1/2\\
+1/2\\
+0
+\end{bmatrix}
+\quad
+\mathbf{x}_2 =
+\begin{bmatrix}
+1/6\\
+0\\
+1/6\\
+4/6
+\end{bmatrix}
+\quad
+\mathbf{x}_3 =
+\begin{bmatrix}
+0\\
+1/12\\
+9/12\\
+2/12
+\end{bmatrix}
+\end{split}\]</div>
+<p>There are a few observations to do here. First at each time step we can observe that the <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> vector remains stochastic. Second we can interpret the multiplication as providing the probabilities that the walker will end on each state at the next step given the probabilities to be on each state at the current step. Thus the <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> vector is intepreted as the probability to have the walker on each state after <span class="math notranslate nohighlight">\(t\)</span> steps. Finally we can observe that repeated matrix multiplication is matrix power. For instance</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbf{x}_3 &amp;= \mathbf{M}  \mathbf{M}  \mathbf{M} \mathbf{x}_0\\
+&amp;= \mathbf{M}^3 \mathbf{x}_0
+\end{align}
+\end{split}\]</div>
+<p>In other words, matrix power of stochastic matrices seems to implement a process close to formalizing the PageRank idea given above with <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> storing the importance of each node as a probability.</p>
+</div>
+<div class="proof definition admonition" id="markov chain">
+<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Markov chain)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>markov chain</strong> is a sequence of probability vectors <span class="math notranslate nohighlight">\(\mathbf{x}_0,\mathbf{x}_1, \mathbf{x}_2\ldots \mathbf{x}_n\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_{t+1}=\mathbf{M}\mathbf{x}_t\]</div>
+<p>for some column stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>. Furthermore a markov chain is <strong>strongly connected</strong> if each state of the stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is reachable in a finite number of steps from each state of <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>.</p>
+</section>
+</div><div class="proof theorem admonition" id="perron-frobenius">
+<p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Markov chain theorem )</p>
+<section class="theorem-content" id="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a stochastic matrix with strongly connected graph, then <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> has a unique steady-state vector, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.
+Moreover if <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> is <strong>any</strong> initial probabilistic vector, then</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_{t+1} = \mathbf{M}\mathbf{x}_t
+\]</div>
+<p>converges to <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as <span class="math notranslate nohighlight">\(t \rightarrow\infty\)</span></p>
+</section>
+</div><p>There are two key observations to do here.  First, <a class="reference internal" href="#perron-frobenius">Theorem 1</a> is a theorem than can be read as:
+matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a matrix with eigenvector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and eigenvalue <span class="math notranslate nohighlight">\(\lambda = 1\)</span>.
+Indeed the fix point <span class="math notranslate nohighlight">\(\mathbf{M}\mathbf{x}_t = \lambda \mathbf{x}_{t+1}\)</span> is just an instanciation of the eigenvector definition with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>. <a class="reference internal" href="#perron-frobenius">Theorem 1</a>
+suggests to compute this eigenvector by iterating a very large number of matrix vector multiplications or by computing a matrix power with some high value. <strong>Power iteration</strong> or matrix power is indeed a well known numerical method for computing the first eigenvector of a matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>.</p>
+<p>The second observation relates to the stability of the method. We emphasize that the theorem holds with any initial random vector only if the graph <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is strongly connected. Absence of strong connectivity may have two kind of consequences:</p>
+<ul class="simple">
+<li><p>The markov chain is <strong>absorbing</strong> : in case a node, or a set of nodes, has not outgoing edge allowing the walker to reach any other node in the graph then the probability will concentrate on this set of nodes.</p></li>
+<li><p>In case several sets of nodes are absorbing, the process could become dependant on the initial condition <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span>: the probability may concentrate on some set of nodes or another depending on the starting point of the chain.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When the matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> comes from a web graph, there is no guarantee that this graph is strongly connected and thus running the markov chain as is can lead to unstable results</p>
+</div>
+</section>
+<section id="pagerank">
+<h2>PageRank<a class="headerlink" href="#pagerank" title="Permalink to this heading">#</a></h2>
+<p>PageRank is an algorithm that computes the importance scores of the web pages by viewing the web as a graph.
+The importance is given by computing the first eigenvector from a stochastic matrix, representing the graph structure, with the power iteration method.</p>
+<p>To overcome problems pointed above, related to ensure the graph strong connectivity, PageRank introduces a new idea: that of the <strong>random surfer</strong>. The random surfer, like a random walker, moves from node to node in the graph following the edges, but unlike the random walker he is also allowed to jump from a node to <strong>any</strong> other node of the graph with some probability. This property of the random surfer aims to avoid problems related to absorbing markov chains.</p>
+<p>To formalize the random surfer intuition, we create another stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{R}\in\mathbb{R}^{n\times n}\)</span> representing the surfer’s capacity of performing random jumps. Each line of the matrix represents the probability of jumping from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span>. Since the probability of jumping to any other node from <span class="math notranslate nohighlight">\(i\)</span> is uniform, we define:</p>
+<div class="math notranslate nohighlight">
+\[
+P_R (j | i) = r_{ij} = \frac{1}{n} 
+\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(\mathbf{R}\)</span> encodes a fully connected graph with equal probability to move from node any node <span class="math notranslate nohighlight">\(i\)</span> to any node <span class="math notranslate nohighlight">\(j\)</span>. Now we create the final matrix combining the original column stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> with the random jump matrix <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{G} = \alpha \mathbf{M} + (1-\alpha)\mathbf{R}^\top
+\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is called the <strong>google matrix</strong> and is still a colum stochastic matrix. Now the google matrix has the strong connectivity property  as long as <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>. The parameter <span class="math notranslate nohighlight">\(\alpha\)</span> is called the damping factor and it is used to compute a weighted average of both matrices <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>. In practice it is often set to 0.85.</p>
+<p>Given a matrix <span class="math notranslate nohighlight">\(\mathbf{G}\in\mathbb{R}^{n\times n}\)</span> and a random probabilistic vector <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span>, the PageRank of a graph is computed by repeating the update:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}_{t+1} = \mathbf{Gx}_{t}
+\]</div>
+<p>until <span class="math notranslate nohighlight">\( || \mathbf{x}_{t+1}  - \mathbf{x}_t || \approx 0\)</span></p>
+</section>
+<section id="example-in-python">
+<h2>Example in Python<a class="headerlink" href="#example-in-python" title="Permalink to this heading">#</a></h2>
+<p>Here is an example implementation of PageRank in Python. We use a small graph
+whose nodes are Wikipedia pages of Star Wars characters. The edges reflect links between the pages.
+We use the  <a class="reference external" href="https://wikipedia.readthedocs.io/en/latest">wikipedia</a> and <a class="reference external" href="https://networkx.org">networkx</a> libraries to respectively scrape wikipedia and represent the graph in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wikipedia</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="c1"># We enumerate the subset of wikipedia pages to be used</span>
+
+<span class="n">nodeset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Luke Skywalker&quot;</span><span class="p">,</span><span class="s2">&quot;Admiral Ackbar&quot;</span><span class="p">,</span><span class="s2">&quot;Boba Fett&quot;</span><span class="p">,</span><span class="s2">&quot;C-3PO&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Chewbacca&quot;</span><span class="p">,</span><span class="s2">&quot;Count Dooku&quot;</span><span class="p">,</span><span class="s2">&quot;Darth Maul&quot;</span><span class="p">,</span><span class="s2">&quot;Darth Vader&quot;</span><span class="p">,</span><span class="s2">&quot;General Grievous&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Greedo&quot;</span><span class="p">,</span><span class="s2">&quot;Han Solo&quot;</span><span class="p">,</span><span class="s2">&quot;Jabba the Hutt&quot;</span><span class="p">,</span><span class="s2">&quot;Jango Fett&quot;</span><span class="p">,</span><span class="s2">&quot;Jar Jar Binks&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Lando Calrissian&quot;</span><span class="p">,</span><span class="s2">&quot;Leia Organa&quot;</span><span class="p">,</span><span class="s2">&quot;Mace Windu&quot;</span><span class="p">,</span><span class="s2">&quot;Obi-Wan Kenobi&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;Padmé Amidala&quot;</span><span class="p">,</span><span class="s2">&quot;Palpatine&quot;</span><span class="p">,</span><span class="s2">&quot;Qui-Gon Jinn&quot;</span><span class="p">,</span><span class="s2">&quot;R2-D2&quot;</span><span class="p">,</span><span class="s2">&quot;Saw Gerrera&quot;</span><span class="p">,</span><span class="s2">&quot;Yoda&quot;</span><span class="p">]</span>
+
+<span class="c1"># Gets the wikipedia pages</span>
+<span class="n">nodes2pages</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span><span class="n">wikipedia</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="n">auto_suggest</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodeset</span><span class="p">}</span>
+
+
+<span class="c1"># Graph construction</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodeset</span><span class="p">:</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="n">node</span><span class="p">)</span>
+    
+
+<span class="c1"># An edge is added to the graph from page i to page j </span>
+<span class="c1"># if there is a mention to page j in page i summary </span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodeset</span><span class="p">:</span>    
+    <span class="n">cpage</span> <span class="o">=</span> <span class="n">nodes2pages</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">target_node</span> <span class="ow">in</span> <span class="n">nodeset</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">target_node</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">target_node</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">cpage</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="n">target_node</span><span class="p">)</span>
+            
+</pre></div>
+</div>
+</div>
+</div>
+<p>A small graph can be viewed using standard python plotting libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+
+<span class="n">nodepos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="n">nodepos</span><span class="p">,</span><span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e0d4180b8a187e3545fdb3a97e8234b6893d9eca723de407e1e9e489644c8447.png" src="_images/e0d4180b8a187e3545fdb3a97e8234b6893d9eca723de407e1e9e489644c8447.png" />
+</div>
+</div>
+<p>To implement PageRank we first build the Google Matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">nnodes</span>           <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span> 
+<span class="n">adjacency</span>        <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+<span class="c1">#nans occur in case of absorbing node: division by 0</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+  <span class="n">row_stochastic</span>   <span class="o">=</span> <span class="n">adjacency</span> <span class="o">/</span> <span class="n">adjacency</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">row_stochastic</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">row_stochastic</span><span class="p">,</span><span class="mf">0.</span><span class="p">)</span>
+
+
+<span class="n">jump</span>             <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">row_stochastic</span><span class="p">)</span> <span class="o">/</span> <span class="n">nnodes</span>
+
+<span class="n">alpha</span>            <span class="o">=</span> <span class="mf">0.85</span>
+<span class="n">google</span>           <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">row_stochastic</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">jump</span> <span class="p">)</span>
+<span class="c1">#ensure stochasticity for absorbing nodes</span>
+<span class="n">google</span>           <span class="o">=</span> <span class="n">google</span> <span class="o">/</span> <span class="n">google</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="c1">#google matrix is eventually column stochastic</span>
+<span class="n">google</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we implement the PageRank function that expects a column stochastic google matrix and a stopping criterion <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span>
+
+<span class="k">def</span> <span class="nf">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+	<span class="n">n</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="n">x</span> <span class="o">/=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> 	                   <span class="c1">#ensure probabilistic vector</span>
+	<span class="n">error</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+	<span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">while</span> <span class="n">error</span> <span class="o">&gt;=</span> <span class="n">eps</span><span class="p">:</span>
+		<span class="n">xnext</span> <span class="o">=</span> <span class="n">G</span> <span class="o">@</span> <span class="n">x</span>
+		<span class="n">error</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">xnext</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Iteration </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s1">, Error = </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+		<span class="n">x</span>     <span class="o">=</span> <span class="n">xnext</span>
+		<span class="n">idx</span>  <span class="o">+=</span> <span class="mi">1</span>
+	<span class="k">return</span> <span class="n">x</span>
+	
+<span class="n">pr</span> <span class="o">=</span> <span class="n">pagerank</span><span class="p">(</span><span class="n">google</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 0, Error = 0.21066787960569622
+Iteration 1, Error = 0.12760565258150158
+Iteration 2, Error = 0.06076572293986581
+Iteration 3, Error = 0.03630308785334461
+Iteration 4, Error = 0.02110404428203825
+Iteration 5, Error = 0.013618708342570637
+Iteration 6, Error = 0.008912237715648922
+Iteration 7, Error = 0.005882206633823387
+Iteration 8, Error = 0.003926289599112746
+Iteration 9, Error = 0.0025935298566412274
+Iteration 10, Error = 0.0017368624708592893
+Iteration 11, Error = 0.0011484945019513875
+Iteration 12, Error = 0.000769480828076023
+</pre></div>
+</div>
+</div>
+</div>
+<p>It remains to match the PageRank scores with the node names and to display the results sorted by decreasing PageRank order:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pr</span><span class="p">,</span><span class="n">nodename</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="n">nodename</span><span class="p">,</span><span class="n">pr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Luke Skywalker 0.1501058730614095
+Darth Vader 0.12564195026869565
+Obi-Wan Kenobi 0.12489459800808388
+Han Solo 0.07542844567161087
+Padmé Amidala 0.06842630964861299
+Palpatine 0.06643247160988064
+Qui-Gon Jinn 0.05333904155042878
+Yoda 0.05200844207055648
+Boba Fett 0.0434153746434626
+Chewbacca 0.03854963513178494
+Jabba the Hutt 0.03616379233958057
+Leia Organa 0.028849997719601832
+Jango Fett 0.025111962605013447
+Darth Maul 0.018967593028262862
+Count Dooku 0.01865539067388204
+Mace Windu 0.017442046483508323
+C-3PO 0.008104165548551645
+R2-D2 0.00810416554245489
+Saw Gerrera 0.006726457399103174
+Lando Calrissian 0.006726457399103174
+Jar Jar Binks 0.006726457399103174
+Greedo 0.006726457399103174
+General Grievous 0.006726457399103174
+Admiral Ackbar 0.006726457399103174
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="final-remarks">
+<h2>Final remarks<a class="headerlink" href="#final-remarks" title="Permalink to this heading">#</a></h2>
+<p>PageRank illustrates the potential of markov chains for modelling graph data.
+In natural language processing, this kind of graph structure arises naturally in the context of social networks (facebook, twitter …)
+This kind of setup is not uncommon when strictly modelling language.
+Many language problems can be framed as graph or network problems.
+The most typical are lexical and semantic networks.</p>
+<p>For large or very large graphs, at web scale,  the kind of implementation provided here is inappropriate.
+Indeed the dense matrix has a size that grows quadratically with the number of nodes of the network and
+will inevitably cause both memory and run-time efficiency problems.
+Large social and semantic networks are small world networks and as such they are sparse networks.
+Actual implementations of large networks will rely on sparse matrices data structures with algorithms specialized for the case where most coefficients of the matrices are null.</p>
+<p>Variants of the power iteration method are used in a variety of setups without necessarily running the markov chain till convergence.
+This is the case of algorithms propagating information from node to node in a k-hop fashion.
+Label Propagation is a typical example in this family.</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Implement an algorithm that ranks the nodes of the Star Wars graph using the in-degree of each node. How are the results different from PageRank ?</p></li>
+<li><p>Suppose we have a graph of synonyms where nodes are word senses and edges represent the synonymy relation.</p>
+<ul>
+<li><p>Considering its adjacency matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and a one hot vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> selecting one particular word sense.
+What mathematical operation will provide the synonym of the word sense selected by <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> ? What operation gets the synonyms of the synonyms ?</p></li>
+<li><p>Does a markov chain using a stochastic adjacency matrix  of this graph  is likely to have absorbing nodes ?</p></li>
+<li><p>What does the PageRank of this graph would represent ?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="matrices.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Matrices</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="stats.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Applications to statistical analysis : latent semantic analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-the-web-as-a-graph">Representation: the web as a graph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chains-and-random-walks">Markov chains and random walks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pagerank">PageRank</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-in-python">Example in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks">Final remarks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Benoit Crabbe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

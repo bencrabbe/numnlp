@@ -1,0 +1,19 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: vectors
+  sections:
+  - file: numpy_exercises
+- file: euclid
+  sections:
+  - file: Euclid_exercises
+- file: vec2text
+- file: matrices
+- file: graphs
+- file: stats
+- file: optim
+#sections:
+#- file: optim_exercises
