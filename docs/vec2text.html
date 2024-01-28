@@ -371,6 +371,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-in-python">An example in Python</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-of-dimensionality">The curse of dimensionality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#increased-sparsity-as-dimension-grows">Increased sparsity as dimension grows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concentration-of-the-distance">Concentration of the distance</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
@@ -758,6 +763,36 @@ value J
 </div>
 </section>
 </section>
+<section id="the-curse-of-dimensionality">
+<h2>The curse of dimensionality<a class="headerlink" href="#the-curse-of-dimensionality" title="Permalink to this heading">#</a></h2>
+<p>The <strong>curse of dimensionality</strong> states that when the dimension of the vector space gets very large,
+the space gets sparse and the distance concentrates. We illustrate each of these aspects with examples.</p>
+<section id="increased-sparsity-as-dimension-grows">
+<h3>Increased sparsity as dimension grows<a class="headerlink" href="#increased-sparsity-as-dimension-grows" title="Permalink to this heading">#</a></h3>
+<p>Let us consider 10 random vectors of dimension 1 (or 10 random scalars).
+One can observe that in this vector space of dimension 1 data points roughly cover the space.
+Now consider 10 random vectors of dimension 2. One can observe that these vectors are more sparse.
+To get an occupation of the space as dense as in the 1D case we should sample <span class="math notranslate nohighlight">\(10^2=100\)</span> random vectors.
+For 3D in dimensional space we should sample <span class="math notranslate nohighlight">\(10^3=1000\)</span> random vectors and in general a <span class="math notranslate nohighlight">\(d-\)</span>dimensional space
+requires a <span class="math notranslate nohighlight">\(d-\)</span>exponential amount of data points.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/98b1276e77096e558bb1fbed3f2147fd721edbd2db665befa039a505918868d2.png" src="_images/98b1276e77096e558bb1fbed3f2147fd721edbd2db665befa039a505918868d2.png" />
+</div>
+</div>
+</section>
+<section id="concentration-of-the-distance">
+<h3>Concentration of the distance<a class="headerlink" href="#concentration-of-the-distance" title="Permalink to this heading">#</a></h3>
+<p>As the dimension of the space grows the distance between the points tends to concentrate on the mean distance
+with lower and lower variance. Here is a simulation for 100 points drawn randomly on spaces of increasing dimensions.
+For each dimension we provide an histogram of the distance distribution between the points</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/e769ed60110218f9513cb8c83a87719951e5975e7763b9827b5609ca435d9dfa.png" src="_images/e769ed60110218f9513cb8c83a87719951e5975e7763b9827b5609ca435d9dfa.png" />
+</div>
+</div>
+</section>
+</section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -862,6 +897,11 @@ This requires to design a tweet to vector function and a query system.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-and-classification">K-nearest neighbors and classification</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbor-algorithm-knn">K-nearest neighbor algorithm (KNN)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-in-python">An example in Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-of-dimensionality">The curse of dimensionality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#increased-sparsity-as-dimension-grows">Increased sparsity as dimension grows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concentration-of-the-distance">Concentration of the distance</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
