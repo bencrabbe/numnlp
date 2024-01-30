@@ -470,7 +470,7 @@ contain the terms ‘Brutus’ and ‘Caesar’ but not ‘Calpurnia’</em>. In
 </tbody>
 </table>
 <p>Given this table, the query returns two documents : <em>Antony and Cleopatra</em> and <em>Hamlet</em>.</p>
-<p><strong>Formalisation</strong> Let <span class="math notranslate nohighlight">\({\cal D} = D_1\ldots D_n\)</span> be the list of documents and <span class="math notranslate nohighlight">\({\cal Q} = (W_1 \lor W_2\lor \ldots ) \land \ldots \land (W_k\lor W_{k+1}\lor \ldots)\)</span> be a query in conjunctive normal form. The query’s truth value is evaluated as an usual propositional formula. <span class="math notranslate nohighlight">\(W_i\)</span> is true if <span class="math notranslate nohighlight">\(W_i \in D_j\)</span> and false otherwise. Furthermore, negation can occur only on primitive terms. The set of returned documents is the subset of <span class="math notranslate nohighlight">\({\cal D}\)</span> for which the query is true.</p>
+<p><strong>Formalisation</strong> Let <span class="math notranslate nohighlight">\({\cal D} = D_1\ldots D_n\)</span> be the list of documents and <span class="math notranslate nohighlight">\({\cal Q} = (v_1 \lor v_2\lor \ldots ) \land \ldots \land (v_k\lor v_{k+1}\lor \ldots)\)</span> be a query in conjunctive normal form. The query’s truth value is evaluated as an usual propositional formula. <span class="math notranslate nohighlight">\(v_i\)</span> is true if <span class="math notranslate nohighlight">\(v_i \in D_j\)</span> and false otherwise. Furthermore, negation can occur only on variables. The set of returned documents is the subset of <span class="math notranslate nohighlight">\({\cal D}\)</span> for which the query is true.</p>
 <p><strong>Limits of boolean information retrieval</strong> Boolean information retrieval is an all or nothing method. For instance a spelling error may prevent from finding errors. Another typical problem is the absence of ranking. All results that satisfy the query are returned.
 In case the set of such results is large, there is no built-in method for ranking them.</p>
 </section>
@@ -778,7 +778,7 @@ For 3D in dimensional space we should sample <span class="math notranslate nohig
 requires a <span class="math notranslate nohighlight">\(d-\)</span>exponential amount of data points.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/048e7a136fde4c188fcf64681a917ebefd5f5b69fec6a882c4d19ec936420ffd.png" src="_images/048e7a136fde4c188fcf64681a917ebefd5f5b69fec6a882c4d19ec936420ffd.png" />
+<img alt="_images/c2c60c775a112825035d330c378118903a60a5a9c18a8b92d868f0e39ec6c518.png" src="_images/c2c60c775a112825035d330c378118903a60a5a9c18a8b92d868f0e39ec6c518.png" />
 </div>
 </div>
 </section>
@@ -789,7 +789,7 @@ with lower and lower variance. Here is a simulation for 100 points drawn randoml
 For each dimension we provide an histogram of the distance distribution between the points</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/9c3d9828debcaaebeb0d2312dd5f224830d6656cc1153b61230d88647d8fac4e.png" src="_images/9c3d9828debcaaebeb0d2312dd5f224830d6656cc1153b61230d88647d8fac4e.png" />
+<img alt="_images/970f030a15df864106559c278686d6e686d8e4698c2cfbc61817b01d7e6a9af5.png" src="_images/970f030a15df864106559c278686d6e686d8e4698c2cfbc61817b01d7e6a9af5.png" />
 </div>
 </div>
 <p>This effect can be seen as a consequence of the law of large numbers and the central limit therem on vectors of large sizes. The concentration of the distance may have an effect on Nearest neighbours algorithms.
