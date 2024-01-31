@@ -665,7 +665,7 @@ Since singular values are square roots of the eigenvalues, they also represent v
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/60b922062f5bfb82fa1962c9009bb0b2ed36f8dbb832394323af6a26fb6cfa61.png" src="_images/60b922062f5bfb82fa1962c9009bb0b2ed36f8dbb832394323af6a26fb6cfa61.png" />
+<img alt="_images/d6a3cde71cb9831d1dfd84f665bfac751c1e56a7af6a57e45a87d42d3071d0cc.png" src="_images/d6a3cde71cb9831d1dfd84f665bfac751c1e56a7af6a57e45a87d42d3071d0cc.png" />
 </div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
@@ -845,20 +845,20 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.0166138  0.         0.         0.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.         0.         0.         0.
   0.         0.         0.         0.         0.         0.
+  0.         0.01893741 0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.01565347
   0.         0.         0.        ]
  [0.         0.         0.         0.         0.         0.
   0.         0.         0.         0.         0.00988339 0.
   0.         0.         0.        ]
  [0.         0.         0.         0.         0.         0.
-  0.         0.         0.01829764 0.         0.         0.
+  0.         0.         0.         0.01471766 0.         0.
   0.         0.         0.        ]
- [0.02036128 0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.        ]
- [0.         0.         0.         0.02530888 0.         0.
-  0.         0.         0.         0.         0.         0.
+ [0.         0.         0.         0.         0.         0.
+  0.         0.02294958 0.         0.         0.         0.
   0.         0.         0.        ]]
 </pre></div>
 </div>
@@ -907,7 +907,7 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fd36adea2b41ae2edebd30332da0b6f361e4ea30415591f03bbb5d5ffdbc4fa0.png" src="_images/fd36adea2b41ae2edebd30332da0b6f361e4ea30415591f03bbb5d5ffdbc4fa0.png" />
+<img alt="_images/9cec0bb825fec1e762cbc4f53ccfdbc736422a41e00b0dad1d894a876108a208.png" src="_images/9cec0bb825fec1e762cbc4f53ccfdbc736422a41e00b0dad1d894a876108a208.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -953,7 +953,7 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cc8c34abfdc2710086e7f8e649a49414f518ffa5142d7fbec7e2cbca9ed3866e.png" src="_images/cc8c34abfdc2710086e7f8e649a49414f518ffa5142d7fbec7e2cbca9ed3866e.png" />
+<img alt="_images/13dc14635756fee52ee36727660e371a12b3b5af85720f4228116af12304dd36.png" src="_images/13dc14635756fee52ee36727660e371a12b3b5af85720f4228116af12304dd36.png" />
 </div>
 </div>
 </section>
@@ -974,7 +974,7 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2b52bf1a96064fe180ede44f13674a75262e5e88d0cb4495ba6952ead82f5a40.png" src="_images/2b52bf1a96064fe180ede44f13674a75262e5e88d0cb4495ba6952ead82f5a40.png" />
+<img alt="_images/2b7ee45397b045dfdb29fd4cb7f33de99daca85bd5b668e85da7f9ae72282cb4.png" src="_images/2b7ee45397b045dfdb29fd4cb7f33de99daca85bd5b668e85da7f9ae72282cb4.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -1002,28 +1002,28 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
-ai : 0.23531565136977597
-computer : 0.21722209907488266
-roswell : 0.2105800806567474
-army : 0.2105800806567474
-linguistics : 0.14067033387002423
-intelligence : 0.12947405840505713
-artificial : 0.12763457528136454
-extraterrestrial : 0.12634804839404845
-debris : 0.12634804839404845
-language : 0.1241351972137824
+roswell : 0.25339947531045603
+army : 0.25339947531045603
+ai : 0.19574179897551955
+computer : 0.1769070224149671
+extraterrestrial : 0.1520396851862736
+debris : 0.1520396851862736
+air : 0.13919711993300937
+linguistics : 0.11346826424135494
+field : 0.11229395112734171
+intelligence : 0.10735969062871012
 
 * Topic-9 top 10 terms *
-ai : 0.14306142661536617
-harry : 0.13541873949581457
-linguistics : 0.1353395800569156
-potter : 0.10532568627452239
-books : 0.09179982989380533
-study : 0.0772752319769153
-lord : 0.0686613871567678
-rings : 0.06620149518497116
-language : 0.056436371157592743
-typhoon : 0.055181979335102105
+tsunamis : 0.34841342693429983
+tsunami : 0.34841342693429983
+waves : 0.17349547376431987
+large : 0.17252256493415372
+computer : 0.14674905590875142
+ocean : 0.13613866881412945
+generated : 0.1318063857924422
+resemble : 0.11613780897809993
+normal : 0.11613780897809993
+generate : 0.11613780897809993
 </pre></div>
 </div>
 </div>
