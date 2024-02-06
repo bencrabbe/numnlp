@@ -1817,7 +1817,7 @@ Evaluate the following expressions:
 
 - $(\mathbf{AB})\mathbf{x}$
 - $\mathbf{A}(\mathbf{B}\mathbf{x})$
-- $\mathbf{A}\mathbf{x}^top\mathbf{B}$
+- $\mathbf{A}\mathbf{x}^\top\mathbf{B}$
 - $\mathbf{B}\mathbf{A}\mathbf{x}$
 
 
