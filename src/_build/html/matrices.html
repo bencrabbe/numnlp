@@ -382,6 +382,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-theorem">Spectral theorem</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -1859,8 +1860,134 @@ Thus given the spectral theorem we can express the product as:</p>
 </figure>
 </div>
 </div>
-<p>tr</p>
 </section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Given the matrices and vectors:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{A} =
+    \begin{bmatrix}
+      1&amp;-1&amp;2\\
+      0&amp;3&amp;-1
+    \end{bmatrix}
+    \qquad
+     \mathbf{B} =
+    \begin{bmatrix}
+      0&amp;4&amp;-2\\
+      -4&amp;-3&amp;0
+    \end{bmatrix}
+	    \qquad
+\mathbf{x} = 
+\begin{bmatrix}
+2\\
+1\\
+0
+\end{bmatrix}
+    \qquad
+\mathbf{y} = 
+\begin{bmatrix}
+0\\1\\2
+\end{bmatrix}
+    \qquad
+\mathbf{z} =
+\begin{bmatrix}
+0\\0
+\end{bmatrix}
+\end{split}\]</div>
+<p>Evaluate:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Ax}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Bx}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{Az}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{B}^\top\mathbf{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{By}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}^\top\mathbf{z}\)</span></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Given matrices <span class="math notranslate nohighlight">\(\mathbf{A},\mathbf{B}\)</span> and the vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>
+such that:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+    \mathbf{A} =
+    \begin{bmatrix}
+      2&amp;0&amp;-1\\
+      0&amp;3&amp;-2\\
+      0&amp;0&amp;-1
+    \end{bmatrix}
+    \qquad
+     \mathbf{B} =
+    \begin{bmatrix}
+      0&amp;0&amp;2\\
+      -1&amp;3&amp;-1\\
+      0&amp;-3&amp;0
+    \end{bmatrix}
+    \qquad
+    \mathbf{x}=
+    \begin{bmatrix}
+      2\\0\\-1
+    \end{bmatrix}
+	
+\end{split}\]</div>
+<p>Evaluate the following expressions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((\mathbf{AB})\mathbf{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}(\mathbf{B}\mathbf{x})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}^top\mathbf{B}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{B}\mathbf{A}\mathbf{x}\)</span></p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>In python, plot the following matrix as 2D vectors:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X} = 
+\begin{bmatrix}
+1 &amp;2&amp;3\\
+1 &amp;2 &amp;3
+\end{bmatrix}
+\end{split}\]</div>
+<p>and the matrix <span class="math notranslate nohighlight">\(\mathbf{SRX}\)</span> with <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{R}\)</span>
+defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{S} = 
+\begin{bmatrix}
+0.5 &amp; 0\\
+0    &amp;0.5
+\end{bmatrix}
+\qquad
+\mathbf{R} = 
+\begin{bmatrix}
+\cos\frac{\pi}{2} &amp; -\sin\frac{\pi}{2} \\
+\sin\frac{\pi}{2}     &amp;\cos\frac{\pi}{2} 
+\end{bmatrix}
+\end{split}\]</div>
+<p>explain in words what the operation <span class="math notranslate nohighlight">\(\mathbf{SR}\)</span> represents.</p>
+<ol class="arabic simple" start="4">
+<li><p>Check that the following matrices are inverse of each other:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+7 &amp; 3\\
+2 &amp; 1
+\end{bmatrix}
+\quad
+\begin{bmatrix}
+1 &amp; -3\\
+-2 &amp; 7
+\end{bmatrix}
+\end{split}\]</div>
+<ol class="arabic simple" start="5">
+<li><p>For exercises 1. 2. and 4. implement them with <code class="docutils literal notranslate"><span class="pre">numpy</span></code> (find the
+relevant functions in the library)  and check that
+the results match those you get by manual resolution.</p></li>
+</ol>
 </section>
 </section>
 
@@ -1949,6 +2076,7 @@ Thus given the spectral theorem we can express the product as:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-theorem">Spectral theorem</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
   </nav></div>
 

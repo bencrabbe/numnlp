@@ -1744,6 +1744,129 @@ glue("eigen-figures", fig, display=False)
 ```
 
 
+## Exercises
+
+1. Given the matrices and vectors:
+
+$$
+\mathbf{A} =
+    \begin{bmatrix}
+      1&-1&2\\
+      0&3&-1
+    \end{bmatrix}
+    \qquad
+     \mathbf{B} =
+    \begin{bmatrix}
+      0&4&-2\\
+      -4&-3&0
+    \end{bmatrix}
+	    \qquad
+\mathbf{x} = 
+\begin{bmatrix}
+2\\
+1\\
+0
+\end{bmatrix}
+    \qquad
+\mathbf{y} = 
+\begin{bmatrix}
+0\\1\\2
+\end{bmatrix}
+    \qquad
+\mathbf{z} =
+\begin{bmatrix}
+0\\0
+\end{bmatrix}
+$$
+
+Evaluate:
+
+- $\mathbf{Ax}$
+- $\mathbf{Bx}$
+- $\mathbf{Az}$
+- $\mathbf{B}^\top\mathbf{x}$
+- $\mathbf{By}$
+- $\mathbf{A}^\top\mathbf{z}$
 
 
-tr
+2. Given matrices $\mathbf{A},\mathbf{B}$ and the vector $\mathbf{x}$
+  such that:
+  
+$$ 
+    \mathbf{A} =
+    \begin{bmatrix}
+      2&0&-1\\
+      0&3&-2\\
+      0&0&-1
+    \end{bmatrix}
+    \qquad
+     \mathbf{B} =
+    \begin{bmatrix}
+      0&0&2\\
+      -1&3&-1\\
+      0&-3&0
+    \end{bmatrix}
+    \qquad
+    \mathbf{x}=
+    \begin{bmatrix}
+      2\\0\\-1
+    \end{bmatrix}
+	
+$$	
+Evaluate the following expressions:
+
+- $(\mathbf{AB})\mathbf{x}$
+- $\mathbf{A}(\mathbf{B}\mathbf{x})$
+- $\mathbf{A}\mathbf{x}^top\mathbf{B}$
+- $\mathbf{B}\mathbf{A}\mathbf{x}$
+
+
+3. In python, plot the following matrix as 2D vectors:
+
+$$
+\mathbf{X} = 
+\begin{bmatrix}
+1 &2&3\\
+1 &2 &3
+\end{bmatrix}
+$$
+
+and the matrix $\mathbf{SRX}$ with $\mathbf{S}$ and $\mathbf{R}$
+defined as: 
+
+$$
+\mathbf{S} = 
+\begin{bmatrix}
+0.5 & 0\\
+0    &0.5
+\end{bmatrix}
+\qquad
+\mathbf{R} = 
+\begin{bmatrix}
+\cos\frac{\pi}{2} & -\sin\frac{\pi}{2} \\
+\sin\frac{\pi}{2}     &\cos\frac{\pi}{2} 
+\end{bmatrix}
+$$
+
+explain in words what the operation $\mathbf{SR}$ represents.
+
+
+4. Check that the following matrices are inverse of each other:
+
+$$
+\begin{bmatrix}
+7 & 3\\
+2 & 1
+\end{bmatrix}
+\quad
+\begin{bmatrix}
+1 & -3\\
+-2 & 7
+\end{bmatrix}
+$$
+
+5. For exercises 1. 2. and 4. implement them with `numpy` (find the
+   relevant functions in the library)  and check that
+   the results match those you get by manual resolution.
+
+
