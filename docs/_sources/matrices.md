@@ -486,7 +486,7 @@ In this second case, the operation takes the form:
 
 $$
 \begin{bmatrix}
-x_1 & \cdots & x_n
+x_1 & \cdots & x_m
 \end{bmatrix}
 \begin{bmatrix}
     A_{11}&\cdots & A_{1n}\\
@@ -495,7 +495,7 @@ x_1 & \cdots & x_n
   \end{bmatrix}
   =
   \begin{bmatrix}
-   x_1 A_{11} + \ldots +  x_1 A_{m1}  &\cdots &  x_n A_{1n}  + \ldots +  x_n A_{mn}  
+   x_1 A_{11} + \ldots +  x_1 A_{m1}  &\cdots &  x_m A_{1n}  + \ldots +  x_m A_{mn}  
   \end{bmatrix}
 $$
 
@@ -518,7 +518,7 @@ and it can also be viewed as a **linear combination** between $\mathbf{x}$ and e
 
 $$
 \begin{bmatrix}
-x_1 & \cdots & x_n
+x_1 & \cdots & x_m
 \end{bmatrix}
 \begin{bmatrix}
     \mathbf{a}_1\\
@@ -527,7 +527,7 @@ x_1 & \cdots & x_n
   \end{bmatrix}
   =
   \begin{bmatrix}
-   x_1 \mathbf{a}_{1} + \cdots + x_n \mathbf{a}_n
+   x_1 \mathbf{a}_{1} + \cdots + x_m \mathbf{a}_n
   \end{bmatrix}
 $$
 
@@ -671,7 +671,9 @@ $\mathbf{x}$ of size $p\times 1$ (or a line vector $\mathbf{x}$ of size $1\times
 `````
 Let $\mathbf{A}$ , $\mathbf{B}$, $\mathbf{C}$ be matrices. In general **matrix multiplication is not commutative** but **matrix multiplication is 
 associative** provided that the sizes of the matrices follow a pattern of the form    $\mathbf{A} : m\times p$, $\mathbf{B} : p\times q$ et  $\mathbf{C} : q\times n$. 
-**Matrix multiplication distributes over matrix addition** $\mathbf{A}(\mathbf{B}+\mathbf{C}) = \mathbf{AB}+\mathbf{BC}$. 
+If matrices follow the pattern   $\mathbf{A} : m\times p$,
+$\mathbf{B} : p\times n$,  $\mathbf{C} : p\times n$, then **matrix
+multiplication distributes over matrix addition**: $\mathbf{A}(\mathbf{B}+\mathbf{C}) = \mathbf{AB}+\mathbf{BC}$. 
 And finally **the transpose of a matrix matrix product is the product of the transposes of each matrix in reverse order** $(\mathbf{AB})^\top = \mathbf{B}^\top \mathbf{A}^\top$
 
 

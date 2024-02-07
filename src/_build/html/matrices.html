@@ -813,7 +813,7 @@ x_1  \mathbf{a}_1 +\cdots +x_n \mathbf{a}_n
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{bmatrix}
-x_1 &amp; \cdots &amp; x_n
+x_1 &amp; \cdots &amp; x_m
 \end{bmatrix}
 \begin{bmatrix}
     A_{11}&amp;\cdots &amp; A_{1n}\\
@@ -822,7 +822,7 @@ x_1 &amp; \cdots &amp; x_n
   \end{bmatrix}
   =
   \begin{bmatrix}
-   x_1 A_{11} + \ldots +  x_1 A_{m1}  &amp;\cdots &amp;  x_n A_{1n}  + \ldots +  x_n A_{mn}  
+   x_1 A_{11} + \ldots +  x_1 A_{m1}  &amp;\cdots &amp;  x_m A_{1n}  + \ldots +  x_m A_{mn}  
   \end{bmatrix}
 \end{split}\]</div>
 <p>Again the operation can be seen as a <strong>parallel dot product</strong> between <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and each column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span></p>
@@ -843,7 +843,7 @@ x_1 &amp; \cdots &amp; x_n
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{bmatrix}
-x_1 &amp; \cdots &amp; x_n
+x_1 &amp; \cdots &amp; x_m
 \end{bmatrix}
 \begin{bmatrix}
     \mathbf{a}_1\\
@@ -852,7 +852,7 @@ x_1 &amp; \cdots &amp; x_n
   \end{bmatrix}
   =
   \begin{bmatrix}
-   x_1 \mathbf{a}_{1} + \cdots + x_n \mathbf{a}_n
+   x_1 \mathbf{a}_{1} + \cdots + x_m \mathbf{a}_n
   \end{bmatrix}
 \end{split}\]</div>
 <div class="tip admonition">
@@ -985,7 +985,9 @@ y_1 \\ \cdots \\ x_p
 </div>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> , <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> be matrices. In general <strong>matrix multiplication is not commutative</strong> but <strong>matrix multiplication is
 associative</strong> provided that the sizes of the matrices follow a pattern of the form    <span class="math notranslate nohighlight">\(\mathbf{A} : m\times p\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B} : p\times q\)</span> et  <span class="math notranslate nohighlight">\(\mathbf{C} : q\times n\)</span>.
-<strong>Matrix multiplication distributes over matrix addition</strong> <span class="math notranslate nohighlight">\(\mathbf{A}(\mathbf{B}+\mathbf{C}) = \mathbf{AB}+\mathbf{BC}\)</span>.
+If matrices follow the pattern   <span class="math notranslate nohighlight">\(\mathbf{A} : m\times p\)</span>,
+<span class="math notranslate nohighlight">\(\mathbf{B} : p\times n\)</span>,  <span class="math notranslate nohighlight">\(\mathbf{C} : p\times n\)</span>, then <strong>matrix
+multiplication distributes over matrix addition</strong>: <span class="math notranslate nohighlight">\(\mathbf{A}(\mathbf{B}+\mathbf{C}) = \mathbf{AB}+\mathbf{BC}\)</span>.
 And finally <strong>the transpose of a matrix matrix product is the product of the transposes of each matrix in reverse order</strong> <span class="math notranslate nohighlight">\((\mathbf{AB})^\top = \mathbf{B}^\top \mathbf{A}^\top\)</span></p>
 </section>
 <section id="linear-maps">
