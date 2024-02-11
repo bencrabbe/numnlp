@@ -1003,11 +1003,11 @@ c = get_config()  #noqa
 
 ## 
 #  See also: NotebookClient.timeout
-# c.ExecutePreprocessor.timeout = 30
+# c.ExecutePreprocessor.timeout = -1
 
 ## 
 #  See also: NotebookClient.timeout_func
-# c.ExecutePreprocessor.timeout_func = None
+# c.ExecutePreprocessor.timeout_func = lambda x: 600
 
 #------------------------------------------------------------------------------
 # Execute(NbGraderPreprocessor, ExecutePreprocessor) configuration
@@ -1136,11 +1136,11 @@ c = get_config()  #noqa
 #  ``None`` or ``-1`` will disable the timeout. If ``timeout_func`` is set, it
 #  overrides ``timeout``.
 #  Default: 30
-# c.Execute.timeout = 30
+# c.Execute.timeout = -1
 
 ## 
 #  See also: NotebookClient.timeout_func
-# c.Execute.timeout_func = None
+# c.Execute.timeout_func = lambda x:600
 
 #------------------------------------------------------------------------------
 # InstantiateTests(NbGraderPreprocessor) configuration
