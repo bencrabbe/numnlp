@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Search Engine exercise &#8212; Numerical methods in NLP (foundations)</title>
+    <title>Information retrieval exercise &#8212; Numerical methods in NLP (foundations)</title>
   
   
   
@@ -194,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Search Engine exercise</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Information retrieval exercise</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -354,7 +354,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Search Engine exercise</h1>
+    <h1>Information retrieval exercise</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -394,10 +394,12 @@ document.write(`
 </div>
 </div>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="search-engine-exercise">
-<h1>Search Engine exercise<a class="headerlink" href="#search-engine-exercise" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="information-retrieval-exercise">
+<h1>Information retrieval exercise<a class="headerlink" href="#information-retrieval-exercise" title="Permalink to this heading">#</a></h1>
 <p>This exercise amounts to design a toy vector space information retrieval
-on the CISI data set. The data set is small enough to allow an in-class exercise with naive implementations.</p>
+on the CISI data set.  The system can be augmented with latent representations using Latent Semantic Analysis
+(or Latent Semantic Indexing) methodologies.</p>
+<p>The data set is small enough to allow an in-class exercise with naive implementations.</p>
 <section id="download-packages-and-data">
 <h2>Download packages and data<a class="headerlink" href="#download-packages-and-data" title="Permalink to this heading">#</a></h2>
 <p>The first step is to download required packages and data…</p>
@@ -443,7 +445,9 @@ Requirement already satisfied: catalogue&lt;2.1.0,&gt;=2.0.6 in /Library/Framewo
 Requirement already satisfied: weasel&lt;0.4.0,&gt;=0.1.0 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (0.3.4)
 Requirement already satisfied: typer&lt;0.10.0,&gt;=0.3.0 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (0.9.0)
 Requirement already satisfied: smart-open&lt;7.0.0,&gt;=5.2.1 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (6.4.0)
-Requirement already satisfied: tqdm&lt;5.0.0,&gt;=4.38.0 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (4.66.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: tqdm&lt;5.0.0,&gt;=4.38.0 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (4.66.1)
 Requirement already satisfied: requests&lt;3.0.0,&gt;=2.13.0 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (2.31.0)
 Requirement already satisfied: pydantic!=1.8,!=1.8.1,&lt;3.0.0,&gt;=1.7.4 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (2.5.2)
 Requirement already satisfied: jinja2 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from spacy) (3.1.3)
@@ -497,21 +501,22 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /Library/Frameworks/
 ?25l     <span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">0.0/12.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">0.9/12.8 MB</span> <span class=" -Color -Color-Red">30.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━<span class=" -Color -Color-C237">╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">1.0/12.8 MB</span> <span class=" -Color -Color-Red">30.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+     ━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">2.3/12.8 MB</span> <span class=" -Color -Color-Red">40.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">2.9/12.8 MB</span> <span class=" -Color -Color-Red">41.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-     ━━━━━━━━━━━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">5.5/12.8 MB</span> <span class=" -Color -Color-Red">51.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4.9/12.8 MB</span> <span class=" -Color -Color-Red">46.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">7.6/12.8 MB</span> <span class=" -Color -Color-Red">53.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">7.2/12.8 MB</span> <span class=" -Color -Color-Red">51.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━</span> <span class=" -Color -Color-Green">9.5/12.8 MB</span> <span class=" -Color -Color-Red">54.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━━</span> <span class=" -Color -Color-Green">10.3/12.8 MB</span> <span class=" -Color -Color-Red">59.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━</span> <span class=" -Color -Color-Green">12.1/12.8 MB</span> <span class=" -Color -Color-Red">64.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">12.8/12.8 MB</span> <span class=" -Color -Color-Red">66.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-     <span class=" -Color -Color-Red">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">12.8/12.8 MB</span> <span class=" -Color -Color-Red">51.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">12.8/12.8 MB</span> <span class=" -Color -Color-Red">71.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+     <span class=" -Color -Color-Red">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">12.8/12.8 MB</span> <span class=" -Color -Color-Red">55.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -541,9 +546,7 @@ Requirement already satisfied: numpy&gt;=1.19.0 in /Library/Frameworks/Python.fr
 Requirement already satisfied: annotated-types&gt;=0.4.0 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from pydantic!=1.8,!=1.8.1,&lt;3.0.0,&gt;=1.7.4-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (0.6.0)
 Requirement already satisfied: pydantic-core==2.14.5 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from pydantic!=1.8,!=1.8.1,&lt;3.0.0,&gt;=1.7.4-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (2.14.5)
 Requirement already satisfied: typing-extensions&gt;=4.6.1 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from pydantic!=1.8,!=1.8.1,&lt;3.0.0,&gt;=1.7.4-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (4.8.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (3.3.2)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (3.6)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (2.1.0)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy&lt;3.8.0,&gt;=3.7.2-&gt;en-core-web-sm==3.7.1) (2023.11.17)
@@ -582,7 +585,7 @@ To: /Users/bcrabbe/numnlp.github.io/src/cisi_queries.json
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                          | 0.00/72.1k [00:00&lt;?, ?B/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████| 72.1k/72.1k [00:00&lt;00:00, 36.2MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████| 72.1k/72.1k [00:00&lt;00:00, 34.5MB/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -596,7 +599,7 @@ To: /Users/bcrabbe/numnlp.github.io/src/cisi_qrels.json
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                           | 0.00/165k [00:00&lt;?, ?B/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████| 165k/165k [00:00&lt;00:00, 8.65MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████| 165k/165k [00:00&lt;00:00, 9.49MB/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
