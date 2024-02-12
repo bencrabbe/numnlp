@@ -368,6 +368,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-documents">View documents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-queries">View queries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocess-data">Preprocess data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#page-rank">Page Rank</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-vocabulary">Create vocabulary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#term-document-matrix">Term document matrix</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#querying">Querying</a></li>
@@ -406,12 +407,13 @@ on the CISI data set.  The system can be augmented with latent representations u
 <p><strong>WARNING</strong> No other downloaded packages and data sets are allowed for this exercise than those actually downloaded here</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALL</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># set this variable to True to download the necessary materials</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">INSTALL</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># set this variable to False to prevent downloading the materials once you already have them</span>
 
 <span class="k">if</span> <span class="n">INSTALL</span><span class="p">:</span>
     <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>numpy
     <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>spacy
     <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>gdown
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>networkx
     <span class="o">!</span>python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>download<span class="w"> </span>en_core_web_sm
     <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ir_measures<span class="w"> </span>
     
@@ -441,12 +443,6 @@ on the CISI data set.  The system can be augmented with latent representations u
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of documents 1460
-Total number of queries 112
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="view-documents">
@@ -464,18 +460,6 @@ The following code displays the first <span class="math notranslate nohighlight"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;doc_id&#39;: &#39;1&#39;, &#39;title&#39;: &#39;18 Editions of the Dewey Decimal Classifications&#39;, &#39;author&#39;: &#39;Comaromi, J.P.&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &quot;The present study is a history of the DEWEY Decimal Classification. The first edition of the DDC was published in 1876, the eighteenth edition in 1971, and future editions will continue to appear as needed. In spite of the DDC&#39;s long and healthy life, however, its full story has never been told. There have been biographies of Dewey that briefly describe his system, but this is the first attempt to provide a detailed history of the work that more than any other has spurred the growth of librarianship in this country and abroad.&quot;}
---------------------------------------------------------------------------------
-{&#39;doc_id&#39;: &#39;2&#39;, &#39;title&#39;: &#39;Use Made of Technical Libraries&#39;, &#39;author&#39;: &#39;Slater, M.&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &#39;This report is an analysis of 6300 acts of use in 104 technical libraries in the United Kingdom. Library use is only one aspect of the wider pattern of information use. Information transfer in libraries is restricted to the use of documents. It takes no account of documents used outside the library, still less of information transferred orally from person to person. The library acts as a channel in only a proportion of the situations in which information is transferred. Taking technical information transfer as a whole, there is no doubt that this proportion is not the major one. There are users of technical information - particularly in technology rather than science - who visit libraries rarely if at all, relying on desk collections of handbooks, current periodicals and personal contact with their colleagues and with people in other organizations. Even regular library users also receive information in other ways.&#39;}
---------------------------------------------------------------------------------
-{&#39;doc_id&#39;: &#39;3&#39;, &#39;title&#39;: &#39;Two Kinds of Power An Essay on Bibliographic Control&#39;, &#39;author&#39;: &#39;Wilson, P.&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &quot;The relationships between the organization and control of writings and the organization and control of knowledge and information will inevitably enter our story, for writings contain, along with much else, a great deal of mankind&#39;s stock of knowledge and information. Bibliographical control is a form of power, and if knowledge itself is a form of power, as the familiar slogan claims, bibliographical control is in a certain sense power over power, power to obtain the knowledge recorded in written form. As writings are not simply, and not in any simple way, storehouses of knowledge, we cannot satisfactorily discuss bibliographical control as simply control over the knowledge and information contained in writings.&quot;}
---------------------------------------------------------------------------------
-{&#39;doc_id&#39;: &#39;4&#39;, &#39;title&#39;: &#39;Systems Analysis of a University Library; final report and research project&#39;, &#39;author&#39;: &#39;Buckland, M.K.&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &quot;The establishment of nine new universities in the 1960&#39;s provoked a highly stimulating re-examination of the nature, purpose and management of academic libraries. Long-established attitudes and methods were questioned, but although changes were made, the basic difficulty remained - a lack of objective information about the best ways of providing a library service in a university. The report of the UGC Committee on Libraries (the Parry Repot [267]), which, in general, endorsed these changes, also stressed the need for research into all aspects of academic library provision.&quot;}
---------------------------------------------------------------------------------
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="view-queries">
@@ -490,16 +474,6 @@ The following code displays the first <span class="math notranslate nohighlight"
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
 
 <span class="n">show_queries</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;query_id&#39;: &#39;1&#39;, &#39;title&#39;: &#39;&#39;, &#39;author&#39;: &#39;&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &#39;What problems and concerns are there in making up descriptive titles? What difficulties are involved in automatically retrieving articles from approximate titles? What is the usual relevance of the content of articles to their titles?&#39;}
---------------------------------------------------------------------------------
-{&#39;query_id&#39;: &#39;2&#39;, &#39;title&#39;: &#39;&#39;, &#39;author&#39;: &#39;&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &#39;How can actually pertinent data, as opposed to references or entire articles themselves, be retrieved automatically in response to information requests?&#39;}
---------------------------------------------------------------------------------
-{&#39;query_id&#39;: &#39;3&#39;, &#39;title&#39;: &#39;&#39;, &#39;author&#39;: &#39;&#39;, &#39;bib&#39;: &#39;&#39;, &#39;text&#39;: &#39;What is information science? Give definitions where possible.&#39;}
---------------------------------------------------------------------------------
 </pre></div>
 </div>
 </div>
@@ -542,26 +516,6 @@ This preprocessing function typically involves:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NotImplementedError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">stopwords</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">get_lang_class</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Defaults</span><span class="o">.</span><span class="n">stop_words</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#You may customize stop words</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># YOUR CODE HERE</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span> <span class="nf">preproc_doc</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">use_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="sd">     Args: </span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="sd">         text(string)   : the input string</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span><span class="sd">         string. The preprocessed text</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span><span class="sd">     &quot;&quot;&quot;</span>
-
-<span class="ne">NotImplementedError</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -573,6 +527,68 @@ This preprocessing function typically involves:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatic tests #</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="page-rank">
+<h2>Page Rank<a class="headerlink" href="#page-rank" title="Permalink to this heading">#</a></h2>
+<p>The documents contains link to target documents. We take advantage of this network
+structure to compute an importance for the documents</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">make_adjacency</span><span class="p">(</span><span class="n">docset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the network graph from the links provided in the data set</span>
+<span class="sd">    and returns its adjacency matrix</span>
+<span class="sd">    Args:</span>
+<span class="sd">        docset (list): the list of documents</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        np.array. the adjacency matrix of the graph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">make_googlematrix</span><span class="p">(</span><span class="n">adjacency</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a google matrix of the same shape as the adjacency matrix.</span>
+<span class="sd">    The returned matrix is column stochastic</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">       adjacency (numpy.array): the graph adjacency matrix</span>
+<span class="sd">       alpha           (float): the alpha used for weighting the Google matrix construction</span>
+<span class="sd">    Returns:</span>
+<span class="sd">       numpy.array. The Google matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">make_googlematrix_corr</span><span class="p">(</span><span class="n">adjacency</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
+    
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">pagerank</span><span class="p">(</span><span class="n">google_matrix</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes a pagerenak for some google matrix</span>
+<span class="sd">    Args:</span>
+<span class="sd">       google.matrix (numpy.array): a Google matrix</span>
+<span class="sd">       eps(float): the stopping criterion</span>
+<span class="sd">    Returns:</span>
+<span class="sd">       numpy.array. The PageRank vector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#TESTS</span>
 </pre></div>
 </div>
 </div>
@@ -891,7 +907,9 @@ as:</p>
 
 <span class="n">search_model</span> <span class="o">=</span> <span class="n">IRModel</span><span class="p">(</span><span class="n">docset</span><span class="p">,</span><span class="n">use_svd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_vocab_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="c1"># your best model has to be assigned to the search_model variable</span>
+<span class="c1"># you may also try to combine the Vector Space model scores with the PageRank scores.</span>
+
+<span class="c1"># your best model has to be assigned to the search_model variable and the cells below must execute without error</span>
 </pre></div>
 </div>
 </div>
@@ -1013,6 +1031,7 @@ Find out what these metrics actually mean on the web</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-documents">View documents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-queries">View queries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocess-data">Preprocess data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#page-rank">Page Rank</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-vocabulary">Create vocabulary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#term-document-matrix">Term document matrix</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#querying">Querying</a></li>
