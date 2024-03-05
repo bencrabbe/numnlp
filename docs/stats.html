@@ -506,7 +506,8 @@ is nothing else than a cosine measure between two centered data vectors while th
 </section>
 <section id="covariance-matrices">
 <h2>Covariance matrices<a class="headerlink" href="#covariance-matrices" title="Permalink to this heading">#</a></h2>
-<p>Observe that we can compute the covariance between all couples of data column vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1 \ldots \mathbf{x}_m\)</span> by a single matrix product.
+<p>Observe that we can compute the covariance between all couples of
+(centered) data column vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1 \ldots \mathbf{x}_m\)</span> by a single matrix product.
 Let <span class="math notranslate nohighlight">\(\mathbf{X}\in \mathbb{R}^{n\times m}\)</span> then the resulting covariance matrix is:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -668,7 +669,7 @@ Since singular values are square roots of the eigenvalues, they also represent v
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/c5b76370364688d8ca4affaad1ffc505ce039f83bda4f2d56b207f58b9b96118.png" src="_images/c5b76370364688d8ca4affaad1ffc505ce039f83bda4f2d56b207f58b9b96118.png" />
+<img alt="_images/e2e03c7d5ee58ba40e1031c363892424fc96c5914d979ed8f7bfb779f641d45d.png" src="_images/e2e03c7d5ee58ba40e1031c363892424fc96c5914d979ed8f7bfb779f641d45d.png" />
 </div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
@@ -848,18 +849,18 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.         0.         0.0156194  0.
-  0.         0.01707545 0.         0.         0.         0.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.         0.         0.         0.
+  0.         0.         0.03659527 0.         0.         0.
   0.         0.         0.        ]
- [0.         0.         0.0166138  0.         0.         0.
+ [0.01514965 0.         0.01228599 0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.01471766 0.         0.         0.         0.
   0.         0.         0.         0.         0.         0.
   0.         0.         0.        ]
  [0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.0188059  0.         0.        ]
- [0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.0188059  0.         0.        ]
+  0.         0.02294958 0.         0.         0.         0.
+  0.         0.         0.        ]
  [0.         0.         0.         0.         0.         0.
   0.         0.         0.         0.01471766 0.         0.
   0.         0.         0.        ]]
@@ -910,7 +911,7 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bef3167b7fd2999da31ebfc8a5c2c8666d6df1d6a7d2f8f13f24b15d17793c06.png" src="_images/bef3167b7fd2999da31ebfc8a5c2c8666d6df1d6a7d2f8f13f24b15d17793c06.png" />
+<img alt="_images/33f673d3174f49f1b6acea69dcd71717301aa7ea3f6cb90475d6c4724a16954c.png" src="_images/33f673d3174f49f1b6acea69dcd71717301aa7ea3f6cb90475d6c4724a16954c.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -956,7 +957,7 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/81f45bf38ce8b8dd24a8a02a2f608498888bd7a67194e744d23c816f5f75527c.png" src="_images/81f45bf38ce8b8dd24a8a02a2f608498888bd7a67194e744d23c816f5f75527c.png" />
+<img alt="_images/7c9839102dd9360e08b988e13a863f3e6042c785f43fe87101ee62345901caa9.png" src="_images/7c9839102dd9360e08b988e13a863f3e6042c785f43fe87101ee62345901caa9.png" />
 </div>
 </div>
 </section>
@@ -977,7 +978,7 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/518fbb3486112ae927750bf8b3177b97e519db3c7690bf4ec1a567f8bb058d9a.png" src="_images/518fbb3486112ae927750bf8b3177b97e519db3c7690bf4ec1a567f8bb058d9a.png" />
+<img alt="_images/abee4805f00a3cc0c8c83776fa6b02313893a7ed340c6fe07dcd52592f0f0f92.png" src="_images/abee4805f00a3cc0c8c83776fa6b02313893a7ed340c6fe07dcd52592f0f0f92.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -1005,28 +1006,28 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
-tropical : 0.20042421996388
-wine : 0.19933147945261473
-typhoon : 0.13045692465738704
-cyclones : 0.0902840248773141
-cyclone : 0.08982346551574466
-pacific : 0.08569871168670452
-beer : 0.07766775704458924
-warning : 0.06569920572992904
-typhoons : 0.049274404297446776
-northwest : 0.049274404297446776
+wine : 0.36970651816694916
+roswell : 0.22359972080620413
+army : 0.22359972080620413
+extraterrestrial : 0.1341598324837225
+debris : 0.1341598324837225
+air : 0.1074653956689629
+new : 0.10107451840350029
+weather : 0.08943988832248169
+ufo : 0.08943988832248169
+speculation : 0.08943988832248169
 
 * Topic-9 top 10 terms *
-tsunamis : 0.3194048000334688
-tsunami : 0.3194048000334688
-computer : 0.19998662981630191
-waves : 0.15878288365086585
-large : 0.15863107600920007
-theory : 0.12437810213481303
-ocean : 0.12369247547269838
-generated : 0.12190282095039262
-resemble : 0.10646826667782315
-normal : 0.10646826667782294
+finite : 0.22797970518123326
+correct : 0.22797970518123326
+state : 0.15198647012082214
+problem : 0.15198647012082214
+optimal : 0.15198647012082214
+initial : 0.15198647012082214
+automated : 0.15198647012082214
+algorithms : 0.15198647012082214
+algorithm : 0.15198647012082214
+tsunamis : 0.12509565364814593
 </pre></div>
 </div>
 </div>

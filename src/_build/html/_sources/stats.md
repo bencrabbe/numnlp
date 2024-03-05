@@ -108,7 +108,8 @@ is nothing else than a cosine measure between two centered data vectors while th
 
 ## Covariance matrices
 
-Observe that we can compute the covariance between all couples of data column vectors $\mathbf{x}_1 \ldots \mathbf{x}_m$ by a single matrix product.
+Observe that we can compute the covariance between all couples of
+(centered) data column vectors $\mathbf{x}_1 \ldots \mathbf{x}_m$ by a single matrix product.
 Let $\mathbf{X}\in \mathbb{R}^{n\times m}$ then the resulting covariance matrix is:
 
 $$
