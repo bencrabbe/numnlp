@@ -77,7 +77,7 @@ $$
 $$
 
 - The **correlation** of vectors  $\mathbf{x} \in \mathbb{R}^n$  and  $\mathbf{y} \in \mathbb{R}^n$ 
-
+ 
 $$
 \text{cor}(\mathbf{x},\mathbf{y}) = \frac{\mathbf{x}_c^\top \mathbf{y}_c}{ ||\mathbf{x}_c|| \, ||\mathbf{y}_c || } 
 $$
