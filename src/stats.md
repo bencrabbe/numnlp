@@ -100,7 +100,6 @@ $$
 ```
 
 
-
 ```{note} 
 There is an important connection between descriptive statistics and euclidean geometry. The correlation coefficient 
 is nothing else than a cosine measure between two centered data vectors while the standard deviation is proportional to the norm of a data vector. Further connections can be established, for instance to say that two data vectors are statistically independent is equivalent to say that the two vectors are orthogonal.
@@ -305,7 +304,7 @@ Since the singular values can be ordered according to their variance, greater va
 Removing the smaller singular values, with lower variance, removes the details of the input data.
 
 
-```{figure} figs/svd.pdf
+```{figure} figs/svd.png
 ---
 width: 500px
 name: svd-fig
