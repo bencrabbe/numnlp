@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Optimization exercises" href="optim_exercises.html" />
-    <link rel="prev" title="Applications to statistical analysis : latent semantic analysis" href="stats.html" />
+    <link rel="prev" title="Information retrieval exercise" href="ir.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -193,8 +193,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Optimization basics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ir.html">Information retrieval exercise</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Optimization basics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
 </li>
@@ -840,6 +843,22 @@ and on its derivative <span class="math notranslate nohighlight">\(\frac{df}{dx}
 The stepsize is dependent of an arbitrary constant <span class="math notranslate nohighlight">\(\alpha\)</span> and on the pointwise value of the derivative.
 The secant and newton method substantially improve this behavior by seeking to define an adaptative <span class="math notranslate nohighlight">\(\alpha\)</span> taking into account the shape of the derivative function.</p>
 </div>
+<div class="admonition-line-equations admonition">
+<p class="admonition-title">Line equations</p>
+<p>At several times  in this chapter it may be helpful to have in mind some line and plane equations.
+The <em>univariate</em> line equation has the form</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) =  a x + b
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> is the <strong>slope</strong> coefficient and <span class="math notranslate nohighlight">\(b\)</span> the <strong>intercept</strong> or the height <span class="math notranslate nohighlight">\(f(0)\)</span> of the point <span class="math notranslate nohighlight">\((0,f(0))\)</span> where the line crosses the <span class="math notranslate nohighlight">\(y\)</span>-axis.
+When we know the slope and a point <span class="math notranslate nohighlight">\((x_t,f(x_t))\)</span> on the line where <span class="math notranslate nohighlight">\(x_t \not = 0\)</span> then the equation takes the form:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = a (x-x_t) + f(x_t)
+\]</div>
+<p>and observe that this generalized version reduces to the previous equation when <span class="math notranslate nohighlight">\(x_t = 0\)</span>.
+``</p>
 <p><strong>The secant method</strong> is a root finding method that given two iterates <span class="math notranslate nohighlight">\(x_{t-1}\)</span> and <span class="math notranslate nohighlight">\(x_t\)</span> generates the next iterate <span class="math notranslate nohighlight">\(x_{t+1}\)</span> by intersecting the secant line joining  <span class="math notranslate nohighlight">\((x_{t-1},\frac{df}{dx}(x_{t-1}))\)</span> and <span class="math notranslate nohighlight">\((x_t, \frac{df}{dx}(x_t))\)</span> with the <span class="math notranslate nohighlight">\(x\)</span> axis.
 In other words the secant method approximates the derivative of the derivative function <span class="math notranslate nohighlight">\(\frac{df}{dx}\)</span> with a finite difference approximation.</p>
 <div class="proof algorithm admonition" id="sec-algo">
@@ -851,7 +870,8 @@ In other words the secant method approximates the derivative of the derivative f
 <li><p><span class="math notranslate nohighlight">\(x_{t+1} \gets x_t - \alpha\frac{df}{dx}(x_t)\)</span></p></li>
 </ul>
 </section>
-</div><p>The secant method is given as <a class="reference internal" href="#sec-algo">Algorithm 2</a>. To understand the algorithm, we first express the equation of the secant going through <span class="math notranslate nohighlight">\((x_{t-1},\frac{df}{dx}(x_{t-1}))\)</span> and <span class="math notranslate nohighlight">\((x_t, \frac{df}{dx}(x_t))\)</span>:</p>
+</div></div>
+<p>The secant method is given as <a class="reference internal" href="#sec-algo">Algorithm 2</a>. To understand the algorithm, we first express the equation of the secant going through <span class="math notranslate nohighlight">\((x_{t-1},\frac{df}{dx}(x_{t-1}))\)</span> and <span class="math notranslate nohighlight">\((x_t, \frac{df}{dx}(x_t))\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 y  = \frac{ \frac{df}{dx}(x_t)- \frac{df}{dx}(x_{t-1}) } {x_t-x_{t-1}} (x-x_{t}) + \frac{df}{dx}(x_{t})
@@ -1270,22 +1290,9 @@ y_n &amp;= \frac{\partial f}{\partial x_n}(\mathbf{x}_t) + \frac{\partial^2 f}{\
 \mathbf{x}_{t+1} &amp;=  \mathbf{x}_t - \alpha \nabla f(\mathbf{x}_t) 
 \end{align}
 \end{split}\]</div>
-<div class="admonition-line-and-plane-equations admonition">
-<p class="admonition-title">Line and plane equations</p>
-<p>At several times  in this chapter it may be helpful to have in mind some line and plane equations.
-The <em>univariate</em> line equation has the form</p>
-<div class="math notranslate nohighlight">
-\[
-f(x) =  a x + b
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(a\)</span> is the <strong>slope</strong> coefficient and <span class="math notranslate nohighlight">\(b\)</span> the <strong>intercept</strong> or the height <span class="math notranslate nohighlight">\(f(0)\)</span> of the point <span class="math notranslate nohighlight">\((0,f(0))\)</span> where the line crosses the <span class="math notranslate nohighlight">\(y\)</span>-axis.
-When we know the slope and a point <span class="math notranslate nohighlight">\((x_t,f(x_t))\)</span> on the line where <span class="math notranslate nohighlight">\(x_t \not = 0\)</span> then the equation takes the form:</p>
-<div class="math notranslate nohighlight">
-\[
-f(x) = a (x-x_t) + f(x_t)
-\]</div>
-<p>and observe that this generalized version reduces to the previous equation when <span class="math notranslate nohighlight">\(x_t = 0\)</span>.</p>
-<p>In the <em>multivariate</em> case, this generalizes to the plane equation:</p>
+<div class="admonition-plane-equations admonition">
+<p class="admonition-title">Plane equations</p>
+<p>In the <em>multivariate</em> case, line equations generalize to the plane equations:</p>
 <div class="math notranslate nohighlight">
 \[
 f(\mathbf{x}) =  a_1 x_1 + a_2 x_2 + \ldots + a_n x_n + b
@@ -1485,12 +1492,12 @@ minimum found [1.         0.99999998]
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="stats.html"
+       href="ir.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Applications to statistical analysis : latent semantic analysis</p>
+        <p class="prev-next-title">Information retrieval exercise</p>
       </div>
     </a>
     <a class="right-next"

@@ -782,6 +782,27 @@ The stepsize is dependent of an arbitrary constant $\alpha$ and on the pointwise
 The secant and newton method substantially improve this behavior by seeking to define an adaptative $\alpha$ taking into account the shape of the derivative function.
 ```
 
+
+```{admonition} Line equations
+
+At several times  in this chapter it may be helpful to have in mind some line and plane equations.
+The *univariate* line equation has the form
+
+$$
+f(x) =  a x + b
+$$
+
+where $a$ is the **slope** coefficient and $b$ the **intercept** or the height $f(0)$ of the point $(0,f(0))$ where the line crosses the $y$-axis.
+When we know the slope and a point $(x_t,f(x_t))$ on the line where $x_t \not = 0$ then the equation takes the form:
+
+$$
+f(x) = a (x-x_t) + f(x_t)
+$$
+
+and observe that this generalized version reduces to the previous equation when $x_t = 0$.
+``
+
+
 **The secant method** is a root finding method that given two iterates $x_{t-1}$ and $x_t$ generates the next iterate $x_{t+1}$ by intersecting the secant line joining  $(x_{t-1},\frac{df}{dx}(x_{t-1}))$ and $(x_t, \frac{df}{dx}(x_t))$ with the $x$ axis.
 In other words the secant method approximates the derivative of the derivative function $\frac{df}{dx}$ with a finite difference approximation.
 
@@ -796,7 +817,6 @@ In other words the secant method approximates the derivative of the derivative f
 
 ```
 
-+++
 
 The secant method is given as {prf:ref}`sec-algo`. To understand the algorithm, we first express the equation of the secant going through $(x_{t-1},\frac{df}{dx}(x_{t-1}))$ and $(x_t, \frac{df}{dx}(x_t))$:
 
@@ -1460,7 +1480,6 @@ $$
 $$
 ```
 
-+++
 
 ```{code-cell}
 #Example implementation of the multivariate gradient descent in numpy
@@ -1487,7 +1506,6 @@ min = grad_descent(np.array([4,4]),grad)
 print('minimum found',min)
 ```
 
-+++
 
 The **Multivariate Newton method** extends naturally the newton method to the multivariate case. It is provided as {prf:ref}`newton-mv`. 
 The key difference with other algorithms described so far is located in the $\alpha$. When optimizing a function $f(x_1\ldots x_n)$, $\alpha$
@@ -1560,28 +1578,10 @@ $$
 \end{align}
 $$
 
-+++
-
-```{admonition} Line and plane equations
-
-At several times  in this chapter it may be helpful to have in mind some line and plane equations.
-The *univariate* line equation has the form
-
-$$
-f(x) =  a x + b
-$$
-
-where $a$ is the **slope** coefficient and $b$ the **intercept** or the height $f(0)$ of the point $(0,f(0))$ where the line crosses the $y$-axis.
-When we know the slope and a point $(x_t,f(x_t))$ on the line where $x_t \not = 0$ then the equation takes the form:
-
-$$
-f(x) = a (x-x_t) + f(x_t)
-$$
-
-and observe that this generalized version reduces to the previous equation when $x_t = 0$.
 
 
-In the *multivariate* case, this generalizes to the plane equation:
+```{admonition} Plane equations
+In the *multivariate* case, line equations generalize to the plane equations:
 
 $$
 f(\mathbf{x}) =  a_1 x_1 + a_2 x_2 + \ldots + a_n x_n + b
@@ -1746,7 +1746,6 @@ Different choices of the initial guess $\mathbf{x}_0$ may lead to different solu
 In machine learning, most of the time, non convex optimization problems are problems that are not radically different from convex problems.
 The functions are continuous but not necessarily differentiable and they have local or global minima.
 
-+++
 
 ```{code-cell}
 ---
@@ -1803,7 +1802,6 @@ Instead the minimum of the function is located on a point where the derivative i
 Non convex problems may cause difficulties to methods that are otherwise well defined for convex problems. For instance the Newton method may perform too agressive updates
 and diverge. In practice, gradient descent methods with some improvements are widely used when optimizing such non convex functions.
 
-+++
 
 ```{code-cell}
 ---
@@ -1838,7 +1836,7 @@ ax3d.invert_yaxis()
 glue('rosen',fig,display=False)
 ```
 
-+++
+
 
 ```{admonition} Example
 :class: example
@@ -1869,7 +1867,7 @@ $$
 
 ```
 
-+++
+
 
 ```{code-cell}
 def grad(x):
