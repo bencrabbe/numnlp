@@ -800,7 +800,7 @@ f(x) = a (x-x_t) + f(x_t)
 $$
 
 and observe that this generalized version reduces to the previous equation when $x_t = 0$.
-``
+```
 
 
 **The secant method** is a root finding method that given two iterates $x_{t-1}$ and $x_t$ generates the next iterate $x_{t+1}$ by intersecting the secant line joining  $(x_{t-1},\frac{df}{dx}(x_{t-1}))$ and $(x_t, \frac{df}{dx}(x_t))$ with the $x$ axis.
@@ -908,6 +908,9 @@ and at each time step capture the approximative shape of the derivative with the
 {glue:any}`sec_fig`
 
 ```
+
+
+
 
 ```{code-cell}
 ---

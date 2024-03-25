@@ -857,8 +857,8 @@ When we know the slope and a point <span class="math notranslate nohighlight">\(
 \[
 f(x) = a (x-x_t) + f(x_t)
 \]</div>
-<p>and observe that this generalized version reduces to the previous equation when <span class="math notranslate nohighlight">\(x_t = 0\)</span>.
-``</p>
+<p>and observe that this generalized version reduces to the previous equation when <span class="math notranslate nohighlight">\(x_t = 0\)</span>.</p>
+</div>
 <p><strong>The secant method</strong> is a root finding method that given two iterates <span class="math notranslate nohighlight">\(x_{t-1}\)</span> and <span class="math notranslate nohighlight">\(x_t\)</span> generates the next iterate <span class="math notranslate nohighlight">\(x_{t+1}\)</span> by intersecting the secant line joining  <span class="math notranslate nohighlight">\((x_{t-1},\frac{df}{dx}(x_{t-1}))\)</span> and <span class="math notranslate nohighlight">\((x_t, \frac{df}{dx}(x_t))\)</span> with the <span class="math notranslate nohighlight">\(x\)</span> axis.
 In other words the secant method approximates the derivative of the derivative function <span class="math notranslate nohighlight">\(\frac{df}{dx}\)</span> with a finite difference approximation.</p>
 <div class="proof algorithm admonition" id="sec-algo">
@@ -870,8 +870,7 @@ In other words the secant method approximates the derivative of the derivative f
 <li><p><span class="math notranslate nohighlight">\(x_{t+1} \gets x_t - \alpha\frac{df}{dx}(x_t)\)</span></p></li>
 </ul>
 </section>
-</div></div>
-<p>The secant method is given as <a class="reference internal" href="#sec-algo">Algorithm 2</a>. To understand the algorithm, we first express the equation of the secant going through <span class="math notranslate nohighlight">\((x_{t-1},\frac{df}{dx}(x_{t-1}))\)</span> and <span class="math notranslate nohighlight">\((x_t, \frac{df}{dx}(x_t))\)</span>:</p>
+</div><p>The secant method is given as <a class="reference internal" href="#sec-algo">Algorithm 2</a>. To understand the algorithm, we first express the equation of the secant going through <span class="math notranslate nohighlight">\((x_{t-1},\frac{df}{dx}(x_{t-1}))\)</span> and <span class="math notranslate nohighlight">\((x_t, \frac{df}{dx}(x_t))\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 y  = \frac{ \frac{df}{dx}(x_t)- \frac{df}{dx}(x_{t-1}) } {x_t-x_{t-1}} (x-x_{t}) + \frac{df}{dx}(x_{t})
