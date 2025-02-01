@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
@@ -492,18 +492,7 @@ is the map <span class="math notranslate nohighlight">\(\mathbb{R}^n \mapsto \ma
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">f</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">3.1</span><span class="p">])</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
+<img alt="_images/d1cb1fe372b26d393a522ecf9bc6c73f738e4991cfd08d9cb29bcf2364df6e4d.png" src="_images/d1cb1fe372b26d393a522ecf9bc6c73f738e4991cfd08d9cb29bcf2364df6e4d.png" />
 </div>
 </div>
 <div class="admonition-note-triangular-inequality admonition">
@@ -513,6 +502,23 @@ is the map <span class="math notranslate nohighlight">\(\mathbb{R}^n \mapsto \ma
 <p>The inequality becomes an equality when <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are colinear. Here is an illustration for the 2D case</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:13: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:14: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:13: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:14: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_88036/1784828239.py:13: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  ax.annotate(&quot;$\mathbf{x}$&quot;,(2.5,1.4))
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_88036/1784828239.py:14: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  ax.annotate(&quot;$\mathbf{y}$&quot;,(1.5,0.65))
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_88036/1784828239.py:15: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  ax.annotate(&quot;$\mathbf{x}+\mathbf{y}$&quot;,(1.5,1.2))
+</pre></div>
+</div>
+<img alt="_images/2e36ba14c5500e81263bb5ff3a9d2fa3167cc65b5e52cf64e3463f2daba77215.png" src="_images/2e36ba14c5500e81263bb5ff3a9d2fa3167cc65b5e52cf64e3463f2daba77215.png" />
+</div>
 </div>
 </section>
 <section id="euclidean-distance">
@@ -540,6 +546,15 @@ x_2 - y_2
 \end{split}\]</div>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:14: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:14: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_88036/2368618605.py:14: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  ax.annotate(&quot;$\mathbf{x}-\mathbf{y}$&quot;, (1.5,1.01),verticalalignment=&quot;bottom&quot;)
+</pre></div>
+</div>
+<img alt="_images/55a82b3769fbbb173f7c2e686fe27f03078249dad79ea5f229d5665c6a510e9f.png" src="_images/55a82b3769fbbb173f7c2e686fe27f03078249dad79ea5f229d5665c6a510e9f.png" />
+</div>
 </div>
 </section>
 <section id="angles">
@@ -581,6 +596,9 @@ and let <span class="math notranslate nohighlight">\(\theta\)</span> be the angl
 \end{split}\]</div>
 </section>
 </div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/c1de305c00935e9b792aea1a63e316153d66102e6dba6b0a413c87651afbd4c2.png" src="_images/c1de305c00935e9b792aea1a63e316153d66102e6dba6b0a413c87651afbd4c2.png" />
+</div>
 </div>
 <div class="proof lemma admonition" id="sqsinusoids">
 <p class="admonition-title"><span class="caption-number">Lemma 1 </span></p>
@@ -616,6 +634,9 @@ c^2 &amp;= a^2\sin^2\theta + (b-a\cos\theta)^2&amp; (\text{Pythagoras})\\
 <p>where the last line is obtained with <a class="reference internal" href="#sqsinusoids">Lemma 1</a>. The law of cosines holds also when <span class="math notranslate nohighlight">\(\theta\)</span> is an obtuse angle, this part of the proof is left to the reader.</p>
 </section>
 </div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/ed269f1adc11034caafcd8b7d50d90b558d46d1960bf53fb9831ff583e506831.png" src="_images/ed269f1adc11034caafcd8b7d50d90b558d46d1960bf53fb9831ff583e506831.png" />
+</div>
 </div>
 <div class="proof lemma admonition" id="perfsquareneg">
 <p class="admonition-title"><span class="caption-number">Lemma 3 </span></p>
