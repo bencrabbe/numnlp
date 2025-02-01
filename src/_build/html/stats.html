@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Applications to statistical analysis : latent semantic analysis &#8212; Numerical methods in NLP (foundations)</title>
   
@@ -15,63 +14,63 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'stats';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Information retrieval exercise" href="ir.html" />
+    <link rel="next" title="Optimization basics" href="optim.html" />
     <link rel="prev" title="Applications to graph analysis : the PageRank algorithm" href="graphs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,32 +78,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -112,7 +95,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -120,24 +102,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
-  <header>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -152,6 +135,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="intro.html">
   
@@ -159,17 +144,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logoUPC.png" class="logo__image only-light" alt="Numerical methods in NLP (foundations) - Home"/>
-    <script>document.write(`<img src="_static/logoUPC.png" class="logo__image only-dark" alt="Numerical methods in NLP (foundations) - Home"/>`);</script>
   
+    <p class="title logo__title">Numerical methods in NLP (foundations)</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -180,27 +166,25 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Applications to statistical analysis : latent semantic analysis</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="ir.html">Information retrieval exercise</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Applications to statistical analysis : latent semantic analysis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -209,14 +193,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -225,14 +214,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -323,27 +312,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -386,16 +367,16 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="applications-to-statistical-analysis-latent-semantic-analysis">
-<h1>Applications to statistical analysis : latent semantic analysis<a class="headerlink" href="#applications-to-statistical-analysis-latent-semantic-analysis" title="Permalink to this heading">#</a></h1>
+<h1>Applications to statistical analysis : latent semantic analysis<a class="headerlink" href="#applications-to-statistical-analysis-latent-semantic-analysis" title="Link to this heading">#</a></h1>
 <p>This chapter essentially provides an application of the spectral theorem to data analysis
 with a focus on Latent Semantic Analysis, a foundational method of textual data analysis.</p>
 <p>The methods described here are mainly used to get low rank representations of multivariate high dimensional statistical data.
 High dimensional data is the classical kind of data used in language modeling.
 Low rank representations are used to visualize and/or to smooth this kind of data</p>
 <section id="linear-algebra-for-descriptive-multivariate-statistics">
-<h2>Linear algebra for descriptive multivariate statistics<a class="headerlink" href="#linear-algebra-for-descriptive-multivariate-statistics" title="Permalink to this heading">#</a></h2>
+<h2>Linear algebra for descriptive multivariate statistics<a class="headerlink" href="#linear-algebra-for-descriptive-multivariate-statistics" title="Link to this heading">#</a></h2>
 <p>Recall that a standard data set such as the <em>Iris</em>  is naturally viewed as a matrix</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p>Sepal Length</p></th>
@@ -431,6 +412,7 @@ Low rank representations are used to visualize and/or to smooth this kind of dat
 </tr>
 </tbody>
 </table>
+</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \mathbf{X}
@@ -505,7 +487,7 @@ is nothing else than a cosine measure between two centered data vectors while th
 </div>
 </section>
 <section id="covariance-matrices">
-<h2>Covariance matrices<a class="headerlink" href="#covariance-matrices" title="Permalink to this heading">#</a></h2>
+<h2>Covariance matrices<a class="headerlink" href="#covariance-matrices" title="Link to this heading">#</a></h2>
 <p>Observe that we can compute the covariance between all couples of
 (centered) data column vectors <span class="math notranslate nohighlight">\(\mathbf{x}_1 \ldots \mathbf{x}_m\)</span> by a single matrix product.
 Let <span class="math notranslate nohighlight">\(\mathbf{X}\in \mathbb{R}^{n\times m}\)</span> then the resulting covariance matrix is:</p>
@@ -540,7 +522,18 @@ the scatter plot given in the figure below:</p>
 </div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/185327790c8e67e6c80670986ed26011f47125e414f57f752f355bebb768119c.png" src="_images/185327790c8e67e6c80670986ed26011f47125e414f57f752f355bebb768119c.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;seaborn&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <p>Another covariance matrix can be computed  by picking data line vectors  <span class="math notranslate nohighlight">\(\mathbf{x}_1 \ldots \mathbf{x}_m\)</span>, the resulting matrix is then:</p>
@@ -560,7 +553,7 @@ the scatter plot given in the figure below:</p>
 <p class="admonition-title">Example</p>
 <p>The <strong>term document matrix</strong> is a classical method for encoding a collection of textual data sets.
 For the Shakespeare example repeated here, it makes sense to compute both covariance matrices</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p>Antony and Cleopatra</p></th>
@@ -630,15 +623,16 @@ For the Shakespeare example repeated here, it makes sense to compute both covari
 </tr>
 </tbody>
 </table>
+</div>
 <p>The matrix <span class="math notranslate nohighlight">\( \frac{1}{n}\mathbf{X}^\top\mathbf{X}\)</span> is again the covariances computed for column (document) variables
 and the matrix  <span class="math notranslate nohighlight">\(\frac{1}{m}\mathbf{X}\mathbf{X}^\top\)</span> is the matrix computed for line (term) variables.</p>
 </div>
 </section>
 <section id="singular-value-decomposition">
-<h2>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this heading">#</a></h2>
+<h2>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Link to this heading">#</a></h2>
 <p>The Singular Value Decomposition theorem generalizes the diagonalization and spectral theorems to rectangular matrices.</p>
 <div class="proof theorem admonition" id="svd-theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 3 </span> (SVD theorem )</p>
+<p class="admonition-title"><span class="caption-number">Theorem 2 </span> (SVD theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>The singular value decomposition theorem states that any matrix <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbf{R}^{n\times m}\)</span> is decomposable as the product of 3 matrices:</p>
 <div class="math notranslate nohighlight">
@@ -668,9 +662,6 @@ For both covariance matrices, we can conclude that <span class="math notranslate
 Since singular values are square roots of the eigenvalues, they also represent variance: the larger the singular value, the larger the intrinsic variance of the variable.</p>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/9ae7f2647e2845454538c18992d170948aa0d204a93c39afadcc6a3bfe635163.png" src="_images/9ae7f2647e2845454538c18992d170948aa0d204a93c39afadcc6a3bfe635163.png" />
-</div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
 The left plot is a dataset whose covariance matrix is diagonal : the covariance between variables is zero and the eigenvalues are found on the diagonal of the actual covariance matrix.
@@ -683,7 +674,7 @@ The columns of <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</s
 </div>
 </section>
 <section id="low-rank-representation">
-<h2>Low Rank representation<a class="headerlink" href="#low-rank-representation" title="Permalink to this heading">#</a></h2>
+<h2>Low Rank representation<a class="headerlink" href="#low-rank-representation" title="Link to this heading">#</a></h2>
 <p>SVD is generally used in its truncated form. In exact SVD, the value <span class="math notranslate nohighlight">\(r\)</span> is set to be the number of singular values.
 In truncated SVD, <span class="math notranslate nohighlight">\(\boldsymbol\Sigma \in \mathbb{R}^{t\times t}\)</span> with <span class="math notranslate nohighlight">\(t &lt; r\)</span>.
 Since the singular values can be ordered according to their variance, greater variance comes first, lower comes last, in <span class="math notranslate nohighlight">\(\text{diag}(\boldsymbol\Sigma)\)</span>.
@@ -691,13 +682,13 @@ Removing the smaller singular values, with lower variance, removes the details o
 <figure class="align-default" id="svd-fig">
 <a class="reference internal image-reference" href="_images/svd.png"><img alt="_images/svd.png" src="_images/svd.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The Truncated SVD drops the singular values with least variance and their related left and right singular vectors</span><a class="headerlink" href="#svd-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">The Truncated SVD drops the singular values with least variance and their related left and right singular vectors</span><a class="headerlink" href="#svd-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Remark that reducing <span class="math notranslate nohighlight">\(r\)</span> to <span class="math notranslate nohighlight">\(t\)</span> does not prevent from reconstructing an approximation of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> with the same shape. We illustrate that with an image example.
 The raccoon is a matrix <span class="math notranslate nohighlight">\(\mathbf{X}\in [0,255]^{n\times m}\)</span> encoding the grayscale image pixelwise. Computing its SVD and then reconstructing the image by matrix multiplication
 yields the following results:</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> full</p></th>
 <th class="head"><p><span class="math notranslate nohighlight">\(\hat{\mathbf{X}}\)</span> (t=100)</p></th>
@@ -717,6 +708,7 @@ yields the following results:</p>
 </tr>
 </tbody>
 </table>
+</div>
 <p>where each picture keeps the <span class="math notranslate nohighlight">\(\sigma_1 \ldots \sigma_t\)</span> larger singular values and their corresponding singular vectors to compute the reconstruction <span class="math notranslate nohighlight">\(\hat{\mathbf{X}}\)</span>.
 As can be seen the low rank reconstruction creates a smoothing effect. The less singular values used in the reconstruction, the less variance is kept, the more approximative the image becomes.</p>
 <p>When the matrix is not an image, but rather a count-based term-document matrix, SVD can be used in principle to generate either a denoised reconstruction of the text-document matrix, where ignoring small singular values
@@ -727,7 +719,7 @@ may remove random residual noise gathered when counting. But in practice, SVD is
 </ul>
 </section>
 <section id="latent-semantic-analysis">
-<h2>Latent Semantic Analysis<a class="headerlink" href="#latent-semantic-analysis" title="Permalink to this heading">#</a></h2>
+<h2>Latent Semantic Analysis<a class="headerlink" href="#latent-semantic-analysis" title="Link to this heading">#</a></h2>
 <p>The application of SVD to term-document matrices is called <strong>Latent Semantic Analysis</strong> (or LSA). LSA relies on a more elaborate encoding of the term-document matrices than the one introduced so far
 by means of a TF-IDF transformation of the counts. This transformation is motivated by the particular pattern of count distributions gathered from textual data.</p>
 <p><strong>Zipf law of word counts</strong> Counts from text, provided a sufficiently large text, do invariably follow a distribution called the Zipf law of frequencies.
@@ -744,14 +736,11 @@ It entails that few words are highly frequent and most of the vocabulary has low
 <li><p>Informative words are highly infrequent, half of the vocabulary has frequency 1, and may sometimes occur in documents “by chance”, introducing “counting noise”</p></li>
 </ul>
 <div class="admonition-an-example-from-shakespeare admonition">
-<p class="admonition-title">An example from Shakespeare </p>
+<p class="admonition-title">An example from Shakespeare</p>
 <p>Here is an example count pattern gathered from works of Shakespeare.
 It is a typical Zipf pattern. The x axis is ordered according to the word rank and y axis is the word frequency (logarithmic scale).</p>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/79e6d378ffe42591d38c67f8c0e0468c8e968baa64ba2deab0c3c78da93eadc5.png" src="_images/79e6d378ffe42591d38c67f8c0e0468c8e968baa64ba2deab0c3c78da93eadc5.png" />
-</div>
 </div>
 <p>The <strong>TF-IDF</strong>  aims at filling term document matrices by transforming the raw frequency counts.
 The transformation builds on two submetrics: True Frequency and Inverse Document Frequency.</p>
@@ -780,13 +769,10 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 <p>Observe the IDF function for a collection <span class="math notranslate nohighlight">\(D\)</span> of 100 documents. The more a word occurs in many different documents the more the IDF function downweights  its True Frequency towards 0</p>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/c1af47c99478d0151531d298ffbb3fd55e980ee758c4cf4b36067cc213ac6bf4.png" src="_images/c1af47c99478d0151531d298ffbb3fd55e980ee758c4cf4b36067cc213ac6bf4.png" />
-</div>
 </div>
 </section>
 <section id="example-in-python">
-<h2>Example in Python<a class="headerlink" href="#example-in-python" title="Permalink to this heading">#</a></h2>
+<h2>Example in Python<a class="headerlink" href="#example-in-python" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
@@ -848,29 +834,10 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.02036128 0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.        ]
- [0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.00988339 0.
-  0.         0.         0.        ]
- [0.         0.         0.0165125  0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.        ]
- [0.03029929 0.01095056 0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.        ]
- [0.         0.         0.         0.05061776 0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.        ]]
-</pre></div>
-</div>
-</div>
 </div>
 <p>that’s it ! We have both the term document matrix with TF-IDF values and the SVD decomposition.</p>
 <section id="lsa-and-visualisation">
-<h3>LSA and visualisation<a class="headerlink" href="#lsa-and-visualisation" title="Permalink to this heading">#</a></h3>
+<h3>LSA and visualisation<a class="headerlink" href="#lsa-and-visualisation" title="Link to this heading">#</a></h3>
 <p>Given the term document matrix we can compute the SVD and use it for <strong>visualisation</strong> of words or documents in two dimensions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -909,9 +876,6 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/3e190916c90f51440a34729ad292759e857e8d65f8070881c9c3e2197a2703f1.png" src="_images/3e190916c90f51440a34729ad292759e857e8d65f8070881c9c3e2197a2703f1.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -956,13 +920,10 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/b93505032e0c8e71eda3adcc54e7ca7a76c8d89fecb4d5fdfedc33f79efd0181.png" src="_images/b93505032e0c8e71eda3adcc54e7ca7a76c8d89fecb4d5fdfedc33f79efd0181.png" />
-</div>
 </div>
 </section>
 <section id="topic-analysis">
-<h3>Topic analysis<a class="headerlink" href="#topic-analysis" title="Permalink to this heading">#</a></h3>
+<h3>Topic analysis<a class="headerlink" href="#topic-analysis" title="Link to this heading">#</a></h3>
 <p>Latent semantic analysis is also used to identify <strong>latent topics</strong> (or latent concepts) in documents.
 Each element of a document vector (a column of the <em>topic-document matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>) can be interpreted as an indicator of a topic representation in a document.</p>
 <p>Considering the “Milky Way” document vector in a non truncated SVD we can get a plot of the topics represented in the Milky way document:</p>
@@ -976,9 +937,6 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 <span class="n">title</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Latent topics in the document &quot;Milky Way&quot;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/8c372844be59d488ecbe2c706f9947fc727930509676b2297c20434fb924be85.png" src="_images/8c372844be59d488ecbe2c706f9947fc727930509676b2297c20434fb924be85.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -1001,33 +959,6 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;* Topic-9 top </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> terms *&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">score</span><span class="p">,</span><span class="n">term</span> <span class="ow">in</span>  <span class="nb">sorted</span><span class="p">(</span><span class="n">scored_terms</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">k</span><span class="p">]:</span>
    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">term</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
-wine : 0.33076692936763585
-roswell : 0.09157630748292014
-army : 0.09157630748292014
-new : 0.0678240738887316
-air : 0.05535326086915279
-extraterrestrial : 0.05494578448975209
-debris : 0.05494578448975209
-viticulture : 0.047252418481090845
-varieties : 0.047252418481090845
-styles : 0.047252418481090845
-
-* Topic-9 top 10 terms *
-finite : 0.24386798115815117
-correct : 0.24386798115815117
-state : 0.1625786541054341
-optimal : 0.1625786541054341
-initial : 0.1625786541054341
-automated : 0.1625786541054341
-algorithms : 0.1625786541054341
-algorithm : 0.1625786541054341
-problem : 0.16257865410543404
-tsunamis : 0.1107733660268093
 </pre></div>
 </div>
 </div>
@@ -1065,7 +996,7 @@ tsunamis : 0.1107733660268093
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1078,11 +1009,11 @@ tsunamis : 0.1107733660268093
       </div>
     </a>
     <a class="right-next"
-       href="ir.html"
+       href="optim.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Information retrieval exercise</p>
+        <p class="prev-next-title">Optimization basics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1093,7 +1024,8 @@ tsunamis : 0.1107733660268093
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1136,7 +1068,7 @@ By Benoit Crabbé
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1160,8 +1092,8 @@ By Benoit Crabbé
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

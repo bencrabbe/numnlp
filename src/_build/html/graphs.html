@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Applications to graph analysis : the PageRank algorithm &#8212; Numerical methods in NLP (foundations)</title>
   
@@ -15,54 +14,53 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'graphs';</script>
@@ -72,6 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Matrices" href="matrices.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,32 +78,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -112,7 +95,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -120,24 +102,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
-  <header>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -152,6 +135,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="intro.html">
   
@@ -159,17 +144,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logoUPC.png" class="logo__image only-light" alt="Numerical methods in NLP (foundations) - Home"/>
-    <script>document.write(`<img src="_static/logoUPC.png" class="logo__image only-dark" alt="Numerical methods in NLP (foundations) - Home"/>`);</script>
   
+    <p class="title logo__title">Numerical methods in NLP (foundations)</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -180,24 +166,25 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Applications to graph analysis : the PageRank algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -206,14 +193,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -222,14 +214,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -320,27 +312,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -379,11 +363,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="applications-to-graph-analysis-the-pagerank-algorithm">
-<h1>Applications to graph analysis : the PageRank algorithm<a class="headerlink" href="#applications-to-graph-analysis-the-pagerank-algorithm" title="Permalink to this heading">#</a></h1>
+<h1>Applications to graph analysis : the PageRank algorithm<a class="headerlink" href="#applications-to-graph-analysis-the-pagerank-algorithm" title="Link to this heading">#</a></h1>
 <p>This chapter illustrates an application of eigenvalues and eigenvectors to graph analytics with the PageRank algorithm. PageRank is an algorithm that maps a set of web pages to real numbers that can be used to <strong>rank</strong> them.</p>
 <p>The algorithm views the web as a graph whose nodes are web pages and whose edges are hyperlinks leading from one page to another. It views the structure of the web graph as a matrix. The algorithm outputs a vector of scores, with one score for each web page and it turns out that the output vector is actually the first eigenvector of the graph adjacency matrix.</p>
 <section id="representation-the-web-as-a-graph">
-<h2>Representation: the web as a graph<a class="headerlink" href="#representation-the-web-as-a-graph" title="Permalink to this heading">#</a></h2>
+<h2>Representation: the web as a graph<a class="headerlink" href="#representation-the-web-as-a-graph" title="Link to this heading">#</a></h2>
 <p>A set of web pages can be represented as a directed graph <span class="math notranslate nohighlight">\(G=\langle V, E\rangle\)</span> whose vertices are the actual web pages.
 The edges relating the vertices are inferred from hyperlinks: a link sending an internet surfer from page <span class="math notranslate nohighlight">\(p_1\)</span> to page <span class="math notranslate nohighlight">\(p_2\)</span> is thus an edge <span class="math notranslate nohighlight">\((p_1,p_2) \in E\)</span> of the directed graph.</p>
 <p>PageRank is an algorithm that takes advantage of the graph structure to rank the pages rathen than the page contents. It  builds upon the idea
@@ -391,19 +375,30 @@ that a web page is important if many pages are pointing to it. In graph terminol
 <figure class="align-default" id="pagerank-fig">
 <a class="reference internal image-reference" href="_images/pr.png"><img alt="_images/pr.png" src="_images/pr.png" style="height: 250px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">The PageRank algorithm weights each node as a function of its incoming edges and the importance of the their source nodes.</span><a class="headerlink" href="#pagerank-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">The PageRank algorithm weights each node as a function of its incoming edges and the importance of the their source nodes.</span><a class="headerlink" href="#pagerank-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="markov-chains-and-random-walks">
-<h2>Markov chains and random walks<a class="headerlink" href="#markov-chains-and-random-walks" title="Permalink to this heading">#</a></h2>
+<h2>Markov chains and random walks<a class="headerlink" href="#markov-chains-and-random-walks" title="Link to this heading">#</a></h2>
 <p>Graphs can be conveniently represented by matrices.
 A graphs’s <strong>adjacency matrix</strong> is a matrix   <span class="math notranslate nohighlight">\(\mathbf{A}\in \mathbb{R}^{n\times n}\)</span> with <span class="math notranslate nohighlight">\(n\)</span> the number of graph vertices.
 A coefficient <span class="math notranslate nohighlight">\(a_{ij}\)</span> is set to 1 if there is an edge from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span> in the graph and to 0 otherwise.</p>
 <p>Here is a sample graph together with its adjacency matrix:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ab7fb48cafc5f8bd70ce568e2160528f9cd7fbc48c5f3db5fd0d4d8612d9dc8e.png"><img alt="graph" src="_images/ab7fb48cafc5f8bd70ce568e2160528f9cd7fbc48c5f3db5fd0d4d8612d9dc8e.png" style="width: 250px;" /></a>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.usetex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\usepackage{{amsmath}}&#39;</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <p>each row (or each column) of the matrix represents a source (resp. target) state of the graph.</p>
@@ -501,7 +496,7 @@ P(j|i) = s_{ij} = \frac{a_{ij}}{\sum_j a_{ij}}
 <p>for some column stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>. Furthermore a markov chain is <strong>strongly connected</strong> if each state of the stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is reachable in a finite number of steps from each state of <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>.</p>
 </section>
 </div><div class="proof theorem admonition" id="perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 2 </span> (Markov chain theorem )</p>
+<p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Markov chain theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a stochastic matrix with strongly connected graph, then <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> has a unique steady-state vector, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.
 Moreover if <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> is <strong>any</strong> initial probabilistic vector, then</p>
@@ -511,9 +506,9 @@ Moreover if <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> i
 \]</div>
 <p>converges to <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as <span class="math notranslate nohighlight">\(t \rightarrow\infty\)</span></p>
 </section>
-</div><p>There are two key observations to do here.  First, <a class="reference internal" href="#perron-frobenius">Theorem 2</a> is a theorem than can be read as:
+</div><p>There are two key observations to do here.  First, <a class="reference internal" href="#perron-frobenius">Theorem 1</a> is a theorem than can be read as:
 matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a matrix with eigenvector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and eigenvalue <span class="math notranslate nohighlight">\(\lambda = 1\)</span>.
-Indeed the fix point <span class="math notranslate nohighlight">\(\mathbf{M}\mathbf{x}_t = \lambda \mathbf{x}_{t+1}\)</span> is just an instanciation of the eigenvector definition with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>. <a class="reference internal" href="#perron-frobenius">Theorem 2</a>
+Indeed the fix point <span class="math notranslate nohighlight">\(\mathbf{M}\mathbf{x}_t = \lambda \mathbf{x}_{t+1}\)</span> is just an instanciation of the eigenvector definition with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>. <a class="reference internal" href="#perron-frobenius">Theorem 1</a>
 suggests to compute this eigenvector by iterating a very large number of matrix vector multiplications or by computing a matrix power with some high value. <strong>Power iteration</strong> or matrix power is indeed a well known numerical method for computing the first eigenvector of a matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>.</p>
 <p>The second observation relates to the stability of the method. We emphasize that the theorem holds with any initial random vector only if the graph <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is strongly connected. Absence of strong connectivity may have two kind of consequences:</p>
 <ul class="simple">
@@ -526,7 +521,7 @@ suggests to compute this eigenvector by iterating a very large number of matrix 
 </div>
 </section>
 <section id="pagerank">
-<h2>PageRank<a class="headerlink" href="#pagerank" title="Permalink to this heading">#</a></h2>
+<h2>PageRank<a class="headerlink" href="#pagerank" title="Link to this heading">#</a></h2>
 <p>PageRank is an algorithm that computes the importance scores of the web pages by viewing the web as a graph.
 The importance is given by computing the first eigenvector from a stochastic matrix, representing the graph structure, with the power iteration method.</p>
 <p>To overcome problems pointed above, related to ensure the graph strong connectivity, PageRank introduces a new idea: that of the <strong>random surfer</strong>. The random surfer, like a random walker, moves from node to node in the graph following the edges, but unlike the random walker he is also allowed to jump from a node to <strong>any</strong> other node of the graph with some probability. This property of the random surfer aims to avoid problems related to absorbing markov chains.</p>
@@ -549,7 +544,7 @@ P_R (j | i) = r_{ij} = \frac{1}{n}
 <p>until <span class="math notranslate nohighlight">\( || \mathbf{x}_{t+1}  - \mathbf{x}_t || \approx 0\)</span></p>
 </section>
 <section id="example-in-python">
-<h2>Example in Python<a class="headerlink" href="#example-in-python" title="Permalink to this heading">#</a></h2>
+<h2>Example in Python<a class="headerlink" href="#example-in-python" title="Link to this heading">#</a></h2>
 <p>Here is an example implementation of PageRank in Python. We use a small graph
 whose nodes are Wikipedia pages of Star Wars characters. The edges reflect links between the pages.
 We use the  <a class="reference external" href="https://wikipedia.readthedocs.io/en/latest">wikipedia</a> and <a class="reference external" href="https://networkx.org">networkx</a> libraries to respectively scrape wikipedia and represent the graph in Python.</p>
@@ -604,9 +599,6 @@ We use the  <a class="reference external" href="https://wikipedia.readthedocs.io
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/e0d4180b8a187e3545fdb3a97e8234b6893d9eca723de407e1e9e489644c8447.png" src="_images/e0d4180b8a187e3545fdb3a97e8234b6893d9eca723de407e1e9e489644c8447.png" />
-</div>
 </div>
 <p>To implement PageRank we first build the Google Matrix</p>
 <div class="cell docutils container">
@@ -658,23 +650,6 @@ We use the  <a class="reference external" href="https://wikipedia.readthedocs.io
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 0, Error = 0.1983285445602558
-Iteration 1, Error = 0.10802036729989754
-Iteration 2, Error = 0.055687717151322355
-Iteration 3, Error = 0.03480521020164175
-Iteration 4, Error = 0.02143084141360396
-Iteration 5, Error = 0.014290312707169515
-Iteration 6, Error = 0.009124102324108475
-Iteration 7, Error = 0.006203940850876198
-Iteration 8, Error = 0.004033017412097724
-Iteration 9, Error = 0.0027381229119599554
-Iteration 10, Error = 0.0017886713633430962
-Iteration 11, Error = 0.001211086193498257
-Iteration 12, Error = 0.0007938613262856292
-</pre></div>
-</div>
-</div>
 </div>
 <p>It remains to match the PageRank scores with the node names and to display the results sorted by decreasing PageRank order:</p>
 <div class="cell docutils container">
@@ -684,38 +659,10 @@ Iteration 12, Error = 0.0007938613262856292
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Luke Skywalker 0.1501068866135157
-Darth Vader 0.12562308828014102
-Obi-Wan Kenobi 0.12487321454475193
-Han Solo 0.07548649491594556
-Padmé Amidala 0.06841699680052668
-Palpatine 0.06642423942924044
-Qui-Gon Jinn 0.05332472347843292
-Yoda 0.05200602774207259
-Boba Fett 0.04341801369658203
-Chewbacca 0.038578895807911434
-Jabba the Hutt 0.036162180175801945
-Leia Organa 0.02884505765771401
-Jango Fett 0.02511135523154026
-Darth Maul 0.018962597338157944
-Count Dooku 0.01865142356251156
-Mace Windu 0.01744172924140187
-R2-D2 0.008104165545354845
-C-3PO 0.008104165543779584
-Saw Gerrera 0.0067264573991031576
-Lando Calrissian 0.0067264573991031576
-Jar Jar Binks 0.0067264573991031576
-Greedo 0.0067264573991031576
-General Grievous 0.0067264573991031576
-Admiral Ackbar 0.0067264573991031576
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="final-remarks">
-<h2>Final remarks<a class="headerlink" href="#final-remarks" title="Permalink to this heading">#</a></h2>
+<h2>Final remarks<a class="headerlink" href="#final-remarks" title="Link to this heading">#</a></h2>
 <p>PageRank illustrates the potential of markov chains for modelling graph data.
 In natural language processing, this kind of graph structure arises naturally in the context of social networks (facebook, twitter …)
 This kind of setup is not uncommon when strictly modelling language.
@@ -731,7 +678,7 @@ This is the case of algorithms propagating information from node to node in a k-
 Label Propagation is a typical example in this family.</p>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Implement an algorithm that ranks the nodes of the Star Wars graph using the in-degree of each node. How are the results different from PageRank ?</p></li>
 <li><p>Suppose we have a graph of synonyms where nodes are word senses and edges represent the synonymy relation.</p>
@@ -773,7 +720,7 @@ What mathematical operation will provide the synonym of the word sense selected 
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -801,7 +748,8 @@ What mathematical operation will provide the synonym of the word sense selected 
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -840,7 +788,7 @@ By Benoit Crabbé
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -864,8 +812,8 @@ By Benoit Crabbé
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

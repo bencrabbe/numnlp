@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Matrices &#8212; Numerical methods in NLP (foundations)</title>
   
@@ -15,54 +14,53 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'matrices';</script>
@@ -72,6 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Applications to information retrieval" href="vec2text.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,32 +78,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -112,7 +95,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -120,24 +102,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
-  <header>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -152,6 +135,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="intro.html">
   
@@ -159,17 +144,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logoUPC.png" class="logo__image only-light" alt="Numerical methods in NLP (foundations) - Home"/>
-    <script>document.write(`<img src="_static/logoUPC.png" class="logo__image only-dark" alt="Numerical methods in NLP (foundations) - Home"/>`);</script>
   
+    <p class="title logo__title">Numerical methods in NLP (foundations)</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -180,24 +166,25 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -206,14 +193,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -222,14 +214,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -320,27 +312,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -395,7 +379,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="matrices">
-<h1>Matrices<a class="headerlink" href="#matrices" title="Permalink to this heading">#</a></h1>
+<h1>Matrices<a class="headerlink" href="#matrices" title="Link to this heading">#</a></h1>
 <p>A <strong>matrix</strong> is a rectangular array of numbers, for instance</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -454,11 +438,11 @@ enumerating its column vectors:</p>
   \end{bmatrix}
 \end{split}\]</div>
 <section id="where-do-matrices-come-from">
-<h2>Where do matrices come from ?<a class="headerlink" href="#where-do-matrices-come-from" title="Permalink to this heading">#</a></h2>
+<h2>Where do matrices come from ?<a class="headerlink" href="#where-do-matrices-come-from" title="Link to this heading">#</a></h2>
 <p>Matrices likely arise in data analysis, image representation, graph representation and as mathematical operators.</p>
 <p><strong>Data analysis</strong> In data analysis, measures are most of the time arranged as array of numbers, in other words matrices.
 Here are the first few lines of a classic data set reporting measures from Iris flowers across species:</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p>Sepal Length</p></th>
@@ -494,6 +478,7 @@ Here are the first few lines of a classic data set reporting measures from Iris 
 </tr>
 </tbody>
 </table>
+</div>
 <p>where the following picture provides hints on how to interpret these measures.</p>
 <img alt="iris" class="align-center" src="_images/iris-machinelearning.png" />
 <div class="admonition warning">
@@ -525,7 +510,23 @@ Here is a matrix coding an image:</p>
 <p>and here is the corresponding image visualisation.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<a class="shadow bg-primary reference internal image-reference" href="_images/6c0de61143d6e4ac8885fbd32abf9cdbabb1735c29494b9b97eb107ea78d2b29.png"><img alt="pokeball" class="shadow bg-primary" src="_images/6c0de61143d6e4ac8885fbd32abf9cdbabb1735c29494b9b97eb107ea78d2b29.png" style="width: 50px;" /></a>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">pokeball</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">[</span><span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">0</span>   <span class="p">,</span> <span class="mi">0</span>   <span class="p">,</span> <span class="mi">0</span>   <span class="p">,</span>   <span class="mi">0</span>  <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">[</span><span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">0</span>    <span class="p">,</span>   <span class="mi">0</span>   <span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">0</span>    <span class="p">,</span>   <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span>    <span class="p">,</span>   <span class="mi">0</span>   <span class="p">,</span> <span class="mi">0</span>     <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">[</span><span class="mi">255</span> <span class="p">,</span>  <span class="mi">255</span>  <span class="p">,</span> <span class="mi">255</span><span class="p">,</span><span class="mi">255</span> <span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">255</span>   <span class="p">,</span> <span class="mi">255</span>  <span class="p">,</span>  <span class="mi">255</span>    <span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">f</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Graph data representation</strong> Graphs are another important source of matrices. In natural language processing they come from networks such as web pages
@@ -545,7 +546,7 @@ and their hyperlink relation, such as semantic networks like Wordnet, such as so
 Examples of such linear maps are scaling or rotation matrices among others.</p>
 </section>
 <section id="matrix-transpose">
-<h2>Matrix transpose<a class="headerlink" href="#matrix-transpose" title="Permalink to this heading">#</a></h2>
+<h2>Matrix transpose<a class="headerlink" href="#matrix-transpose" title="Link to this heading">#</a></h2>
 <p>In the next few sections, we review classical algebric operations involving matrices.
 Let <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> be an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix, its transpose <span class="math notranslate nohighlight">\(\mathbf{A}^\top\)</span>
 is a matrix <span class="math notranslate nohighlight">\(n\times m\)</span> where each entry a has value <span class="math notranslate nohighlight">\(A^\top_{ij} = A_{ji}\)</span>.</p>
@@ -597,7 +598,7 @@ such that <span class="math notranslate nohighlight">\(\mathbf{A} = \mathbf{A}^\
 \end{split}\]</div>
 </section>
 <section id="matrix-addition">
-<h2>Matrix addition<a class="headerlink" href="#matrix-addition" title="Permalink to this heading">#</a></h2>
+<h2>Matrix addition<a class="headerlink" href="#matrix-addition" title="Link to this heading">#</a></h2>
 <p>The <strong>addition</strong> of two matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>
 of size <span class="math notranslate nohighlight">\(m\times n\)</span> consists in producing a new matrix whose elements
 are the sum of the corresponding elements in the original matrices:</p>
@@ -647,7 +648,7 @@ are the sum of the corresponding elements in the original matrices:</p>
 has neutral element <span class="math notranslate nohighlight">\(\mathbf{0}\)</span> and the transposition of a sum is the sum of the transpositions:   <span class="math notranslate nohighlight">\((\mathbf{A} +\mathbf{B})^\top = \mathbf{A}^\top+\mathbf{B}^\top\)</span></p>
 </section>
 <section id="matrix-scalar-product">
-<h2>Matrix scalar product<a class="headerlink" href="#matrix-scalar-product" title="Permalink to this heading">#</a></h2>
+<h2>Matrix scalar product<a class="headerlink" href="#matrix-scalar-product" title="Link to this heading">#</a></h2>
 <p>Given a scalar <span class="math notranslate nohighlight">\(a\)</span> and  a matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, the matrix scalar product is defined as:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}a\, 
@@ -685,13 +686,13 @@ has neutral element <span class="math notranslate nohighlight">\(\mathbf{0}\)</s
 and associative for scalar multiplication  <span class="math notranslate nohighlight">\((ab) \mathbf{A} = a(b\mathbf{A})\)</span></p>
 </section>
 <section id="matrix-vector-product">
-<h2>Matrix vector product<a class="headerlink" href="#matrix-vector-product" title="Permalink to this heading">#</a></h2>
+<h2>Matrix vector product<a class="headerlink" href="#matrix-vector-product" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(S\)</span> be a set of numbers, the matrix vector product supposes a matrix <span class="math notranslate nohighlight">\(\mathbf{A}\in S^{m\times n}\)</span> and a vector <span class="math notranslate nohighlight">\(\mathbf{x}\in S^n\)</span>
 and yields a vector in <span class="math notranslate nohighlight">\(S^m\)</span>.</p>
 <p>This operation is not commutative and breaks down in two cases. Either <span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{x}\)</span> is the product where the vector is at the right of the matrix
 or <span class="math notranslate nohighlight">\( \mathbf{x}^\top \mathbf{A} \)</span> where <span class="math notranslate nohighlight">\(\mathbf{x}^\top\)</span> is a line vector on the left of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span></p>
 <section id="mathbf-a-mathbf-x">
-<h3><span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{x}\)</span><a class="headerlink" href="#mathbf-a-mathbf-x" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{x}\)</span><a class="headerlink" href="#mathbf-a-mathbf-x" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{bmatrix}
@@ -808,7 +809,7 @@ x_1  \mathbf{a}_1 +\cdots +x_n \mathbf{a}_n
 </div>
 </section>
 <section id="mathbf-x-top-mathbf-a">
-<h3><span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{A}\)</span><a class="headerlink" href="#mathbf-x-top-mathbf-a" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathbf{x}^\top \mathbf{A}\)</span><a class="headerlink" href="#mathbf-x-top-mathbf-a" title="Link to this heading">#</a></h3>
 <p>In this second case, the operation takes the form:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -910,7 +911,7 @@ x_1 &amp; \cdots &amp; x_m
 </section>
 </section>
 <section id="matrix-matrix-multiplication">
-<h2>Matrix matrix multiplication<a class="headerlink" href="#matrix-matrix-multiplication" title="Permalink to this heading">#</a></h2>
+<h2>Matrix matrix multiplication<a class="headerlink" href="#matrix-matrix-multiplication" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> be two matrices of sizes <span class="math notranslate nohighlight">\(m\times p\)</span> and <span class="math notranslate nohighlight">\(p\times n\)</span> respectively,
 the multiplication of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> generates the matrix <span class="math notranslate nohighlight">\(\mathbf{AB}\)</span> of size <span class="math notranslate nohighlight">\(m \times n\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -991,7 +992,7 @@ multiplication distributes over matrix addition</strong>: <span class="math notr
 And finally <strong>the transpose of a matrix matrix product is the product of the transposes of each matrix in reverse order</strong> <span class="math notranslate nohighlight">\((\mathbf{AB})^\top = \mathbf{B}^\top \mathbf{A}^\top\)</span></p>
 </section>
 <section id="linear-maps">
-<h2>Linear maps<a class="headerlink" href="#linear-maps" title="Permalink to this heading">#</a></h2>
+<h2>Linear maps<a class="headerlink" href="#linear-maps" title="Link to this heading">#</a></h2>
 <p>Matrices can be viewed as an implementation for mathematical operators generalizing scalar linear functions to vectors.
 For scalars from some set <span class="math notranslate nohighlight">\(S\)</span> we define a linear function as <span class="math notranslate nohighlight">\(f(x) = ax\)</span> performing the mapping <span class="math notranslate nohighlight">\(f:S\mapsto S\)</span>.
 Linear maps generalizes this notion to vectors and define maps of the form <span class="math notranslate nohighlight">\(F:S^n \mapsto S^m\)</span> from an input vector space to an output vector space.
@@ -1045,7 +1046,7 @@ f(ax) &amp;= a f(x)\\
 \end{split}\]</div>
 </div>
 <div class="admonition-note-linearity admonition">
-<p class="admonition-title">Note (Linearity) </p>
+<p class="admonition-title">Note (Linearity)</p>
 <p>Why do we care about linearity ? In general problems that can be reduced or approximated reasonably well by linear functions or linear maps
 are very substantially easier to solve than non linear problems.
 In general linear problems can be solved by analytical and/or efficient methods while non linear problems
@@ -1053,13 +1054,13 @@ require more involved developments such as numerical simulations.</p>
 </div>
 </section>
 <section id="square-matrices">
-<h2>Square matrices<a class="headerlink" href="#square-matrices" title="Permalink to this heading">#</a></h2>
+<h2>Square matrices<a class="headerlink" href="#square-matrices" title="Link to this heading">#</a></h2>
 <p>A <strong>square matrix</strong> is a matrix whose size is <span class="math notranslate nohighlight">\(n\times n\)</span>.
 Among matrices, square matrices hold a special position: they are used to express many common linear maps,
 we can compute their <em>determinant</em> and we can also compute an <em>inverse</em> for this class of matrices. And finally
 we can compute their <em>eigenvectors</em> with their associated <em>eigenvalues</em>.</p>
 <section id="examples-from-geometry">
-<h3>Examples from geometry<a class="headerlink" href="#examples-from-geometry" title="Permalink to this heading">#</a></h3>
+<h3>Examples from geometry<a class="headerlink" href="#examples-from-geometry" title="Link to this heading">#</a></h3>
 <p>We start by providing a few examples of square matrices used as linear maps for 2D geometrical transformations: scaling, rotation and projection.
 For illustration purposes, we assume a data set of <span class="math notranslate nohighlight">\(n\)</span> vectors stored as columns in a matrix <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times n}\)</span>.
 Each such vector is interpreted as a point in the plane. We represent as blue point in figure <a class="reference internal" href="#geom-map"><span class="std std-numref">Fig. 1</span></a>
@@ -1075,7 +1076,7 @@ the vectors <span class="math notranslate nohighlight">\((1,1)\)</span>, <span c
 <figure class="align-center" id="geom-map">
 <img alt="geometric linear maps" src="_images/geom_map.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Common Geometric transforms as linear maps</span><a class="headerlink" href="#geom-map" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Common Geometric transforms as linear maps</span><a class="headerlink" href="#geom-map" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The first transformation performed is the <strong>scaling of vectors</strong>. This operation is generally performed using a <strong>diagonal matrix</strong>
@@ -1147,7 +1148,7 @@ of the form:</p>
 <span class="math notranslate nohighlight">\(\mathbf{PX}\)</span> is illustrated with purple dots in  figure <a class="reference internal" href="#geom-map"><span class="std std-numref">Fig. 1</span></a>.</p>
 </section>
 <section id="diagonal-matrices">
-<h3>Diagonal matrices<a class="headerlink" href="#diagonal-matrices" title="Permalink to this heading">#</a></h3>
+<h3>Diagonal matrices<a class="headerlink" href="#diagonal-matrices" title="Link to this heading">#</a></h3>
 <p>Among square matrices, diagonal matrices enjoy some appealing mathematical properties: computation of determinants, inverses, eigenvalues and eigenvectors
 are substantially easier than for the general class of square matrices.</p>
 <p>The <strong>diagonal</strong> of a square matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the subset of elements <span class="math notranslate nohighlight">\(a_{i,j}\)</span> whose coordinates satisfy <span class="math notranslate nohighlight">\(i=j\)</span>.
@@ -1166,7 +1167,7 @@ with size <span class="math notranslate nohighlight">\(4\times 4\)</span>:</p>
 <p>A diagonal matrix whose elements of the diagonal are all equal to 1 is called the <strong>identity matrix</strong> and written as <span class="math notranslate nohighlight">\(\mathbf{I}\)</span>.</p>
 </section>
 <section id="determinant">
-<h3>Determinant<a class="headerlink" href="#determinant" title="Permalink to this heading">#</a></h3>
+<h3>Determinant<a class="headerlink" href="#determinant" title="Link to this heading">#</a></h3>
 <p>The determinant of a matrix is the scalar <span class="math notranslate nohighlight">\(|\mathbf{A}|\)</span> (or det(<span class="math notranslate nohighlight">\(\mathbf{A}\)</span>) ) that can be computed for any square matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.
 The determinant is of crucial importance when computing the inverse of a matrix.  A <strong>singular matrix</strong>  <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>  is a matrix whose <span class="math notranslate nohighlight">\(\det(\mathbf{A}) = 0\)</span>
 and it is therefore non invertible. In case <span class="math notranslate nohighlight">\(\det(\mathbf{A}) \not= 0\)</span>, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is invertible.</p>
@@ -1232,7 +1233,7 @@ a_{m1} &amp; \cdots &amp; a_{mn}
 </div>
 </section>
 <section id="matrix-inverse">
-<h3>Matrix inverse<a class="headerlink" href="#matrix-inverse" title="Permalink to this heading">#</a></h3>
+<h3>Matrix inverse<a class="headerlink" href="#matrix-inverse" title="Link to this heading">#</a></h3>
 <p>The matrix inverse provides a form of division for matrices. The inverse <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span>, of the square matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>
 satisfies the relation:</p>
 <div class="math notranslate nohighlight">
@@ -1366,17 +1367,9 @@ An <strong>orthonormal matrix</strong> is a matrix such that its rows and column
 </div>
 </section>
 <section id="eigenvectors-and-eigenvalues">
-<h3>Eigenvectors and eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Permalink to this heading">#</a></h3>
-<p>We start by providing a visual introduction to eigenvectors and eigenvalues from <a class="reference internal" href="#eigen-figs"><span class="std std-numref">Fig. 2</span></a>.</p>
+<h3>Eigenvectors and eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Link to this heading">#</a></h3>
+<p>We start by providing a visual introduction to eigenvectors and eigenvalues from <code class="xref std std-numref docutils literal notranslate"><span class="pre">eigen_figs</span></code>.</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<figure class="align-default" id="eigen-figs">
-<img alt="eigen-figures" class="shadow bg-primary" src="_images/e9df80202ffd14a238a9760a8a623324907d3769d7bf7c05b8b37d10eb89fc09.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">The transformation of a diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> (left) and the transformation of a symmetric matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> (right) with their respective eigenvectors</span><a class="headerlink" href="#eigen-figs" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</div>
 </div>
 <p>The figure displays the effect of mapping a matrix  <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times 8}\)</span> of 2D vectors (in blue)
 with a diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>  on the left and with a symmetrix matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> on the right. The resulting vectors,
@@ -1727,7 +1720,7 @@ that the eigenvector has unit norm we can use <span class="math notranslate nohi
 </div>
 </section>
 <section id="matrix-diagonalization">
-<h3>Matrix Diagonalization<a class="headerlink" href="#matrix-diagonalization" title="Permalink to this heading">#</a></h3>
+<h3>Matrix Diagonalization<a class="headerlink" href="#matrix-diagonalization" title="Link to this heading">#</a></h3>
 <p>Diagonal matrices make life easy…  There is interest in expressing a given linear map as a diagonal matrix to make computations easier.
 In this section we show how to factorize some non diagonal matrices as a product of three matrices, including
 a diagonal matrix.  This is called matrix diagonalization.
@@ -1805,7 +1798,7 @@ The usual convention is to order them from greater to lower, thus <span class="m
 </div>
 </section>
 <section id="spectral-theorem">
-<h3>Spectral theorem<a class="headerlink" href="#spectral-theorem" title="Permalink to this heading">#</a></h3>
+<h3>Spectral theorem<a class="headerlink" href="#spectral-theorem" title="Link to this heading">#</a></h3>
 <p>In the case of <strong>symmetric</strong> matrices there is a stronger form of factorization given by the spectral theorem:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1821,7 +1814,7 @@ with the data <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. 
 \frac{1}{2}&amp;3
 \end{bmatrix}
 \)</span>
-and <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times n}\)</span> be the set of 2D coordinates depicted in Figure <a class="reference internal" href="#spectral"><span class="std std-numref">Fig. 3</span></a>.
+and <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times n}\)</span> be the set of 2D coordinates depicted in Figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">spectral</span></code>.
 Thus given the spectral theorem we can express the product as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1850,22 +1843,14 @@ Thus given the spectral theorem we can express the product as:</p>
 \end{bmatrix}^\top
 \mathbf{X}
 \end{split}\]</div>
-<p>We illustrate in figure <a class="reference internal" href="#spectral"><span class="std std-numref">Fig. 3</span></a> each step of the computation</p>
+<p>We illustrate in figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">spectral</span></code> each step of the computation</p>
 </div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<figure class="align-default" id="spectral">
-<a class="shadow bg-primary reference internal image-reference" href="_images/618819b4136e0e710157a088a6651f320975763f8a6617d146541ecfc4a4b792.png"><img alt="spectral decomposition" class="shadow bg-primary" src="_images/618819b4136e0e710157a088a6651f320975763f8a6617d146541ecfc4a4b792.png" style="width: 1000px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">The transformation of the matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> through the decomposition of <span class="math notranslate nohighlight">\(\mathbf{AX}\)</span>. From left to right. Given the input <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{P}^\top\mathbf{X}\)</span> first rotates the data, then it scales it with the diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> and finally rotates it again with <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> yielding the final result</span><a class="headerlink" href="#spectral" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</div>
 </div>
 </section>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Given the matrices and vectors:</p></li>
 </ol>
@@ -2020,7 +2005,7 @@ the results match those you get by manual resolution.</p></li>
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -2048,7 +2033,8 @@ the results match those you get by manual resolution.</p></li>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -2103,7 +2089,7 @@ By Benoit Crabbé
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -2127,8 +2113,8 @@ By Benoit Crabbé
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

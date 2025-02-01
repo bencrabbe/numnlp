@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Vectors and vector spaces &#8212; Numerical methods in NLP (foundations)</title>
   
@@ -15,54 +14,53 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'vectors';</script>
@@ -72,6 +70,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="Numerical methods for Natural Language Processing" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -79,32 +78,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -112,7 +95,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -120,24 +102,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
-  <header>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <div class="bd-header navbar navbar-expand-lg bd-navbar">
-    </div>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
-  </header>
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -152,6 +135,8 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="intro.html">
   
@@ -159,17 +144,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logoUPC.png" class="logo__image only-light" alt="Numerical methods in NLP (foundations) - Home"/>
-    <script>document.write(`<img src="_static/logoUPC.png" class="logo__image only-dark" alt="Numerical methods in NLP (foundations) - Home"/>`);</script>
   
+    <p class="title logo__title">Numerical methods in NLP (foundations)</p>
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -180,24 +166,25 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Vectors and vector spaces</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Vectors and vector spaces</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrices.html">Matrices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graphs.html">Applications to graph analysis : the PageRank algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="stats.html">Applications to statistical analysis : latent semantic analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="optim.html">Optimization basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -206,14 +193,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -222,14 +214,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -320,27 +312,19 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -371,7 +355,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-by-a-scalar">Multiplication by a scalar</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space">Vector space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space">Vector space</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-combinations">Linear combinations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-of-a-vector-space">Basis of a vector space</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
@@ -385,11 +373,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="vectors-and-vector-spaces">
-<h1>Vectors and vector spaces<a class="headerlink" href="#vectors-and-vector-spaces" title="Permalink to this heading">#</a></h1>
+<h1>Vectors and vector spaces<a class="headerlink" href="#vectors-and-vector-spaces" title="Link to this heading">#</a></h1>
 <p>In this chapter, we focus on the notion of vector and motivate
 their use through various examples.</p>
 <section id="vectors">
-<h2>Vectors<a class="headerlink" href="#vectors" title="Permalink to this heading">#</a></h2>
+<h2>Vectors<a class="headerlink" href="#vectors" title="Link to this heading">#</a></h2>
 <p>A <strong>vector</strong> is an <span class="math notranslate nohighlight">\(n-\)</span>tuple of real numbers. In this
 course, we’ll be dealing exclusively with <span class="math notranslate nohighlight">\(n\)</span>-tuples of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, even if other possibilities exist.
 For example, a vector <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^4\)</span> will be noted as follows:</p>
@@ -487,14 +475,25 @@ is the vector whose values are all zero except for one value at
 position <span class="math notranslate nohighlight">\(i\)</span>, which is 1. Finally, we note with <span class="math notranslate nohighlight">\(\mathbf{1}\)</span> the
 vector whose elements are all equal to 1.</p>
 <section id="vectors-and-geometry">
-<h3>Vectors and geometry<a class="headerlink" href="#vectors-and-geometry" title="Permalink to this heading">#</a></h3>
+<h3>Vectors and geometry<a class="headerlink" href="#vectors-and-geometry" title="Link to this heading">#</a></h3>
 <p>In 2 and 3 dimensions,  vectors may be viewed as a movement from
 the origin of a coordinate system to its coordinates. It may also be
 viewed as the coordinates of its destination. This is illustrated with the
 following plot for the 2-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{x} = \begin{bmatrix}3\\2\end{bmatrix}\)</span>:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/c954a1ff1ecafad54c43537394d45278fa84e5a4e2423676abd648746aa79006.png" src="_images/c954a1ff1ecafad54c43537394d45278fa84e5a4e2423676abd648746aa79006.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">f</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <p>In this class we will manipulate vectors of dimensions definitely higher than 2
@@ -503,7 +502,7 @@ geometric notions (angle,distance) that we will define for those vectors are not
 specific 2D and 3D cases but also generalize for those higher dimensions.</p>
 </section>
 <section id="where-do-vectors-come-from">
-<h3>Where do vectors come from ?<a class="headerlink" href="#where-do-vectors-come-from" title="Permalink to this heading">#</a></h3>
+<h3>Where do vectors come from ?<a class="headerlink" href="#where-do-vectors-come-from" title="Link to this heading">#</a></h3>
 <p>Besides geometry, vectors are used in various fields of science.
 For language, they appear most often in a context of statistical
 analysis or data representation. We list here a few cases where you
@@ -528,9 +527,6 @@ to create a color. Thus, vector <span class="math notranslate nohighlight">\((25
 represents red, vector <span class="math notranslate nohighlight">\((0,0,0)\)</span> represents black and
 vector <span class="math notranslate nohighlight">\((120,120,120)\)</span> represents gray.</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/1d79565f465f3734891fdd81c77a7236acf08eed7a006e1c7dca0ce49096ca6d.png" src="_images/1d79565f465f3734891fdd81c77a7236acf08eed7a006e1c7dca0ce49096ca6d.png" />
-</div>
 </div>
 <p><strong>Counting occurrences</strong> In a language context, numbers naturally appear
 when counting in texts. For example, we can
@@ -601,7 +597,7 @@ vectors of partial derivatives.</p>
 </section>
 </section>
 <section id="vector-addition">
-<h2>Vector addition<a class="headerlink" href="#vector-addition" title="Permalink to this heading">#</a></h2>
+<h2>Vector addition<a class="headerlink" href="#vector-addition" title="Link to this heading">#</a></h2>
 <p>Just as arithmetic expressions allow you to perform calculations with
 real numbers,  just as boolean expressions can be used to perform
 calculations with booleans, we can also formalize a calculation with
@@ -664,7 +660,7 @@ the number of occurrences in both texts:</p>
 \end{split}\]</div>
 </div>
 <section id="geometric-interpretation-of-the-addition">
-<h3>Geometric interpretation of the addition<a class="headerlink" href="#geometric-interpretation-of-the-addition" title="Permalink to this heading">#</a></h3>
+<h3>Geometric interpretation of the addition<a class="headerlink" href="#geometric-interpretation-of-the-addition" title="Link to this heading">#</a></h3>
 <p>The addition of two vectors in 2D as a geometric interpretation known
 as the parallelogram law of vector addition which states that if two
 vectors can be represented as two sides of a parallelogram, their
@@ -685,14 +681,11 @@ addition is represented by the diagonal of the parallelogram.</p>
 \end{bmatrix}
 \end{split}\]</div>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/b10ff84e50427feed7639b1d421b1261e2598c117eb30991878564e13005ef7f.png" src="_images/b10ff84e50427feed7639b1d421b1261e2598c117eb30991878564e13005ef7f.png" />
-</div>
 </div>
 </section>
 </section>
 <section id="multiplication-by-a-scalar">
-<h2>Multiplication by a scalar<a class="headerlink" href="#multiplication-by-a-scalar" title="Permalink to this heading">#</a></h2>
+<h2>Multiplication by a scalar<a class="headerlink" href="#multiplication-by-a-scalar" title="Link to this heading">#</a></h2>
 <p>The other operation is the <strong>multiplication of a vector
 vector by a scalar</strong>.
 Let <span class="math notranslate nohighlight">\(r\)</span> be a real number and <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> a vector.
@@ -726,7 +719,7 @@ r x_1\\ \vdots\\ r x_n
 </div>
 </section>
 <section id="vector-space">
-<h2>Vector space<a class="headerlink" href="#vector-space" title="Permalink to this heading">#</a></h2>
+<h2>Vector space<a class="headerlink" href="#vector-space" title="Link to this heading">#</a></h2>
 <p>A vector space is a set <span class="math notranslate nohighlight">\(S^n\)</span> of vectors (or tuples) whose elements are from set
 <span class="math notranslate nohighlight">\(S\)</span>. The vectors can be added together and multiplied by scalars
 <span class="math notranslate nohighlight">\(s\in S\)</span>.</p>
@@ -740,6 +733,8 @@ element the scalar 1</p></li>
 vector multiplication distributes over scalar addition: <span class="math notranslate nohighlight">\((s+t)
 \mathbf{x} = s\mathbf{x} + t \mathbf{x}\)</span></p></li>
 </ul>
+<section id="linear-combinations">
+<h3>Linear combinations<a class="headerlink" href="#linear-combinations" title="Link to this heading">#</a></h3>
 <p>Given these algebraic properties, let us focus on the case of <strong>linear
 combination</strong>.
 If <span class="math notranslate nohighlight">\(\mathbf{x}_1\ldots \mathbf{x}_k\)</span> are vectors and <span class="math notranslate nohighlight">\(s_1\ldots s_k\)</span>
@@ -784,13 +779,32 @@ linear combination is equivalent to averaging the vectors <span class="math notr
 probabilities (<span class="math notranslate nohighlight">\(s_1+\ldots + s_k = 1\)</span>, <span class="math notranslate nohighlight">\(s_i\geq 0\)</span>), we say that the
 linear combination is a
 <strong>weighted sum</strong> or <strong>mixture</strong>.</p>
-<p>A set of vectors is called <strong>linearly independent</strong> if no object in
-the set can be written as a linear combination of the other objects
-in the set.
+</section>
+<section id="basis-of-a-vector-space">
+<h3>Basis of a vector space<a class="headerlink" href="#basis-of-a-vector-space" title="Link to this heading">#</a></h3>
+<p>A <strong>basis</strong> is a minimal set of vectors from which any vector in the space can be expressed as a linear combination of.
+To define this formally we rely on the properties of linear independence and spanning.</p>
+<p>A set of vectors is <strong>linearly independent</strong> if no vector in
+the set can be written as a linear combination of the other vectors
+in the set. This is generally stated as follows: The set of vectors <span class="math notranslate nohighlight">\({\mathbf{x}_1,\ldots \mathbf{x}_n}\)</span>
+is linearly independent iff</p>
+<div class="math notranslate nohighlight">
+\[
+c_1 \mathbf{x}_1 + \ldots + c_n\mathbf{x}_n = \mathbf{0}
+\]</div>
+<p>then the set of scalar coefficients <span class="math notranslate nohighlight">\(c_1, \ldots c_n\)</span> is the set of zero coefficients: <span class="math notranslate nohighlight">\(c_1 = 0, \ldots c_n = 0\)</span>.
 A set of vectors that is not linearly independent is <strong>linearly dependent</strong>.</p>
+<p>A set of vectors <span class="math notranslate nohighlight">\({\mathbf{x}_1,\ldots \mathbf{x}_n}\)</span> <strong>spans</strong> a vector space  if any vector <span class="math notranslate nohighlight">\(\mathbf{x}\in S\)</span> can be expressed as the linear
+combination of these vectors, that is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{v} = c_1 \mathbf{x}_1 + \ldots + c_n\mathbf{x}_n \qquad \forall \mathbf{v} \in S
+\]</div>
+<p>A set of vectors <span class="math notranslate nohighlight">\({\mathbf{x}_1,\ldots \mathbf{x}_n}\)</span> that are both linearly dependent and that span the vector space is a basis of the vector space.</p>
+</section>
 </section>
 <section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Define explicitly the operation of substraction <span class="math notranslate nohighlight">\(\mathbf{x} -
 \mathbf{y}\)</span>. Choose a 2D example and draw the parallelogram law for vector substraction.</p></li>
@@ -845,7 +859,7 @@ why.  Is this vector unique ?</p>
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -873,7 +887,8 @@ why.  Is this vector unique ?</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -892,7 +907,11 @@ why.  Is this vector unique ?</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-by-a-scalar">Multiplication by a scalar</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space">Vector space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space">Vector space</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-combinations">Linear combinations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-of-a-vector-space">Basis of a vector space</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
   </nav></div>
@@ -918,7 +937,7 @@ By Benoit Crabbé
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -942,8 +961,8 @@ By Benoit Crabbé
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

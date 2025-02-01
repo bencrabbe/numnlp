@@ -452,6 +452,9 @@ $s\in S$.
   \mathbf{x} = s\mathbf{x} + t \mathbf{x}$ 
 
 
+
+### Linear combinations
+
 Given these algebraic properties, let us focus on the case of **linear
  combination**.
  If $\mathbf{x}_1\ldots \mathbf{x}_k$ are vectors and $s_1\ldots s_k$
@@ -501,10 +504,47 @@ linear combination is a
 **weighted sum** or **mixture**. 
 
 
-A set of vectors is called **linearly independent** if no object in
- the set can be written as a linear combination of the other objects
- in the set.
+
+### Basis of a vector space
+
+A **basis** is a minimal set of vectors from which any vector in the space can be expressed as a linear combination of. 
+To define this formally we rely on the properties of linear independence and spanning. 
+
+
+A set of vectors is **linearly independent** if no vector in
+ the set can be written as a linear combination of the other vectors
+ in the set. This is generally stated as follows: The set of vectors ${\mathbf{x}_1,\ldots \mathbf{x}_n}$ 
+ is linearly independent iff
+
+$$
+c_1 \mathbf{x}_1 + \ldots + c_n\mathbf{x}_n = \mathbf{0}
+$$  
+
+then the set of scalar coefficients $c_1, \ldots c_n$ is the set of zero coefficients: $c_1 = 0, \ldots c_n = 0$.
 A set of vectors that is not linearly independent is **linearly dependent**.
+
+
+
+A set of vectors ${\mathbf{x}_1,\ldots \mathbf{x}_n}$ **spans** a vector space  if any vector $\mathbf{x}\in S$ can be expressed as the linear 
+combination of these vectors, that is:
+
+$$
+\mathbf{v} = c_1 \mathbf{x}_1 + \ldots + c_n\mathbf{x}_n \qquad \forall \mathbf{v} \in S
+$$
+
+
+A set of vectors ${\mathbf{x}_1,\ldots \mathbf{x}_n}$ that are both linearly dependent and that span the vector space is a basis of the vector space.
+
+
+
+
+
+
+ 
+  
+ 
+
+
 
 
 ## Exercises
