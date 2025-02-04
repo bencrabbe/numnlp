@@ -1,3 +1,20 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.11.5
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+
+
+
 # Appendix to Euclidean spaces
 
 
@@ -24,6 +41,52 @@ Proving the law $c^2 = a^2+b^2-2ab\cos\theta$ Breaks down in three cases:
 
 To prove (3) let us consider the black triangle and its prolongation
 as a right triangle in blue.
+
+
+````{code-cell}
+:tags: ["remove-input"]
+from myst_nb import glue
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+
+f,ax = plt.subplots()
+ax.set_xlim([-2.1,1.1])
+ax.set_ylim([-0.1,2.1])
+ax.set_axis_off()
+
+
+ax.plot([0,1],[0,0],color='black')
+ax.plot([0,-2],[0,2],color='black')
+ax.plot([1,-2],[0,2],color='black')
+ax.plot([0,-2],[0,0],'--',color='b')
+ax.plot([-2,-2],[0,2],'--',color='b')
+
+
+
+ax.annotate("a",(-1.2,1))
+ax.annotate("b", (0.5,-0.01),verticalalignment="top")
+ax.annotate("c", (-0.4,1))
+ax.annotate("e", (-1,-0.01), verticalalignment="top",color="blue")
+ax.annotate("h", (-2.01,1),  horizontalalignment="right",color="blue")
+
+
+ax.annotate(r"$\theta$", (0.25,0.125),color="red")
+ax.annotate(r"$\theta'$", (-0.35,0.125),color="blue")
+
+pac1 = mpatches.Arc([0, 0], 0.5, 0.5, angle=0, theta1=0, theta2=135.,color="red")
+pac2 = mpatches.Arc([0, 0], 0.5, 0.5, angle=0, theta1=135, theta2=180.,color="blue")
+
+ax.add_patch(pac1)
+ax.add_patch(pac2)
+
+
+
+
+glue("geom_vector", f, display=False)
+````
+
 
 
 ````{prf:lemma} Law of Cosines, obtuse angles 
