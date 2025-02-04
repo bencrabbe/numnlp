@@ -200,9 +200,9 @@ ax.quiver(2, 1, 1, 1, angles='xy', scale_units='xy', scale=1, color='b', width=0
 ax.quiver(0, 0, 3, 2, angles='xy', scale_units='xy', scale=1, color='r', width=0.005)
 
 
-ax.annotate("$\mathbf{x}$",(2.5,1.4))
-ax.annotate("$\mathbf{y}$",(1.5,0.65))
-ax.annotate("$\mathbf{x}+\mathbf{y}$",(1.5,1.2))
+ax.annotate(r"$\mathbf{x}$",(2.5,1.4))
+ax.annotate(r"$\mathbf{y}$",(1.5,0.65))
+ax.annotate(r"$\mathbf{x}+\mathbf{y}$",(1.5,1.2))
 
 glue("geom_vector", f, display=False)
 ````
@@ -246,9 +246,9 @@ ax.quiver(0, 0, 1, 1, angles='xy', scale_units='xy', scale=1, color='r', width=0
 ax.quiver(0, 0, 2, 1, angles='xy', scale_units='xy', scale=1, color='r', width=0.005)
 ax.quiver(2, 1, -1, 0, angles='xy', scale_units='xy', scale=1, color='b', width=0.005)
 
-ax.annotate("($x_1,x_2$)",(2,1.01), verticalalignment="bottom")
-ax.annotate("$(y_1,y_2)$", (1,1.01),verticalalignment="bottom")
-ax.annotate("$\mathbf{x}-\mathbf{y}$", (1.5,1.01),verticalalignment="bottom")
+ax.annotate(r"($x_1,x_2$)",(2,1.01), verticalalignment="bottom")
+ax.annotate(r"$(y_1,y_2)$", (1,1.01),verticalalignment="bottom")
+ax.annotate(r"$\mathbf{x}-\mathbf{y}$", (1.5,1.01),verticalalignment="bottom")
 
 glue("geom_vector", f, display=False)
 ````
@@ -282,7 +282,8 @@ when dot product is negative, the angle is obtuse and vectors head in opposite d
 ````
 
 
-The proof of Cauchy-Schwarz inequality is non intuititive, however we can illustrate how the cosine definition given here makes sense in the 2D case. To do that we establish two preliminary results: the  law of cosines, that generalizes Pythagoras theorem to triangles without right angle, and a square identity.
+The proof of Cauchy-Schwarz inequality is algebric and receives no
+straightforward interpretation (see appendix), however we can illustrate how the cosine definition given here makes sense in the 2D case. To do that we establish two preliminary results: the  law of cosines, that generalizes Pythagoras theorem to triangles without right angle, and a square identity.
 
 ````{prf:definition}
 :label: trigonometry
@@ -362,7 +363,9 @@ c^2 &= a^2\sin^2\theta + (b-a\cos\theta)^2& (\text{Pythagoras})\\
 \end{align}
 $$
 
-where the last line is obtained with {prf:ref}`sqsinusoids`. The law of cosines holds also when $\theta$ is an obtuse angle, this part of the proof is left to the reader.
+where the last line is obtained with {prf:ref}`sqsinusoids`. The law
+of cosines holds also when $\theta$ is an obtuse angle, this part of
+the proof is given in appendix.
 ````
 
 ````{code-cell}
