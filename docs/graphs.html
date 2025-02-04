@@ -179,6 +179,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
@@ -502,7 +503,7 @@ P(j|i) = s_{ij} = \frac{a_{ij}}{\sum_j a_{ij}}
 <p>for some column stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>. Furthermore a markov chain is <strong>strongly connected</strong> if each state of the stochastic matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is reachable in a finite number of steps from each state of <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>.</p>
 </section>
 </div><div class="proof theorem admonition" id="perron-frobenius">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Markov chain theorem)</p>
+<p class="admonition-title"><span class="caption-number">Theorem 2 </span> (Markov chain theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>If <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a stochastic matrix with strongly connected graph, then <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> has a unique steady-state vector, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.
 Moreover if <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> is <strong>any</strong> initial probabilistic vector, then</p>
@@ -512,9 +513,9 @@ Moreover if <span class="math notranslate nohighlight">\(\mathbf{x}_0\)</span> i
 \]</div>
 <p>converges to <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as <span class="math notranslate nohighlight">\(t \rightarrow\infty\)</span></p>
 </section>
-</div><p>There are two key observations to do here.  First, <a class="reference internal" href="#perron-frobenius">Theorem 1</a> is a theorem than can be read as:
+</div><p>There are two key observations to do here.  First, <a class="reference internal" href="#perron-frobenius">Theorem 2</a> is a theorem than can be read as:
 matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a matrix with eigenvector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and eigenvalue <span class="math notranslate nohighlight">\(\lambda = 1\)</span>.
-Indeed the fix point <span class="math notranslate nohighlight">\(\mathbf{M}\mathbf{x}_t = \lambda \mathbf{x}_{t+1}\)</span> is just an instanciation of the eigenvector definition with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>. <a class="reference internal" href="#perron-frobenius">Theorem 1</a>
+Indeed the fix point <span class="math notranslate nohighlight">\(\mathbf{M}\mathbf{x}_t = \lambda \mathbf{x}_{t+1}\)</span> is just an instanciation of the eigenvector definition with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>. <a class="reference internal" href="#perron-frobenius">Theorem 2</a>
 suggests to compute this eigenvector by iterating a very large number of matrix vector multiplications or by computing a matrix power with some high value. <strong>Power iteration</strong> or matrix power is indeed a well known numerical method for computing the first eigenvector of a matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span>.</p>
 <p>The second observation relates to the stability of the method. We emphasize that the theorem holds with any initial random vector only if the graph <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is strongly connected. Absence of strong connectivity may have two kind of consequences:</p>
 <ul class="simple">

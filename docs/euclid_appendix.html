@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Numerical methods for Natural Language Processing &#8212; Numerical methods in NLP (foundations)</title>
+    <title>Appendix to Euclidean spaces &#8212; Numerical methods in NLP (foundations)</title>
   
   
   
@@ -63,10 +63,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'euclid_appendix';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Vectors and vector spaces" href="vectors.html" />
+    <link rel="next" title="Applications to information retrieval" href="vec2text.html" />
+    <link rel="prev" title="Euclidean spaces : exercises" href="Euclid_exercises.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -118,8 +119,6 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -139,7 +138,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -166,21 +165,21 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Numerical methods for Natural Language Processing
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="vectors.html">Vectors and vector spaces</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Appendix to Euclidean spaces</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
@@ -241,7 +240,7 @@
 <div class="article-header-buttons">
 
 
-<a href="http://github.com/bencrabbe/numnlp/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+<a href="http://github.com/bencrabbe/numnlp/issues/new?title=Issue%20on%20page%20%2Feuclid_appendix.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button"
    title="Open an issue"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -267,7 +266,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/euclid_appendix.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -343,7 +342,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Numerical methods for Natural Language Processing</h1>
+    <h1>Appendix to Euclidean spaces</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -353,7 +352,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-readings">Further readings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-law-of-cosines-full-version">The Law of cosines (full version)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-cauchy-schwarz">Proof of Cauchy Schwarz</a></li>
 </ul>
             </nav>
         </div>
@@ -365,54 +365,92 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="numerical-methods-for-natural-language-processing">
-<h1>Numerical methods for Natural Language Processing<a class="headerlink" href="#numerical-methods-for-natural-language-processing" title="Link to this heading">#</a></h1>
-<p>This book has been designed as a course aid to introduce elementary
-numerical methods to students from a wide range of backgrounds. It
-builds on the Python programming language</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is assumed that the reader has already taken an introductory
-course to Python and is able to write beginner-level
-programs in this language</p>
-</div>
-<p>This course is essentially aimed at data practitioners and data
-experimentalists.
-It is generally aimed at students who are not at ease
-in mathematics. One of the aims of this course is to reconcile them with
-mathematics by first showing them examples of how it is used
-in natural language processing and text mining, and then encouraging
-them to delve deeper into notions that might otherwise seem
-too abstract.</p>
-<p>The course is also aimed at students with a scientific background.
-These students will find the link between scientific concepts
-and some basic methods used in natural language processing.</p>
-<p>At the end of this course, students are expected to have acquired elementary
-basic notions of linear algebra and numerical analysis, and be
-able to implement them in computer programs.</p>
-<section id="further-readings">
-<h2>Further readings<a class="headerlink" href="#further-readings" title="Link to this heading">#</a></h2>
-<p>For further information on this course, please refer to the following references:
-<span id="id1">Anton and Busby [<a class="reference internal" href="#id5" title="Howard Anton and Robert C. Busby. Contemporay Linear Algebra. Wiley, 2002.">AB02</a>]</span>, <span id="id2">Boyd and Vandenberghe [<a class="reference internal" href="#id6" title="Stephen Boyd and Lieven Vandenberghe. Introduction to Applied Linear Algebra. Cambdridge University Press, 2018.">BV18</a>]</span> and <span id="id3">Kong <em>et al.</em> [<a class="reference internal" href="#id7" title="Qingkai Kong, Timmy Siauw, and Alexandre Bayen. Python Programming and Numerical Methods. Elsevier, 2020.">KSB20</a>]</span></p>
-<div class="docutils container" id="id4">
-<div role="list" class="citation-list">
-<div class="citation" id="id5" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">AB02</a><span class="fn-bracket">]</span></span>
-<p>Howard Anton and Robert C. Busby. <em>Contemporay Linear Algebra</em>. Wiley, 2002.</p>
-</div>
-<div class="citation" id="id6" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">BV18</a><span class="fn-bracket">]</span></span>
-<p>Stephen Boyd and Lieven Vandenberghe. <em>Introduction to Applied Linear Algebra</em>. Cambdridge University Press, 2018.</p>
-</div>
-<div class="citation" id="id7" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">KSB20</a><span class="fn-bracket">]</span></span>
-<p>Qingkai Kong, Timmy Siauw, and Alexandre Bayen. <em>Python Programming and Numerical Methods</em>. Elsevier, 2020.</p>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="appendix-to-euclidean-spaces">
+<h1>Appendix to Euclidean spaces<a class="headerlink" href="#appendix-to-euclidean-spaces" title="Link to this heading">#</a></h1>
+<p>This appendix provides additional proofs left underspecified in the main chapter.</p>
+<section id="the-law-of-cosines-full-version">
+<h2>The Law of cosines (full version)<a class="headerlink" href="#the-law-of-cosines-full-version" title="Link to this heading">#</a></h2>
+<p>As pointed out in the main chapter, the <em>law of cosines</em> is the basis for justifying the cosine definition in the two dimensional case:</p>
+<div class="math notranslate nohighlight">
+\[ \cos\theta = \frac{\mathbf{x}\top \mathbf{y}}{||\mathbf{x}||\,
+||\mathbf{y}||}
+\]</div>
+<p>Proving the law <span class="math notranslate nohighlight">\(c^2 = a^2+b^2-2ab\cos\theta\)</span> Breaks down in three cases:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is an acute angle (proven in the main chapter)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is a right angle, in which case <span class="math notranslate nohighlight">\(\cos\theta= 0\)</span> and <span class="math notranslate nohighlight">\(c^2 = a^2+b^2-2ab\cos\theta\)</span> reduces to Pythagoras theorem</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is an obtuse angle, which is the case left to prove.</p></li>
+</ol>
+<p>To prove (3) let us consider the black triangle and its prolongation
+as a right triangle in blue.</p>
+<div class="proof lemma admonition" id="lemma-0">
+<p class="admonition-title"><span class="caption-number">Lemma 4 </span> (Law of Cosines, obtuse angles)</p>
+<section class="lemma-content" id="proof-content">
+<p>We prove that <span class="math notranslate nohighlight">\(c^2 = a^2+b^2-2ab\cos\theta\)</span>  when <span class="math notranslate nohighlight">\(\theta\)</span> is an
+obtuse angle between sides <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. To establish the proof we make
+explicit an additional right angled triangle (dotted blue line), with
+sides <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(e\)</span>. Then we apply Pythagoras on, this triangle and develop:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+c^2 &amp;= (b+e)^2+h^2\\
+       &amp;= b^2+2be+e^2+h^2\\
+	   &amp;=a^2+b^2+2be &amp; (e^2+h^2) = a^2\\
+	   &amp;=a^2+b^2-2ab\cos\theta
+\end{align}
+\end{split}\]</div>
+<p>where the last line is obtained by observing that <span class="math notranslate nohighlight">\(\cos\theta' =
+\frac{e}{a}\)</span>. Consequently the obtuse angle <span class="math notranslate nohighlight">\(\theta\)</span> has cosine
+<span class="math notranslate nohighlight">\(\cos\theta = - \frac{e}{a}\)</span> and <span class="math notranslate nohighlight">\(e= -a\cos\theta\)</span></p>
 </section>
-<div class="toctree-wrapper compound">
-</div>
+</div></section>
+<section id="proof-of-cauchy-schwarz">
+<h2>Proof of Cauchy Schwarz<a class="headerlink" href="#proof-of-cauchy-schwarz" title="Link to this heading">#</a></h2>
+<p>The Cauchy Schwarz inequality justifies the definition for the
+n-dimensional case. Several proofs exists, but are algebric and
+generally less intuitive than the law of cosines. We provide such a
+proof that relies on two algebraic properties of norms:</p>
+<ol class="arabic simple">
+<li><p>The squared norm is positive or null : <span class="math notranslate nohighlight">\(||\mathbf{v}||^2 \geq 0\)</span>
+for <span class="math notranslate nohighlight">\(\mathbf{v}\in\mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|| \mathbf{x}+\mathbf{y}||^2 =
+||\mathbf{x}||^2+2\mathbf{x}^\top\mathbf{y} +||\mathbf{y}||^2\)</span></p></li>
+</ol>
+<div class="proof theorem admonition" id="theorem-1">
+<p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Cauchy Schwarz)</p>
+<section class="theorem-content" id="proof-content">
+<p>We prove that <span class="math notranslate nohighlight">\(|\mathbf{x}^\top \mathbf{y}| \leq ||\mathbf{x}||\,
+||\mathbf{y}||\)</span>. Consider the vectors <span class="math notranslate nohighlight">\(\mathbf{x},\mathbf{y} \in \mathbb{R}^n\)</span> and the scalar
+<span class="math notranslate nohighlight">\(k\in \mathbb{R}\)</span>. The proof takes advantage of the properties of the
+norm <span class="math notranslate nohighlight">\(|| \mathbf{x}+k\mathbf{y}||\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+|| \mathbf{x}+k\mathbf{y}|| = ||\mathbf{x}||^2 + 2\mathbf{x}^\top \mathbf{y}k+k^2||\mathbf{y}||^2
+\]</div>
+<p>By definition <span class="math notranslate nohighlight">\(|| \mathbf{x}+k\mathbf{y}|| \geq 0\)</span>. Therefore we can
+choose any real value for <span class="math notranslate nohighlight">\(k\)</span>. By choosing <span class="math notranslate nohighlight">\(k =
+\frac{-\mathbf{x}^\top\mathbf{y} }{||\mathbf{y}||^2}\)</span> we get:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+||\mathbf{x}+k\mathbf{y} ||^2 &amp;= ||\mathbf{x} ||^2+2(\mathbf{x}^\top\mathbf{y})^\top \frac{-\mathbf{x}^\top\mathbf{y}}{||\mathbf{y}||^2} + \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^4} ||\mathbf{y}||^2\\
+                                                 &amp;= ||\mathbf{x} ||^2 - \frac{2(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}+\frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}\\
+	&amp;= ||\mathbf{x} ||^2 - \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}
+\end{align}
+\end{split}\]</div>
+<p>As the norm is positive or null, we further have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+0 &amp;\leq ||\mathbf{x}||^2 -  \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}\\
+    \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}
+      &amp;\leq ||\mathbf{x}||^2\\
+    (\mathbf{x}^\top\mathbf{y})^2 &amp; \leq ||\mathbf{x}||^2 \,||\mathbf{y}||^2\\
+ |\mathbf{x}^\top\mathbf{y})| &amp; \leq ||\mathbf{x}|| \,||\mathbf{y}||\\
+\end{align}
+\end{split}\]</div>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -445,12 +483,21 @@ able to implement them in computer programs.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Euclid_exercises.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Euclidean spaces : exercises</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="vectors.html"
+       href="vec2text.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Vectors and vector spaces</p>
+        <p class="prev-next-title">Applications to information retrieval</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -471,7 +518,8 @@ able to implement them in computer programs.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-readings">Further readings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-law-of-cosines-full-version">The Law of cosines (full version)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-cauchy-schwarz">Proof of Cauchy Schwarz</a></li>
 </ul>
   </nav></div>
 
