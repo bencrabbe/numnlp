@@ -20,4 +20,5 @@ chapters:
 - file: optim
   sections:
   - file: optim_exercises
+- file: systems
 - file: constrained

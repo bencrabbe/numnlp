@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Appendix to Euclidean spaces &#8212; Numerical methods in NLP (foundations)</title>
+    <title>Systems of linear equations &#8212; Numerical methods in NLP (foundations)</title>
   
   
   
@@ -63,11 +63,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'euclid_appendix';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'systems';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Applications to information retrieval" href="vec2text.html" />
-    <link rel="prev" title="Euclidean spaces : exercises" href="Euclid_exercises.html" />
+    <link rel="next" title="Constrained optimization" href="constrained.html" />
+    <link rel="prev" title="Optimization exercises" href="optim_exercises.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -176,10 +176,10 @@
 <li class="toctree-l2"><a class="reference internal" href="numpy_exercises.html">Numpy exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="euclid.html">The euclidean space</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Euclid_exercises.html">Euclidean spaces : exercises</a></li>
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Appendix to Euclidean spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="euclid_appendix.html">Appendix to Euclidean spaces</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="vec2text.html">Applications to information retrieval</a></li>
@@ -192,7 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="systems.html">Systems of linear equations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Systems of linear equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained optimization</a></li>
 </ul>
 
@@ -242,7 +242,7 @@
 <div class="article-header-buttons">
 
 
-<a href="http://github.com/bencrabbe/numnlp/issues/new?title=Issue%20on%20page%20%2Feuclid_appendix.html&body=Your%20issue%20content%20here." target="_blank"
+<a href="http://github.com/bencrabbe/numnlp/issues/new?title=Issue%20on%20page%20%2Fsystems.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button"
    title="Open an issue"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -268,7 +268,7 @@
       
       
       
-      <li><a href="_sources/euclid_appendix.md" target="_blank"
+      <li><a href="_sources/systems.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -344,7 +344,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Appendix to Euclidean spaces</h1>
+    <h1>Systems of linear equations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -354,8 +354,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-law-of-cosines-full-version">The Law of cosines (full version)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-cauchy-schwarz">Proof of Cauchy Schwarz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-transformation-rules">Row transformation rules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-jordan-pivot">Gauss Jordan Pivot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-inversion">Matrix inversion</a></li>
 </ul>
             </nav>
         </div>
@@ -367,97 +368,324 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="appendix-to-euclidean-spaces">
-<h1>Appendix to Euclidean spaces<a class="headerlink" href="#appendix-to-euclidean-spaces" title="Link to this heading">#</a></h1>
-<p>This appendix provides additional proofs left underspecified in the main chapter.</p>
-<section id="the-law-of-cosines-full-version">
-<h2>The Law of cosines (full version)<a class="headerlink" href="#the-law-of-cosines-full-version" title="Link to this heading">#</a></h2>
-<p>As pointed out in the main chapter, the <em>law of cosines</em> is the basis for justifying the cosine definition in the two dimensional case:</p>
-<div class="math notranslate nohighlight">
-\[ \cos\theta = \frac{\mathbf{x}\top \mathbf{y}}{||\mathbf{x}||\,
-||\mathbf{y}||}
-\]</div>
-<p>Proving the law <span class="math notranslate nohighlight">\(c^2 = a^2+b^2-2ab\cos\theta\)</span> Breaks down in three cases:</p>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is an acute angle (proven in the main chapter)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is a right angle, in which case <span class="math notranslate nohighlight">\(\cos\theta= 0\)</span> and <span class="math notranslate nohighlight">\(c^2 = a^2+b^2-2ab\cos\theta\)</span> reduces to Pythagoras theorem</p></li>
-<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is an obtuse angle, which is the case left to prove.</p></li>
-</ol>
-<p>To prove (3) let us consider the black triangle and its prolongation
-as a right triangle in blue.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="_images/09980cf738ce02323efc023255f3421aa5aec9ceb76e47a200f36fd1982535c9.png" src="_images/09980cf738ce02323efc023255f3421aa5aec9ceb76e47a200f36fd1982535c9.png" />
-</div>
-</div>
-<div class="proof lemma admonition" id="lemma-0">
-<p class="admonition-title"><span class="caption-number">Lemma 4 </span> (Law of Cosines, obtuse angles)</p>
-<section class="lemma-content" id="proof-content">
-<p>We prove that <span class="math notranslate nohighlight">\(c^2 = a^2+b^2-2ab\cos\theta\)</span>  when <span class="math notranslate nohighlight">\(\theta\)</span> is an
-obtuse angle between sides <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. To establish the proof we make
-explicit an additional right angled triangle (dotted blue line), with
-sides <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(e\)</span>. Then we apply Pythagoras on, this triangle and develop:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-c^2 &amp;= (b+e)^2+h^2\\
-       &amp;= b^2+2be+e^2+h^2\\
-	   &amp;=a^2+b^2+2be &amp; (e^2+h^2) = a^2\\
-	   &amp;=a^2+b^2-2ab\cos\theta
-\end{align}
-\end{split}\]</div>
-<p>where the last line is obtained by observing that <span class="math notranslate nohighlight">\(\cos\theta' =
-\frac{e}{a}\)</span>. Consequently the obtuse angle <span class="math notranslate nohighlight">\(\theta\)</span> has cosine
-<span class="math notranslate nohighlight">\(\cos\theta = - \frac{e}{a}\)</span> and <span class="math notranslate nohighlight">\(e= -a\cos\theta\)</span></p>
-</section>
-</div></section>
-<section id="proof-of-cauchy-schwarz">
-<h2>Proof of Cauchy Schwarz<a class="headerlink" href="#proof-of-cauchy-schwarz" title="Link to this heading">#</a></h2>
-<p>The Cauchy Schwarz inequality justifies the definition for the
-n-dimensional case. Several proofs exists, but are algebric and
-generally less intuitive than the law of cosines. We provide such a
-proof that relies on two algebraic properties of norms:</p>
-<ol class="arabic simple">
-<li><p>The squared norm is positive or null : <span class="math notranslate nohighlight">\(||\mathbf{v}||^2 \geq 0\)</span>
-for <span class="math notranslate nohighlight">\(\mathbf{v}\in\mathbb{R}^n\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(|| \mathbf{x}+\mathbf{y}||^2 =
-||\mathbf{x}||^2+2\mathbf{x}^\top\mathbf{y} +||\mathbf{y}||^2\)</span></p></li>
-</ol>
-<div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span> (Cauchy Schwarz)</p>
-<section class="theorem-content" id="proof-content">
-<p>We prove that <span class="math notranslate nohighlight">\(|\mathbf{x}^\top \mathbf{y}| \leq ||\mathbf{x}||\,
-||\mathbf{y}||\)</span>. Consider the vectors <span class="math notranslate nohighlight">\(\mathbf{x},\mathbf{y} \in \mathbb{R}^n\)</span> and the scalar
-<span class="math notranslate nohighlight">\(k\in \mathbb{R}\)</span>. The proof takes advantage of the properties of the
-norm <span class="math notranslate nohighlight">\(|| \mathbf{x}+k\mathbf{y}||\)</span>:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="systems-of-linear-equations">
+<h1>Systems of linear equations<a class="headerlink" href="#systems-of-linear-equations" title="Link to this heading">#</a></h1>
+<p>Although not directly related to language applications, we introduce here an automatic method for solving systems of linear equations.
+This may be of interest for the reader willing to better understand a related problem: that of matrix inversion and it also helps to better understand
+constrained optimization algorithms like the simplex.</p>
+<p>A system of linear equations is a collection of equations involving the same variables and all these equations are linear.
+The key initial observation is that such a system can be written in matrix vector form.</p>
 <div class="math notranslate nohighlight">
 \[
-|| \mathbf{x}+k\mathbf{y}|| = ||\mathbf{x}||^2 + 2\mathbf{x}^\top \mathbf{y}k+k^2||\mathbf{y}||^2
+\mathbf{Ax} = \mathbf{b} 
 \]</div>
-<p>By definition <span class="math notranslate nohighlight">\(|| \mathbf{x}+k\mathbf{y}|| \geq 0\)</span>. Therefore we can
-choose any real value for <span class="math notranslate nohighlight">\(k\)</span>. By choosing <span class="math notranslate nohighlight">\(k =
-\frac{-\mathbf{x}^\top\mathbf{y} }{||\mathbf{y}||^2}\)</span> we get:</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Here is an example of a system with three equations:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-||\mathbf{x}+k\mathbf{y} ||^2 &amp;= ||\mathbf{x} ||^2+2(\mathbf{x}^\top\mathbf{y})^\top \frac{-\mathbf{x}^\top\mathbf{y}}{||\mathbf{y}||^2} + \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^4} ||\mathbf{y}||^2\\
-                                                 &amp;= ||\mathbf{x} ||^2 - \frac{2(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}+\frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}\\
-	&amp;= ||\mathbf{x} ||^2 - \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}
-\end{align}
+\left\{
+\begin{array}{rcl}
+3x_1+2x_2-x_3&amp;=&amp;1\\
+2x_1-2x_2+4x_3&amp;=&amp;-2\\
+-x_1+\frac{x_2}{2}-x_3 &amp;=&amp; 0 
+\end{array}
+\right.
 \end{split}\]</div>
-<p>As the norm is positive or null, we further have:</p>
+<p>such a system can be rewritten in matrix form given the following vectors and matrices:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-0 &amp;\leq ||\mathbf{x}||^2 -  \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}\\
-    \frac{(\mathbf{x}^\top\mathbf{y})^2}{||\mathbf{y}||^2}
-      &amp;\leq ||\mathbf{x}||^2\\
-    (\mathbf{x}^\top\mathbf{y})^2 &amp; \leq ||\mathbf{x}||^2 \,||\mathbf{y}||^2\\
- |\mathbf{x}^\top\mathbf{y})| &amp; \leq ||\mathbf{x}|| \,||\mathbf{y}||\\
-\end{align}
+\underbrace{
+\begin{bmatrix}
+3 &amp; 2 &amp;-1\\
+2 &amp;-2 &amp;4\\
+-1&amp;\frac{1}{2} &amp; -1
+\end{bmatrix}
+}_\mathbf{A}
+\underbrace{
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix}
+}_\mathbf{x}
+=
+\underbrace{
+\begin{bmatrix}
+1\\
+-2\\
+0
+\end{bmatrix}
+}_\mathbf{b}
 \end{split}\]</div>
+</div>
+<p>The naive way to solve such a system is by variable substitution: one expresses a variable as a function of all the other variables and substitutes it in the other equations.
+We introduce here another method that relies on the fundamental observation: in case the matrix of coefficients <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the identity matrix,
+the solution is trivially read off:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\
+x_2\\
+x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1\\
+b_2\\
+b_3
+\end{bmatrix}
+\end{split}\]</div>
+<p>since it reduces to the system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{rcl}
+x_1 &amp;=&amp;b_1\\
+x_2 &amp;=&amp; b_2\\
+x_3 &amp;=&amp;b_3
+\end{array}
+\end{split}\]</div>
+<p>The gauss pivot method for solving systems of linear equations actually transforms any square matrix of coefficients <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and the vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> into an equivalent matrix
+<span class="math notranslate nohighlight">\(\mathbf{A}'\)</span> and vector <span class="math notranslate nohighlight">\(\mathbf{b}'\)</span> using structural transformation rules that preserve the equivalence of the system : the solutions remain the same.</p>
+<section id="row-transformation-rules">
+<h2>Row transformation rules<a class="headerlink" href="#row-transformation-rules" title="Link to this heading">#</a></h2>
+<p>The row transformation rules (or pivoting rules) are rules to rewrite equations in a different form that preserve the solutions of the equation.
+given an equation of the form <span class="math notranslate nohighlight">\(\mathbf{ax} = b\)</span> the rules are</p>
+<ol class="arabic simple">
+<li><p><strong>Swap rule</strong>. Two equations in a system can be swapped without changing the set of solutions</p></li>
+<li><p><strong>Multiplication rule.</strong> Let <span class="math notranslate nohighlight">\(k \not = 0\)</span> the equation <span class="math notranslate nohighlight">\(\mathbf{a}^\top\mathbf{x} = b\)</span> may be rewritten  <span class="math notranslate nohighlight">\(k \mathbf{a}^\top\mathbf{x} = k b\)</span></p></li>
+<li><p><strong>Addition rule</strong> Let the equations <span class="math notranslate nohighlight">\(E_1 : \mathbf{a}_1^\top\mathbf{x}_1 =  b_1 \)</span> and <span class="math notranslate nohighlight">\(E_2 : \mathbf{a}_2^\top\mathbf{x}_2 = b_2 \)</span> we can replace <span class="math notranslate nohighlight">\(E_1\)</span>
+by <span class="math notranslate nohighlight">\(E_1+E_2 :  \mathbf{a}_1^\top\mathbf{x}_1  +  \mathbf{a}_2^\top\mathbf{x}_2= b_1+b_2\)</span>. This justified since we add an equal quantity to each side of the equality.</p></li>
+</ol>
+<p>Note that in practice the addition rule is commonly combined with the multiplication rule.
+The notation <span class="math notranslate nohighlight">\(E_i \gets \alpha E_i + \beta E_j\)</span> means that equation <span class="math notranslate nohighlight">\(E_i\)</span> is updated by multiplying <span class="math notranslate nohighlight">\(E_i\)</span> and <span class="math notranslate nohighlight">\(E_j\)</span> by non zero constants before adding them</p>
 </section>
-</div></section>
+<section id="gauss-jordan-pivot">
+<h2>Gauss Jordan Pivot<a class="headerlink" href="#gauss-jordan-pivot" title="Link to this heading">#</a></h2>
+<p>The Gauss pivot algorithm solves a system of linear equation by reformulating it and transforming it until the matrix of coefficients is the identity matrix.
+From there the solution is immediately read off. Given a system of linear equations with a square coefficient matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and vector of values <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>
+the algorithm starts from the augmented matrix:
+<span class="math notranslate nohighlight">\( [\mathbf{A} | \mathbf{b}]\)</span></p>
+<p>The augmented matrix is then transformed iteratively until it either reaches the row reduced form or it fails.
+At each iteration step <span class="math notranslate nohighlight">\(i\)</span> the pivot column is column <span class="math notranslate nohighlight">\(\mathbf{a}_i\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Select a pivot row such that it has a non zero coefficient in the pivoting column and its row has not been chosen earlier. In case no such pivot is found the system is not solvable.</p></li>
+<li><p>Swap rows such that the pivot row becomes the <span class="math notranslate nohighlight">\(i\)</span>-th row in <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. The <strong>pivot</strong> is now element <span class="math notranslate nohighlight">\(a_{ii}\)</span></p></li>
+<li><p>Use row transformations to get <span class="math notranslate nohighlight">\(a_{ii} = 1\)</span>.</p></li>
+<li><p>Use row transformations of the form <span class="math notranslate nohighlight">\(E_j \gets E_j +  k E_i\)</span> to get <span class="math notranslate nohighlight">\(a_{ij} = 0\)</span> everywhere in the pivoting column except when <span class="math notranslate nohighlight">\(i=j\)</span>. <span class="math notranslate nohighlight">\(k\)</span> is chosen to be <span class="math notranslate nohighlight">\(-\frac{a_{ij}}{a_{ii}}\)</span></p></li>
+</ol>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Here is an example for a system with three equations.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{
+\begin{array}{rcl}
+2x_1+x_2+2x_3&amp;=&amp;10\\
+x_1+2x_2+x_3  &amp;=&amp;8\\
+3x_1+x_2-x_3  &amp;=&amp; 2 
+\end{array}
+\right.
+\end{split}\]</div>
+<p>and its coding in an augmented matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+ 2 &amp; 1&amp;2&amp;10\\
+{\color{red}\mathbf{1}} &amp;2&amp; 1&amp; 8\\ 
+3&amp;1&amp;-1&amp;2
+\end{array}\right]
+\stackrel{swap}{\Rightarrow}
+\left[
+\begin{array}{ccc|c}
+{\color{red}\mathbf{1}} &amp;2&amp; 1&amp; 8\\ 
+2 &amp; 1&amp;2&amp;10\\
+3&amp;1&amp;-1&amp;2
+\end{array}\right]\end{split}\]</div>
+<p>The pivot in the first column is chosen to be 1 (the choice is motivated only to simplify  calculations) and after swapping we apply row transformations to get to the next iteration:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+1 &amp; 2&amp; 1&amp; 8\\ 
+0 &amp; {\color{red} \mathbf{-3}}&amp;0&amp;-6\\
+0&amp;-5&amp;-4&amp;-22
+\end{array}
+\right]
+\begin{array}{l}
+\\
+E_2\gets E_2 - 2 E_1\\
+E_3\gets E_3 - 3  E_1
+\end{array}
+\end{split}\]</div>
+<p>Moving to the second column, we choose the pivot to be -3. We first divide the pivot row by -3 to get a 1</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+1 &amp; 2&amp; 1&amp; 8\\ 
+0 &amp; {\color{red} 1}&amp;0&amp;2\\
+0&amp;-5&amp;-4&amp;-22
+\end{array}
+\right]
+\begin{array}{l}
+\strut\\
+E_2\gets - \frac{1}{3}E_2\\
+\strut
+\end{array}
+\end{split}\]</div>
+<p>then we apply linear transformations to zero out the coefficients in the pivot row.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+1 &amp; 0&amp; 1&amp; 4\\ 
+0 &amp; 1&amp;0&amp;2\\
+0&amp;0&amp;{\color{red} \mathbf{-4}}&amp;-12
+\end{array}
+\right]
+\begin{array}{l}
+E_1\gets E_1 - 2E_2\\
+\\
+E_3 \gets E_3 +5 E_2 
+\end{array}
+\end{split}\]</div>
+<p>Finally we reach the third column where the only possible pivot is -4.
+By dividing the pivot row by -4 we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+1 &amp; 0&amp; 1&amp; 4\\ 
+0 &amp; 1&amp;0&amp;2\\
+0&amp;0&amp;{\color{red} \mathbf{1}}&amp;3
+\end{array}
+\right]
+\begin{array}{l}
+\strut\\
+\strut\\
+E_3 \gets -\frac{1}{4} E_4 
+\end{array}
+\end{split}\]</div>
+<p>and finally we zero out other coefficients in the pivot column to get:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|c}
+1 &amp; 0&amp; 0&amp; 1\\ 
+0 &amp; 1&amp;0&amp;2\\
+0&amp;0&amp;{\color{red} \mathbf{1}}&amp;3
+\end{array}
+\right]
+\begin{array}{l}
+E_1 \gets  E_1 - E_3 \\
+\strut\\
+\strut
+\end{array}
+\end{split}\]</div>
+<p>The iteration is now over and the matrix is in row reduced form. We can read off the solution : <span class="math notranslate nohighlight">\(x_1 = 1, x_2 = 2, x_3 = 3\)</span></p>
+</div>
+</section>
+<section id="matrix-inversion">
+<h2>Matrix inversion<a class="headerlink" href="#matrix-inversion" title="Link to this heading">#</a></h2>
+<p>The Gauss Jordan method can also be used to solve matrix inversion problems. Suppose we want
+to compute the inverse <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span> of matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. We instanciate an augmented matrix of
+the form <span class="math notranslate nohighlight">\([\mathbf{A}|\mathbf{I}]\)</span> with <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> the identity matrix. The inversion operation applies the pivoting methodology until the
+<span class="math notranslate nohighlight">\(\mathbf{A}\)</span> matrix becomes the identity matrix. The <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> matrix will be transformed into the inverse once the process is complete.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example</p>
+<p>Given the starting augmented matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+[\mathbf{A}|\mathbf{I}]
+=
+\left[
+\begin{array}{ccc|ccc}
+{\color{red}\mathbf{2}}&amp;3&amp;1&amp;1&amp;0&amp;0\\
+3&amp;3&amp;1&amp;0&amp;1&amp;0\\
+2&amp;4&amp;1&amp;0&amp;0&amp;1
+\end{array}
+\right]
+\end{split}\]</div>
+<p>The first pivot is the upper left 2. Then we update the matrix such that the pivot equals 1 and the remaining pivot column coefficients are 0:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|ccc}
+{\color{red}\mathbf{1}}&amp;\frac{3}{2}&amp;\frac{1}{2}&amp;\frac{1}{2}&amp;0&amp;0\\
+0&amp;-\frac{3}{2}&amp;-\frac{1}{2}&amp;-\frac{3}{2}&amp;1&amp;0\\
+0&amp;1&amp;0&amp;-1&amp;0&amp;1
+\end{array}
+\right]
+\begin{array}{l}
+E_1 \gets  \frac{1}{2}E_1 \\
+E_2 \gets E_2 - \frac{3}{2} E_1 \\
+E_3 \gets E_3 -  E_1 \\
+\end{array}
+\end{split}\]</div>
+<p>For the second column we choose the next pivot to be 1 and swap rows accordingly:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|ccc}
+1&amp;\frac{3}{2}&amp;\frac{1}{2}&amp;\frac{1}{2}&amp;0&amp;0\\
+0&amp;{\color{red}\mathbf{1}}&amp;0&amp;-1&amp;0&amp;1\\
+0&amp;-\frac{3}{2}&amp;-\frac{1}{2}&amp;-\frac{3}{2}&amp;1&amp;0
+\end{array}
+\right]
+\end{split}\]</div>
+<p>We move to the next iteration by setting non pivot coefficients to 0:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|ccc}
+1&amp;0&amp;\frac{1}{2}&amp;2&amp;0&amp;-\frac{3}{2}\\
+0&amp;\mathbf{1}&amp;0&amp;-1&amp;0&amp;1\\
+0&amp;0&amp;{\color{red} -\mathbf{\frac{1}{2}}}&amp;-3&amp;1&amp;\frac{3}{2}
+\end{array}
+\right]
+\begin{array}{l}
+E_1 \gets  E_1 - \frac{3}{2}E_2 \\
+\strut \\
+E_3 \gets E_3 +  \frac{3}{2} E_2 \\
+\end{array}
+\end{split}\]</div>
+<p>For the last iteration the only available pivot is  -1/2 and again we set the third column coefficients to 0 in order to get the result.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[
+\begin{array}{ccc|ccc}
+1&amp;0&amp;0&amp;-1&amp;1&amp;0\\
+0&amp;1&amp;0&amp;-1&amp;0&amp;1\\
+0&amp;0&amp;{\color{red} \mathbf{1}}&amp;6&amp;-2&amp;-3
+\end{array}
+\right]
+\begin{array}{l}
+E_1 \gets  E_1 + E_3 \\
+\strut \\
+E_3 \gets -2E_3  \\
+\end{array}
+\end{split}\]</div>
+<p>We conclude that the inverse of matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is the matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{A}^{-1} = 
+\left[
+\begin{array}{ccc}
+-1&amp;1&amp;0\\
+-1&amp;0&amp;1\\
+6&amp;-2&amp;-3
+\end{array}
+\right]
+\end{split}\]</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -491,20 +719,20 @@ choose any real value for <span class="math notranslate nohighlight">\(k\)</span
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Euclid_exercises.html"
+       href="optim_exercises.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Euclidean spaces : exercises</p>
+        <p class="prev-next-title">Optimization exercises</p>
       </div>
     </a>
     <a class="right-next"
-       href="vec2text.html"
+       href="constrained.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Applications to information retrieval</p>
+        <p class="prev-next-title">Constrained optimization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -525,8 +753,9 @@ choose any real value for <span class="math notranslate nohighlight">\(k\)</span
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-law-of-cosines-full-version">The Law of cosines (full version)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-cauchy-schwarz">Proof of Cauchy Schwarz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#row-transformation-rules">Row transformation rules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-jordan-pivot">Gauss Jordan Pivot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-inversion">Matrix inversion</a></li>
 </ul>
   </nav></div>
 

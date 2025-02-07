@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'constrained';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Optimization exercises" href="optim_exercises.html" />
+    <link rel="prev" title="Systems of linear equations" href="systems.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -191,6 +191,7 @@
 <li class="toctree-l2"><a class="reference internal" href="optim_exercises.html">Optimization exercises</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="systems.html">Systems of linear equations</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Constrained optimization</a></li>
 </ul>
 
@@ -352,7 +353,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming">Linear programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming">Linear programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplex-algorithm">Simplex algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-standard-form">Conversion to standard form</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simplex-pivoting-algorithm">The simplex pivoting algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming-in-practice">Linear programming in practice</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-linear-programming">Integer Linear programming</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-constrained-optimization">Non linear constrained optimization</a></li>
 </ul>
@@ -375,11 +384,11 @@ optimization with applications to natural language processing.</p>
 <p>Linear programs are a class of optimization problems that aim to
 maximize a <strong>linear objective function</strong> subject to constraints stated as
 <strong>linear inequalities</strong>.</p>
-<p>Here is an example of linear program:</p>
+<p>Here is an example linear program for a bivariate function:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
-\text{maximize}\ &amp; 3x_1+2x_2\\
+\text{maximize}\ &amp; f(\mathbf{x}) = 3x_1+2x_2\\
 \text{subject to}\ &amp;\\
 &amp;x_1 \geq 0\\
                           &amp;  x_2 \geq 0\\
@@ -388,16 +397,289 @@ maximize a <strong>linear objective function</strong> subject to constraints sta
 						  &amp;2x_1+x_2 \leq 7
 \end{align}
 \end{split}\]</div>
+<p>As can be seen a linear program has an hyperplane as objective
+function. The shape delimited by the constraints takes
+the form of a <em>polytope</em> (the generalization of polygon to an
+arbitrary number of dimensions)  the area inside the polytope is
+called the <strong>feasible region</strong>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/4207ffeaf83c2ab2107163225ce285dd1a242f9fea033a72be9fafcd9c8810f0.png" src="_images/4207ffeaf83c2ab2107163225ce285dd1a242f9fea033a72be9fafcd9c8810f0.png" />
+<img alt="_images/8892f168b09ac91c2ebd6d47fe1c57ef20d5c4d000a772efe5cea594084ce36b.png" src="_images/8892f168b09ac91c2ebd6d47fe1c57ef20d5c4d000a772efe5cea594084ce36b.png" />
 </div>
 </div>
-<p>simplex</p>
+<p>Considering the favorable case, where the feasible region is non empty
+and where the solution is unique (at least one slope coefficient is non null) one has to observe that the <em>solution
+is located on a vertex of the polytope</em>.</p>
+<p>A brute force algorithm for finding the maximum can basically evaluate
+all these vertices and keep the one that maximizes <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span>.
+It turns out that when solving real life problems the number of
+constraints can become so huge that the brute force solution is not
+practical anymore. The simplex algorithm aims to provide a method that
+avoids such an exhaustive exploration.</p>
+<section id="simplex-algorithm">
+<h3>Simplex algorithm<a class="headerlink" href="#simplex-algorithm" title="Link to this heading">#</a></h3>
+<p>The simplex algorithm is an algorithm for solving linear programs that conceptually moves from
+vertex to vertex on the polytope around the feasible region. This is a
+pivoting algorithm of the same family as the Gaussian Pivot for
+solving systems of linear equations. To solve a problem with the
+simplex one follows two steps :</p>
+<ol class="arabic simple">
+<li><p>Rewrite the optimization problem in <em>standard form</em></p></li>
+<li><p>Run the algorithm on the standard form</p></li>
+</ol>
+<section id="conversion-to-standard-form">
+<h4>Conversion to standard form<a class="headerlink" href="#conversion-to-standard-form" title="Link to this heading">#</a></h4>
+<p>The conversion of the problem in standard form involves turning
+inequalities into equalities. This transformation aims to fullfill the
+requirements of the algorithm</p>
+<p>We assume the problem is given in canonical form, that is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\text{maximize}\ &amp;\mathbf{c}^\top \mathbf{x}\\
+\text{subject to}\ &amp;\mathbf{Ax}\leq \mathbf{b}\\
+&amp;\mathbf{x}\geq k 
+\end{align}
+\end{split}\]</div>
+<p>There are two main cases. First, for constraints of the form <span class="math notranslate nohighlight">\(x_i \geq k\)</span>
+specifying a lower bound to the variable different from 0 (<span class="math notranslate nohighlight">\(k \not =
+0\)</span>), the transformation introduces the new variable <span class="math notranslate nohighlight">\(y_i = x_i - k\)</span>
+such that <span class="math notranslate nohighlight">\(y_i \geq 0\)</span>. In this case <span class="math notranslate nohighlight">\(x_i = y_i + k\)</span> and we can use
+this equation to replace <span class="math notranslate nohighlight">\(x_i\)</span> everywhere in the original problem.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example (replace non zero lower bound)</p>
+<p>Suppose we have the constraint <span class="math notranslate nohighlight">\(x_1 \geq 7\)</span>. Then we introduce:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+y_i &amp;= x_i - 7\\
+y_i &amp;\geq 0
+\end{align}
+\end{split}\]</div>
+<p>and we use the equation <span class="math notranslate nohighlight">\(x_i = y_i + 7\)</span> to replace <span class="math notranslate nohighlight">\(x_i\)</span> everywhere in
+the problem.</p>
+</div>
+<p>Second, the remaining inequality constraints are replaced by equality
+constraints. This transformation is achieved by introducing <em>slack variables</em>
+such that each slack variable <span class="math notranslate nohighlight">\(s_i\)</span> is lower bounded at 0 (<span class="math notranslate nohighlight">\(s_i \geq
+ 0\)</span>). Thus an inequation of the form <span class="math notranslate nohighlight">\(
+ a_1x_1+\ldots + a_k x_k \leq b
+ \)</span> is turned into the equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+ a_1x_1+\ldots + a_k x_k + s_i &amp;= b\\
+ s_i &amp;\geq 0
+\end{align}
+\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example (introduce slack variables)</p>
+<p>In the example above we have three inequations for which slack
+variables have to be introduced. Once slack variables are introduced we have the system of equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+x_1+2x_2 + s_1&amp;= 6\\
+x_1 + x_2 + s_2&amp;= 4\\
+2x_1+x_2 + s_3&amp;= 7\\
+s_1,s_2,s_3&amp;\geq 0
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="the-simplex-pivoting-algorithm">
+<h4>The simplex pivoting algorithm<a class="headerlink" href="#the-simplex-pivoting-algorithm" title="Link to this heading">#</a></h4>
+<p>The simplex algorithm is a pivoting algorithm that moves from vertex
+to vertex on the polytope. It starts by picking some vertex and then
+seeks the next vertex to go. At each time step this vertex is chosen in such a way that
+the objective increases. If no such vertex can be found then the
+algorithm terminates, it has found the solution.</p>
+<p>Encoded in standard form the maximization problem is turned into a
+system of linear equations. On the one hand we have the constraints
+that have now the form  <span class="math notranslate nohighlight">\(\mathbf{Ax} = \mathbf{b}\)</span> (where <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>
+is the matrix of coefficients including those for the slack
+variables). On the other hand we have the objective <span class="math notranslate nohighlight">\(z =
+\mathbf{c}^\top\mathbf{x}\)</span>. To standardize the objective it is
+rewritten from the functional form <span class="math notranslate nohighlight">\(z =  c_1x_1+\ldots+ c_kx_k\)</span> to the
+equation <span class="math notranslate nohighlight">\(z-c_1x_1- \ldots -
+c_kx_k = 0\)</span>.  As a result the canonical system of equations can be organized in
+the following simplex matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1                &amp; \mathbf{c} &amp; 0\\
+\mathbf{0} &amp; \mathbf{A} &amp;\mathbf{b} 
+\end{bmatrix}
+\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Example (simplex table)</p>
+<p>Continuing the running example from this chapter, the simplex tableau built
+from the standard form is the following.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{c|cc|ccc|c|c}
+z&amp;x_1&amp;x_2&amp;s_1&amp;s_2&amp;s_3&amp;b&amp;\text{bfs}\\\hline 
+1&amp; -3&amp;-2  &amp; 0  &amp; 0  &amp; 0   &amp;0 &amp; z=0\\ 
+0&amp;1  &amp;  2  &amp; 1  &amp;  0  &amp; 0   &amp;6 &amp;s_1=6\\
+0 &amp;1 &amp; 1  &amp;0 &amp;1 &amp; 0&amp;4&amp;s_2 = 4\\
+0&amp;2&amp;1&amp;0&amp;0&amp;1&amp;7&amp;s_3=7
+\end{array}
+\end{split}\]</div>
+<p>The additional last column indicates the current basic feasible
+solutions. Initially <span class="math notranslate nohighlight">\(z\)</span> and the slack variables are part of the <strong>basic feasible solution</strong> (bfs). Variables mentioned in this column
+have coefficient equal to 1 and their values is read off immediately
+from the b column in a manner analog to reading off values from row
+reduced echelon form used when solving systems of linear equations
+with the Gauss pivot.
+Variables outside the basic feasible solution have value 0. Thus the algorithm starts in a state where <span class="math notranslate nohighlight">\(\mathbf{x} =
+\mathbf{0}\)</span> and where the objective has value <span class="math notranslate nohighlight">\(z=0\)</span>.</p>
+</div>
+<p><strong>Choosing the pivot</strong> The simplex algorithm updates its state, the basic
+feasible solution, from time step to time step. The update amounts to
+drop one variable from the current basic feasible solution and to add a new one
+instead. The choice of which variables to substitute in the bfs is
+made by choosing a pivot in the table.</p>
+<p>The pivot column is chosen by
+selecting the <em>most negative coefficient</em> on the objective line
+indicating a positive partial slope in the objective function (this is
+the most negative since signs are inverted when constructing the
+table).</p>
+<p>In case there is no negative coefficient in the objective line,
+optimization is over the maximum is found.</p>
+<p>The pivot row is chosen by evaluating every <em>positive coefficient</em>
+<span class="math notranslate nohighlight">\(a_{ij}\)</span> in the selected column and pretend it is part of the basis (in practice
+use the row division <span class="math notranslate nohighlight">\(b_j/a_{ij}\)</span> for selected pivot column <span class="math notranslate nohighlight">\(i\)</span>). The one that
+yields the lowest value is chosen since it avoids progressing too fast
+and triggering a sign change when updating the state.</p>
+<p>In case no row contains a positive coefficient, optimization is over
+and there is no feasible solution.</p>
+<p><strong>Update the state</strong><br />
+The pivot is assigned the value 1 and all other rows in the
+constraints are transformed using standard pivoting rules (see solving
+linear equations systems). Allowed rules are line multiplication and adding line multiples to other lines.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example (simplex execution)</p>
+<p>Here is an illustration of the execution of the algorithm on the
+running example given so far. For convenience we repeat the initial
+tableau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{c|cc|ccc|c|c}
+z&amp;x_1&amp;x_2&amp;s_1&amp;s_2&amp;s_3&amp;b&amp;\text{bfs}\\\hline 
+1&amp; -3&amp;-2  &amp; 0  &amp; 0  &amp; 0   &amp;0 &amp; z\\ 
+0&amp;1  &amp;  2  &amp; 1  &amp;  0  &amp; 0   &amp;6 &amp;s_1\\
+0 &amp;1 &amp; 1  &amp;0 &amp;1 &amp; 0&amp;4&amp;s_2 \\
+0&amp;{\color{red}\mathbf{2}}&amp;1&amp;0&amp;0&amp;1&amp;7&amp;s_3
+\end{array}
+\end{split}\]</div>
+<p>The pivot in (red) is chosen from column <span class="math notranslate nohighlight">\(x_1\)</span> and last row since this
+is the highest negative coefficient in the objective (-3) and the
+ratio <span class="math notranslate nohighlight">\(7/2\)</span> is the minimal among the rows. It means that we introduce
+<span class="math notranslate nohighlight">\(x_1\)</span> in the bfs and we drop <span class="math notranslate nohighlight">\(s_3\)</span>.</p>
+<p>The table is transformed using pivoting rules to set the pivot coefficient
+at 1 and everything else at 0 in the pivoting column by adding
+multiples of the dropped row.  The resulting table
+is given below where actual transformation rules are annotated rightwards</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{c|cc|ccc|c|c|l}
+z&amp;x_1&amp;x_2&amp;s_1&amp;s_2&amp;s_3&amp;b&amp;\text{bfs}&amp;\text{rules}\\\hline 
+1&amp; 0&amp; -0.5  &amp; 0  &amp; 0   &amp;1.5 &amp;10.5 &amp; z&amp;O\gets O + 1.5 R_3 \\ 
+0 &amp;0 &amp; 1.5  &amp;1 &amp;0 &amp; -0.5&amp;2.5&amp;s_1&amp; R_1\gets R_1 - 0.5 R_1 \\
+0&amp;0  &amp; {\color{red} \mathbf{0.5}}  &amp; 0  &amp;  1  &amp; -0.5   &amp;0.5&amp;s_2&amp;R_2\gets R_2-0.5 R_3\\
+0&amp;1&amp;0.5&amp;0&amp;0&amp;0.5&amp;3.5&amp;x_1 &amp; R_3\gets 0.5 R_3
+\end{array}
+\end{split}\]</div>
+<p>The iteration continues since the objective coefficient in column
+<span class="math notranslate nohighlight">\(x_2\)</span> is still negative. The pivot is in column <span class="math notranslate nohighlight">\(x_2\)</span> and the lowest
+ratio <span class="math notranslate nohighlight">\(b/a_2\)</span> is 1 and given by row 2. In other words we introduce
+variable <span class="math notranslate nohighlight">\(x_2\)</span> and drop variable <span class="math notranslate nohighlight">\(s_2\)</span> from the bfs. The application of the pivoting
+rules yield the following table</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{c|cc|ccc|c|c|l}
+z&amp;x_1&amp;x_2&amp;s_1&amp;s_2&amp;s_3&amp;b&amp;\text{bfs}&amp;\text{rules}\\\hline 
+1&amp; 0&amp; 0 &amp; 0  &amp; 1   &amp;1 &amp; 11&amp;z&amp;O\gets O +  R_2 \\ 
+0 &amp;0 &amp; 0  &amp;1 &amp;-3 &amp; 1&amp;1&amp;s_1 &amp; R_1\gets R_1 - 3 R_2 \\
+0&amp;0  &amp; 1  &amp; 0  &amp;  2  &amp; -1&amp;1&amp;x_2&amp;R_2\gets 2 R_2\\
+0&amp;1&amp;0&amp;0&amp;-1&amp;0&amp;3&amp;x_1 &amp; R_3\gets R_3 - R_2
+\end{array}
+\end{split}\]</div>
+<p>Since there is no more negative coefficient in the objective row, the
+iteration stops and values of the variables in the bfs can be read off
+from the b column. We thus have the solution <span class="math notranslate nohighlight">\(x_1 = 3, x_2=1, s_1=1\)</span>
+and the value of the objective is <span class="math notranslate nohighlight">\(z=11\)</span>.  Usually solvers will
+report only the values for the <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> vector.</p>
+</div>
+</section>
+</section>
+<section id="linear-programming-in-practice">
+<h3>Linear programming in practice<a class="headerlink" href="#linear-programming-in-practice" title="Link to this heading">#</a></h3>
+<p>In practice one uses a dedicated solver. Here we illustrate how to
+implement the example given above with the <code class="docutils literal notranslate"><span class="pre">pulp</span></code>solver.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pulp</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">(</span><span class="s2">&quot;x1&quot;</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">)</span>
+<span class="n">P</span>  <span class="o">=</span> <span class="n">LpProblem</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">,</span><span class="n">LpMaximize</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x2</span>  <span class="c1">#objective</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="c1">#1st constraint</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mi">4</span>     <span class="c1">#2nd constraint</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mi">7</span> <span class="c1">#3rd constraint</span>
+
+<span class="n">status</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution status:&quot;</span><span class="p">,</span> <span class="n">LpStatus</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution:  x1 : </span><span class="si">{</span><span class="n">value</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="si">}</span><span class="s2">, x2: </span><span class="si">{</span><span class="n">value</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span><span class="si">}</span><span class="s2">  &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pulp/solverdir/cbc/osx/64/cbc /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/b9a65b5e1b8f48788183470f6b4c522d-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/b9a65b5e1b8f48788183470f6b4c522d-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 8 COLUMNS
+At line 17 RHS
+At line 21 BOUNDS
+At line 24 ENDATA
+Problem MODEL has 3 rows, 2 columns and 6 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 3 (0) rows, 2 (0) columns and 6 (0) elements
+0  Obj -0 Dual inf 0.0499998 (2) w.o. free dual inf (0)
+0  Obj -0 Dual inf 0.0499998 (2) w.o. free dual inf (0)
+2  Obj 11
+Optimal - objective value 11
+Optimal objective 11 - 2 iterations time 0.002
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.01
+
+Solution status: Optimal
+Solution:  x1 : 3.0, x2: 1.0  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="integer-linear-programming">
 <h2>Integer Linear programming<a class="headerlink" href="#integer-linear-programming" title="Link to this heading">#</a></h2>
-<p>applications to NLP</p>
+<p>In the context of natural language processing a particular case of
+linear programming is of interest. It is the case where variables are
+integer (and even boolean in practice). This difference has some
+consequences for the solver algorithm and the simplex cannot be
+straightfowardly applied anymore.  To see why let us consider the
+following example integer linear problem:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/8892f168b09ac91c2ebd6d47fe1c57ef20d5c4d000a772efe5cea594084ce36b.png" src="_images/8892f168b09ac91c2ebd6d47fe1c57ef20d5c4d000a772efe5cea594084ce36b.png" />
+</div>
+</div>
 </section>
 <section id="non-linear-constrained-optimization">
 <h2>Non linear constrained optimization<a class="headerlink" href="#non-linear-constrained-optimization" title="Link to this heading">#</a></h2>
@@ -437,12 +719,12 @@ maximize a <strong>linear objective function</strong> subject to constraints sta
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="optim_exercises.html"
+       href="systems.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Optimization exercises</p>
+        <p class="prev-next-title">Systems of linear equations</p>
       </div>
     </a>
 </div>
@@ -462,7 +744,15 @@ maximize a <strong>linear objective function</strong> subject to constraints sta
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming">Linear programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming">Linear programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplex-algorithm">Simplex algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-to-standard-form">Conversion to standard form</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simplex-pivoting-algorithm">The simplex pivoting algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming-in-practice">Linear programming in practice</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-linear-programming">Integer Linear programming</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-constrained-optimization">Non linear constrained optimization</a></li>
 </ul>
