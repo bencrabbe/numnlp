@@ -310,7 +310,7 @@ $$
 \left[
 \begin{array}{ccc|ccc}
 1&0&\frac{1}{2}&2&0&-\frac{3}{2}\\
-0&\mathbf{1}&0&-1&0&1\\
+0&1&0&-1&0&1\\
 0&0&{\color{red} -\mathbf{\frac{1}{2}}}&-3&1&\frac{3}{2}
 \end{array}
 \right]

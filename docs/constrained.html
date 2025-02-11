@@ -362,7 +362,11 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming-in-practice">Linear programming in practice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-linear-programming">Integer Linear programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-linear-programming">Integer Linear programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilp-in-practice">ILP in practice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilp-for-natural-language-processing">ILP for Natural Language Processing</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-constrained-optimization">Non linear constrained optimization</a></li>
 </ul>
             </nav>
@@ -640,7 +644,7 @@ implement the example given above with the <code class="docutils literal notrans
 Version: 2.10.3 
 Build Date: Dec 15 2019 
 
-command line - /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pulp/solverdir/cbc/osx/64/cbc /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/b9a65b5e1b8f48788183470f6b4c522d-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/b9a65b5e1b8f48788183470f6b4c522d-pulp.sol (default strategy 1)
+command line - /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pulp/solverdir/cbc/osx/64/cbc /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/f94522f9dbaf4a519b9b4ba1d3036019-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/f94522f9dbaf4a519b9b4ba1d3036019-pulp.sol (default strategy 1)
 At line 2 NAME          MODEL
 At line 3 ROWS
 At line 8 COLUMNS
@@ -675,11 +679,282 @@ integer (and even boolean in practice). This difference has some
 consequences for the solver algorithm and the simplex cannot be
 straightfowardly applied anymore.  To see why let us consider the
 following example integer linear problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\text{maximize}\ &amp; f(\mathbf{x}) = 3x_1+2x_2\\
+\text{subject to}\ &amp;\\
+						  &amp;  x_1 + 2 x_2 \leq 6\\
+						  &amp; x_1+x_2 \leq 3.5  \\
+						  &amp;1.5 x_1+x_2 \leq 4.5\\
+						  &amp;x_1 ,x_2 \geq 0\\
+						 &amp;  x_1,x_2 \in \mathbb{Z} \\
+\end{align}
+\end{split}\]</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/8892f168b09ac91c2ebd6d47fe1c57ef20d5c4d000a772efe5cea594084ce36b.png" src="_images/8892f168b09ac91c2ebd6d47fe1c57ef20d5c4d000a772efe5cea594084ce36b.png" />
+<img alt="_images/eaf7f531a0d8c8015f7ce5ebbdb37fefbb048e2f7e4455f9c40e1e644aa86ea9.png" src="_images/eaf7f531a0d8c8015f7ce5ebbdb37fefbb048e2f7e4455f9c40e1e644aa86ea9.png" />
 </div>
 </div>
+<p>The dots show where the feasible integer values are located. As can be
+observed these values are not anymore on the edges of the polytope.
+In other words algorithms for solving linear problems like the simplex
+are not anymore suitable for solving integer linear problems. The
+design of algorithms for solving such problems is beyond the scope of
+these notes.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Solving linear programs is in practice solved in polynomial time (as a
+function of the number of variables). Solving integer linear programs
+falls in the class of NP-hard problems. In other words ILP may face
+scalability issues when the number of variables is too high</p>
+</div>
+<div class="admonition-solving-integer-linear-problems admonition">
+<p class="admonition-title">Solving integer linear problems</p>
+<p>Solving integer problems is usually more complicated (higher complexity) than solving linear problems.
+Note that solving the linear relaxation in the first place may help. It means that
+solving the linear problem may help to approach the integer solution. But naive methods such as
+rounding off the solution to the nearest integer is invalid.</p>
+</div>
+<section id="ilp-in-practice">
+<h3>ILP in practice<a class="headerlink" href="#ilp-in-practice" title="Link to this heading">#</a></h3>
+<p>Solving integer linear programs is made with dedicated libraries. Here
+is how to solve the above example with the <code class="docutils literal notranslate"><span class="pre">pulp</span></code> library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pulp</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">(</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span><span class="n">cat</span><span class="o">=</span><span class="s2">&quot;Integer&quot;</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">,</span><span class="n">cat</span><span class="o">=</span><span class="s2">&quot;Integer&quot;</span><span class="p">)</span>
+<span class="n">P</span>   <span class="o">=</span> <span class="n">LpProblem</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">,</span><span class="n">LpMaximize</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x2</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mi">6</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span>  <span class="o">&lt;=</span> <span class="mf">3.5</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">&lt;=</span> <span class="mf">4.5</span>
+
+<span class="n">status</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution status:&quot;</span><span class="p">,</span><span class="n">LpStatus</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution: x1 : </span><span class="si">{</span><span class="n">value</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="si">}</span><span class="s2">  x2: </span><span class="si">{</span><span class="n">value</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pulp/solverdir/cbc/osx/64/cbc /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/4a66def7c86d4744ba1ad8bed6655fb1-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/4a66def7c86d4744ba1ad8bed6655fb1-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 8 COLUMNS
+At line 21 RHS
+At line 25 BOUNDS
+At line 28 ENDATA
+Problem MODEL has 3 rows, 2 columns and 6 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 9 - 0.00 seconds
+Cgl0003I 0 fixed, 4 tightened bounds, 0 strengthened rows, 0 substitutions
+Cgl0004I processed model has 3 rows, 2 columns (2 integer (0 of which binary)) and 6 elements
+Cutoff increment increased from 1e-05 to 0.9999
+Cbc0012I Integer solution of -8 found by DiveCoefficient after 0 iterations and 0 nodes (0.01 seconds)
+Cbc0038I Full problem 3 rows 2 columns, reduced to 0 rows 0 columns
+Cbc0012I Integer solution of -9 found by DiveCoefficient after 2 iterations and 0 nodes (0.01 seconds)
+Cbc0031I 1 added rows had average density of 2
+Cbc0013I At root node, 1 cuts changed objective from -9 to -9 in 13 passes
+Cbc0014I Cut generator 0 (Probing) - 0 row cuts average 0.0 elements, 14 column cuts (14 active)  in 0.000 seconds - new frequency is -100
+Cbc0014I Cut generator 1 (Gomory) - 2 row cuts average 2.0 elements, 0 column cuts (0 active)  in 0.000 seconds - new frequency is -100
+Cbc0014I Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.000 seconds - new frequency is -100
+Cbc0014I Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.000 seconds - new frequency is -100
+Cbc0014I Cut generator 4 (MixedIntegerRounding2) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.000 seconds - new frequency is -100
+Cbc0014I Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.000 seconds - new frequency is -100
+Cbc0001I Search completed - best objective -9, took 2 iterations and 0 nodes (0.01 seconds)
+Cbc0035I Maximum depth 0, 0 variables fixed on reduced cost
+Cuts at root node changed objective from -9 to -9
+Probing was tried 13 times and created 14 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 13 times and created 2 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 13 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 13 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 13 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 13 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 1 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 1 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                9.00000000
+Enumerated nodes:               0
+Total iterations:               2
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.01
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.01
+
+Solution status: Optimal
+Solution: x1 : 3.0  x2: 0.0 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ilp-for-natural-language-processing">
+<h3>ILP for Natural Language Processing<a class="headerlink" href="#ilp-for-natural-language-processing" title="Link to this heading">#</a></h3>
+<p>In natural language processing, Integer Linear Programming is mostly
+used for decoding data structures with a rich set of constraints using
+boolean variables.</p>
+<p>Here is a simple ILP formulation illustrating how to constrain a graph representing
+coreference relations with a set of basic constraints. Consider the
+sentence:</p>
+<blockquote>
+<div><p><strong>Anna</strong> is a student at <strong>Paris Cité</strong>. <strong>She</strong> loves <strong>the University</strong>. <strong>Her</strong>
+hobbies include blogging and singing.</p>
+</div></blockquote>
+<p>Words bolded indicate referring expressions. The task of coreference
+resolution aims to link together expressions referring to the same entity.
+Assuming that weighted edges have been predicted between mentions the
+task is to predict the highest weighted graph linking the nodes.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/b7bb12c830a772a7f37d4c27320ff0a9f8d4b2edccb025b028b97dd2a2a269de.png" src="_images/b7bb12c830a772a7f37d4c27320ff0a9f8d4b2edccb025b028b97dd2a2a269de.png" />
+</div>
+</div>
+<p><strong>Plain English statement</strong> Given a complete weighted directed graph as illustrated above the task is to select the subgraph with maximal weight that satisfies the following constraints:</p>
+<ul class="simple">
+<li><p>Anaphoric pronouns must have at least an antecedent.</p></li>
+<li><p>Only anaphoric pronouns have antecedents. Otherwise the referring expression has no antecedent</p></li>
+</ul>
+<p><strong>ILP Formulation</strong> To formulate these constraints as an ILP problem, we first define two kinds of <strong>boolean variables</strong>:</p>
+<ul class="simple">
+<li><p>One boolean variable for each mention: <span class="math notranslate nohighlight">\(\mathbf{m} =  m_1,m_2,m_3,m_4,m_5\)</span> indicating whether the mention is anaphoric or not.
+Given the example, <span class="math notranslate nohighlight">\(m_3 = 1\)</span> and <span class="math notranslate nohighlight">\(m_5 = 1\)</span> the the other variables are set to 0.</p></li>
+<li><p>One boolean variable for each potential anaphoric edge : <span class="math notranslate nohighlight">\(\mathbf{e} = e_{12} \ldots e_{45}\)</span> indicating whether the edge is included in the solution or not (totalling 20 such variables).
+We further assume a vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> of weights representing the edge weights.</p></li>
+</ul>
+<p>The ILP formulation is the following:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\text{maximize}\ &amp; \mathbf{w}^\top \mathbf{e}\\
+\text{subject to}\ \\
+&amp; m_j \leq \sum_{i} e_{ij} &amp; (\forall_{m_{j}})\\
+&amp;  e_{ij} \leq m_j &amp; (\forall_{e_{ij}})
+\end{align}
+\end{split}\]</div>
+<p>To understand the formulation, the overall objective states that the edge scores should be maximal.
+The solver will include as many edges with positive weight as possible.
+The first set of constraints states that the number of coreferents is greater or equal to 1 if <span class="math notranslate nohighlight">\(m_j\)</span> is anaphoric (greater or equal to 0 otherwise).
+The second set of constraints states that arcs can leave from an mention marked as anaphor</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here is how to implement the coreference problem with pulp</span>
+
+<span class="kn">from</span> <span class="nn">pulp</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+
+<span class="n">edges</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="p">:</span> <span class="n">LpVariable</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;e</span><span class="si">{</span><span class="n">i</span><span class="si">}{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cat</span><span class="o">=</span><span class="s2">&quot;Binary&quot;</span><span class="p">)</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="p">}</span>
+
+<span class="c1">## Initalize and fix variables</span>
+
+<span class="n">mentions</span> <span class="o">=</span> <span class="p">[</span><span class="n">LpVariable</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;m</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cat</span><span class="o">=</span><span class="s2">&quot;Binary&quot;</span><span class="p">)</span>  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mentions</span><span class="p">):</span>
+	<span class="k">if</span> <span class="n">idx</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]:</span>
+		<span class="n">variable</span><span class="o">.</span><span class="n">setInitialValue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">variable</span><span class="o">.</span> <span class="n">setInitialValue</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+	<span class="n">variable</span><span class="o">.</span><span class="n">fixValue</span><span class="p">()</span>
+
+
+
+<span class="c1">## Objective (we arbitrarily assign positive random weights to edges)</span>
+
+<span class="n">P</span>   <span class="o">=</span> <span class="n">LpProblem</span><span class="p">(</span><span class="s2">&quot;coreference&quot;</span><span class="p">,</span><span class="n">LpMaximize</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">+=</span> <span class="n">lpSum</span><span class="p">(</span> <span class="p">[</span> <span class="n">e</span> <span class="o">*</span> <span class="n">random</span><span class="p">()</span>   <span class="k">for</span>  <span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="ow">in</span>  <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]</span> <span class="p">)</span>
+
+
+<span class="c1">## 1st  set of constraints</span>
+
+<span class="k">for</span> <span class="n">jdx</span><span class="p">,</span><span class="n">varm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mentions</span><span class="p">):</span>
+	<span class="n">E</span> <span class="o">=</span> <span class="p">[</span><span class="n">varedge</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span><span class="n">varedge</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span>  <span class="n">j</span> <span class="o">==</span> <span class="n">jdx</span> <span class="p">]</span>
+	<span class="n">P</span><span class="o">+=</span> <span class="n">varm</span> <span class="o">&lt;=</span> <span class="n">lpSum</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="c1">## 2nd set of constraints</span>
+
+<span class="k">for</span> <span class="n">edge</span><span class="p">,</span><span class="n">varedge</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+	<span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">edge</span>
+	<span class="n">P</span> <span class="o">+=</span>  <span class="n">varedge</span> <span class="o">&lt;=</span> <span class="n">mentions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+	
+<span class="c1">## Results </span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution status:&quot;</span><span class="p">,</span><span class="n">LpStatus</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edges in solution&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">varname</span><span class="p">,</span><span class="n">Var</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+	<span class="k">if</span> <span class="n">value</span><span class="p">(</span><span class="n">Var</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span><span class="n">value</span><span class="p">(</span><span class="n">Var</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pulp/solverdir/cbc/osx/64/cbc /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/d0f96b19ac0241a5b796062a72f5994c-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/d0f96b19ac0241a5b796062a72f5994c-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 30 COLUMNS
+At line 166 RHS
+At line 192 BOUNDS
+At line 218 ENDATA
+Problem MODEL has 25 rows, 25 columns and 65 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Continuous objective value is 4.52203 - 0.00 seconds
+Cgl0002I 12 variables fixed
+Cgl0004I processed model has 0 rows, 0 columns (0 integer (0 of which binary)) and 0 elements
+Cbc3007W No integer variables - nothing to do
+Cuts at root node changed objective from -4.52203 to -1.79769e+308
+Probing was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Gomory was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Knapsack was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+Clique was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+MixedIntegerRounding2 was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+FlowCover was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+TwoMirCuts was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+ZeroHalf was tried 0 times and created 0 cuts of which 0 were active after adding rounds of cuts (0.000 seconds)
+
+Result - Optimal solution found
+
+Objective value:                4.52202738
+Enumerated nodes:               0
+Total iterations:               0
+Time (CPU seconds):             0.00
+Time (Wallclock seconds):       0.00
+
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Solution status: Optimal
+Edges in solution
+(0, 2) 1.0
+(0, 4) 1.0
+(1, 2) 1.0
+(1, 4) 1.0
+(2, 4) 1.0
+(3, 2) 1.0
+(3, 4) 1.0
+(4, 2) 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In this exercise we arbitrarily assign positive weights to edges which is easier for understanding the properties of the formulation:
+all edges that satisfy the constraints are included in the solution.</p>
+<p>The typical realistic scenario using a true machine learning model will assign positive and negative weights to the edges, discarding the less likely ones
+with negative scores from the solution.</p>
+</div>
+</section>
 </section>
 <section id="non-linear-constrained-optimization">
 <h2>Non linear constrained optimization<a class="headerlink" href="#non-linear-constrained-optimization" title="Link to this heading">#</a></h2>
@@ -753,7 +1028,11 @@ following example integer linear problem:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming-in-practice">Linear programming in practice</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-linear-programming">Integer Linear programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-linear-programming">Integer Linear programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilp-in-practice">ILP in practice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ilp-for-natural-language-processing">ILP for Natural Language Processing</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-constrained-optimization">Non linear constrained optimization</a></li>
 </ul>
   </nav></div>
