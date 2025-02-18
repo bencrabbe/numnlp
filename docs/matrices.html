@@ -519,23 +519,7 @@ Here is a matrix coding an image:</p>
 <p>and here is the corresponding image visualisation.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">pokeball</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">[</span><span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">0</span>   <span class="p">,</span> <span class="mi">0</span>   <span class="p">,</span> <span class="mi">0</span>   <span class="p">,</span>   <span class="mi">0</span>  <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">[</span><span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">0</span>    <span class="p">,</span>   <span class="mi">0</span>   <span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">0</span>    <span class="p">,</span>   <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span>    <span class="p">,</span>   <span class="mi">0</span>   <span class="p">,</span> <span class="mi">0</span>     <span class="p">,</span> <span class="mi">255</span> <span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">[</span><span class="mi">255</span> <span class="p">,</span>  <span class="mi">255</span>  <span class="p">,</span> <span class="mi">255</span><span class="p">,</span><span class="mi">255</span> <span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">255</span>   <span class="p">,</span> <span class="mi">255</span>  <span class="p">,</span>  <span class="mi">255</span>    <span class="p">,</span> <span class="mi">255</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">f</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
+<img alt="_images/321418db63ba98a02aacb0a335356317194920d251ac407ff65a47bb0d63828e.png" src="_images/321418db63ba98a02aacb0a335356317194920d251ac407ff65a47bb0d63828e.png" />
 </div>
 </div>
 <p><strong>Graph data representation</strong> Graphs are another important source of matrices. In natural language processing they come from networks such as web pages
@@ -1377,8 +1361,16 @@ An <strong>orthonormal matrix</strong> is a matrix such that its rows and column
 </section>
 <section id="eigenvectors-and-eigenvalues">
 <h3>Eigenvectors and eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Link to this heading">#</a></h3>
-<p>We start by providing a visual introduction to eigenvectors and eigenvalues from <code class="xref std std-numref docutils literal notranslate"><span class="pre">eigen_figs</span></code>.</p>
+<p>We start by providing a visual introduction to eigenvectors and eigenvalues from <a class="reference internal" href="#eigen-figs"><span class="std std-numref">Fig. 2</span></a>.</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<figure class="align-default" id="eigen-figs">
+<img alt="eigen-figures" class="shadow bg-primary" src="_images/f176a07164a3cd4098b60fcf0394856211ddcf22a51e9f11c4ff906d96d477fc.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">The transformation of a diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> (left) and the transformation of a symmetric matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> (right) with their respective eigenvectors</span><a class="headerlink" href="#eigen-figs" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
 </div>
 <p>The figure displays the effect of mapping a matrix  <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times 8}\)</span> of 2D vectors (in blue)
 with a diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>  on the left and with a symmetrix matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> on the right. The resulting vectors,
@@ -1823,7 +1815,7 @@ with the data <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. 
 \frac{1}{2}&amp;3
 \end{bmatrix}
 \)</span>
-and <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times n}\)</span> be the set of 2D coordinates depicted in Figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">spectral</span></code>.
+and <span class="math notranslate nohighlight">\(\mathbf{X}\in\mathbb{R}^{2\times n}\)</span> be the set of 2D coordinates depicted in Figure <a class="reference internal" href="#spectral"><span class="std std-numref">Fig. 3</span></a>.
 Thus given the spectral theorem we can express the product as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1852,9 +1844,35 @@ Thus given the spectral theorem we can express the product as:</p>
 \end{bmatrix}^\top
 \mathbf{X}
 \end{split}\]</div>
-<p>We illustrate in figure <code class="xref std std-numref docutils literal notranslate"><span class="pre">spectral</span></code> each step of the computation</p>
+<p>We illustrate in figure <a class="reference internal" href="#spectral"><span class="std std-numref">Fig. 3</span></a> each step of the computation</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:21: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:26: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:31: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:15: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:21: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:26: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+&lt;&gt;:31: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_21285/563011601.py:15: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  axes[0].set_title(&quot;$\mathbf{X}$&quot;)
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_21285/563011601.py:21: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  axes[1].set_title(&quot;$\mathbf{P}^T\mathbf{X}$&quot;)
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_21285/563011601.py:26: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  axes[2].set_title(&quot;$\mathbf{DP}^T\mathbf{X}$&quot;)
+/var/folders/dl/bc40wqgj0f3c71vv59_7rwjc0000gp/T/ipykernel_21285/563011601.py:31: SyntaxWarning: invalid escape sequence &#39;\m&#39;
+  axes[3].set_title(&quot;$\mathbf{PDP}^T\mathbf{X}$&quot;)
+</pre></div>
+</div>
+<figure class="align-default" id="spectral">
+<a class="shadow bg-primary reference internal image-reference" href="_images/ddf28a7c0a41d3608a6c7ec85ba22e3fea1cc2d725a65b3ae58098c2373a1b6d.png"><img alt="spectral decomposition" class="shadow bg-primary" src="_images/ddf28a7c0a41d3608a6c7ec85ba22e3fea1cc2d725a65b3ae58098c2373a1b6d.png" style="width: 1000px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">The transformation of the matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> through the decomposition of <span class="math notranslate nohighlight">\(\mathbf{AX}\)</span>. From left to right. Given the input <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{P}^\top\mathbf{X}\)</span> first rotates the data, then it scales it with the diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> and finally rotates it again with <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> yielding the final result</span><a class="headerlink" href="#spectral" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
 </div>
 </section>
 </section>

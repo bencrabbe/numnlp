@@ -136,14 +136,7 @@ $$
 and here is the corresponding image visualisation.
 
 ```{code-cell}
----
-mystnb:
-  image:
-    width: 50px
-    alt: pokeball
-    classes: shadow bg-primary
-tags: ["remove-input"]
----	
+:tags: ["remove-input"]
 from myst_nb import glue
 import numpy as np
 import matplotlib.pyplot as plt
