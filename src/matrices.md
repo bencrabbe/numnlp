@@ -1717,23 +1717,23 @@ fig,axes = plt.subplots(ncols=4,sharey=True)
 axes[0].scatter(X[0],X[1],color='blue')
 #axes[0].set_xlim(-6,6)
 axes[0].set_ylim(-4,4)
-axes[0].set_title("$\mathbf{X}$")
+axes[0].set_title(r"$\mathbf{X}$")
 
 Y = P.T @ X
 axes[1].scatter(Y[0],Y[1],color='blue')
 #axes[1].set_xlim(-6,6)
 axes[1].set_ylim(-4,4)
-axes[1].set_title("$\mathbf{P}^T\mathbf{X}$")
+axes[1].set_title(r"$\mathbf{P}^T\mathbf{X}$")
 
 Y = D @ P.T @ X
 axes[2].scatter(Y[0],Y[1],color='blue')
 axes[2].set_ylim(-4,4)
-axes[2].set_title("$\mathbf{DP}^T\mathbf{X}$")
+axes[2].set_title(r"$\mathbf{DP}^T\mathbf{X}$")
 
 Y = P @ D @ P.T @ X
 axes[3].scatter(Y[0],Y[1],color='red')
 axes[3].set_ylim(-4,4)
-axes[3].set_title("$\mathbf{PDP}^T\mathbf{X}$")
+axes[3].set_title(r"$\mathbf{PDP}^T\mathbf{X}$")
 
 glue("eigen-figures", fig, display=False)
 ```
