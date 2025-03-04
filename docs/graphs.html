@@ -396,18 +396,7 @@ A coefficient <span class="math notranslate nohighlight">\(a_{ij}\)</span> is se
 <p>Here is a sample graph together with its adjacency matrix:</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.usetex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\usepackage{{amsmath}}&#39;</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
+<img alt="_images/9041e0b7bd773b57531d28f5985fcf7bbc6aebe61e2f4893a15803332d38800d.png" src="_images/9041e0b7bd773b57531d28f5985fcf7bbc6aebe61e2f4893a15803332d38800d.png" />
 </div>
 </div>
 <p>each row (or each column) of the matrix represents a source (resp. target) state of the graph.</p>
@@ -608,6 +597,9 @@ We use the  <a class="reference external" href="https://wikipedia.readthedocs.io
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/ab09d7af49cd533d73c47d2e7e308da8a8808f25815180e5a0458d37b8dc0d64.png" src="_images/ab09d7af49cd533d73c47d2e7e308da8a8808f25815180e5a0458d37b8dc0d64.png" />
+</div>
 </div>
 <p>To implement PageRank we first build the Google Matrix</p>
 <div class="cell docutils container">
@@ -659,12 +651,53 @@ We use the  <a class="reference external" href="https://wikipedia.readthedocs.io
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 0, Error = 0.20184034678219398
+Iteration 1, Error = 0.12740443278956065
+Iteration 2, Error = 0.04654265544326048
+Iteration 3, Error = 0.023116308569410753
+Iteration 4, Error = 0.01244276216071446
+Iteration 5, Error = 0.0059563094172617815
+Iteration 6, Error = 0.0029192545541161324
+Iteration 7, Error = 0.0014509520678946898
+Iteration 8, Error = 0.0007958621677953144
+</pre></div>
+</div>
+</div>
 </div>
 <p>It remains to match the PageRank scores with the node names and to display the results sorted by decreasing PageRank order:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pr</span><span class="p">,</span><span class="n">nodename</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 	<span class="nb">print</span><span class="p">(</span><span class="n">nodename</span><span class="p">,</span><span class="n">pr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Luke Skywalker 0.21669939411310676
+Obi-Wan Kenobi 0.1344243927457291
+Darth Vader 0.08926864516334379
+Yoda 0.07407658251023921
+Leia Organa 0.07110399141473908
+Boba Fett 0.06742418802731719
+Han Solo 0.05649218479647756
+Jabba the Hutt 0.04988618668845244
+Padmé Amidala 0.038413649290773295
+Jango Fett 0.03577346021971692
+Chewbacca 0.03137437316542869
+Palpatine 0.028240632627055905
+Mace Windu 0.022196272299460196
+Qui-Gon Jinn 0.01003262315819419
+Count Dooku 0.01003262315819419
+C-3PO 0.00823731098596332
+Saw Gerrera 0.007040436204476074
+R2-D2 0.007040436204476074
+Lando Calrissian 0.007040436204476074
+Jar Jar Binks 0.007040436204476074
+Greedo 0.007040436204476074
+General Grievous 0.007040436204476074
+Darth Maul 0.007040436204476074
+Admiral Ackbar 0.007040436204476074
 </pre></div>
 </div>
 </div>

@@ -43,16 +43,12 @@ Graphs can be conveniently represented by matrices.
 A graphs's **adjacency matrix** is a matrix   $\mathbf{A}\in \mathbb{R}^{n\times n}$ with $n$ the number of graph vertices. 
 A coefficient $a_{ij}$ is set to 1 if there is an edge from node $i$ to node $j$ in the graph and to 0 otherwise.
 
+
 Here is a sample graph together with its adjacency matrix:
 
+
 ```{code-cell}
----
-mystnb:
-  image:
-    width: 250px
-    alt: graph
-tags: ["remove-input"]
----	
+:tags: ["remove-input"]
 from myst_nb import glue
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -80,6 +76,7 @@ mat = (r"$\mathbf{A} = \begin{bmatrix}0&1&1&0\\1&0&1&1\\0&0&0&1\\0&0&1&0 \end{bm
 ax[1].text(0., 0.5, mat, fontsize=24)
 glue("stuff", fig, display=False)
 ```
+
 each row (or each column) of the matrix represents a source (resp. target) state of the graph.
 
 
