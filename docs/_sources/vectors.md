@@ -116,8 +116,6 @@ viewed as the coordinates of its destination. This is illustrated with the
 following plot for the 2-dimensional vector $\mathbf{x} = \begin{bmatrix}3\\2\end{bmatrix}$:
 
 
- dsdffsfsfsf
-
 ```{code-cell}
 :tags: ["remove-input"]
 from myst_nb import glue
