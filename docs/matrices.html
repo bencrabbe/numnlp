@@ -1411,8 +1411,16 @@ We illustrate the method for a <span class="math notranslate nohighlight">\(2\ti
 (\mathbf{A} - \lambda \mathbf{I})\,\mathbf{x} &amp; = \mathbf{0}
 \end{align}
 \end{split}\]</div>
-<p>To satisfy this last equality, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> cannot be null by definition of eigenvectors, therefore <span class="math notranslate nohighlight">\( \mathbf{A} - \lambda \mathbf{I} \)</span> must be null
-and if it is null it is non invertible which means that the determinant must be null, that is: <span class="math notranslate nohighlight">\(\det(\mathbf{A} - \lambda \mathbf{I}) = 0\)</span>.</p>
+<p><strong>Computing eigenvalues</strong> Suppose <span class="math notranslate nohighlight">\((\mathbf{A} - \lambda \mathbf{I})\)</span> was invertible then we could rewrite :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align} 
+\mathbf{x} &amp;=  (\mathbf{A} - \lambda \mathbf{I})^{-1} \mathbf{0}\\
+\mathbf{x} &amp;= \mathbf{0}
+\end{align}
+\end{split}\]</div>
+<p>Since by definition of eigenvectors <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> cannot be null,
+<span class="math notranslate nohighlight">\( \mathbf{A} - \lambda \mathbf{I} \)</span> must be non invertible and its determinant must be null, that is: <span class="math notranslate nohighlight">\(\det(\mathbf{A} - \lambda \mathbf{I}) = 0\)</span>.</p>
 <p>For the <span class="math notranslate nohighlight">\(2\times 2\)</span> case, we can solve for <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1428,7 +1436,7 @@ c &amp; d
 \end{bmatrix}
 \right) = 0
 \end{split}\]</div>
-<p>For each eigenvalue, that is for each value of <span class="math notranslate nohighlight">\(\lambda\)</span>, we can search its eigenvector from the equality  <span class="math notranslate nohighlight">\( (\mathbf{A} - \lambda\mathbf{I})\mathbf{x} =
+<p><strong>Computing eigenvectors</strong> Once solved, for each eigenvalue, that is for each value of <span class="math notranslate nohighlight">\(\lambda\)</span> found out in the previous step, we can search its eigenvector from the equality  <span class="math notranslate nohighlight">\( (\mathbf{A} - \lambda\mathbf{I})\mathbf{x} =
 \mathbf{0}\)</span></p>
 <div class="tip admonition">
 <p class="admonition-title">Example</p>

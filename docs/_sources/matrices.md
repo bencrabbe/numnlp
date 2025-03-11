@@ -1216,8 +1216,19 @@ $$
 \end{align}
 $$
 
-To satisfy this last equality, $\mathbf{x}$ cannot be null by definition of eigenvectors, therefore $ \mathbf{A} - \lambda \mathbf{I} $ must be null
-and if it is null it is non invertible which means that the determinant must be null, that is: $\det(\mathbf{A} - \lambda \mathbf{I}) = 0$.
+
+**Computing eigenvalues** Suppose $(\mathbf{A} - \lambda \mathbf{I})$ was invertible then we could rewrite : 
+
+$$
+\begin{align} 
+\mathbf{x} &=  (\mathbf{A} - \lambda \mathbf{I})^{-1} \mathbf{0}\\
+\mathbf{x} &= \mathbf{0}
+\end{align}
+$$
+Since by definition of eigenvectors $\mathbf{x}$ cannot be null,
+$ \mathbf{A} - \lambda \mathbf{I} $ must be non invertible and its determinant must be null, that is: $\det(\mathbf{A} - \lambda \mathbf{I}) = 0$.
+
+
 
 For the $2\times 2$ case, we can solve for $\lambda$: 
 
@@ -1235,7 +1246,7 @@ c & d
 \right) = 0
 $$
 
-For each eigenvalue, that is for each value of $\lambda$, we can search its eigenvector from the equality  $ (\mathbf{A} - \lambda\mathbf{I})\mathbf{x} =
+**Computing eigenvectors** Once solved, for each eigenvalue, that is for each value of $\lambda$ found out in the previous step, we can search its eigenvector from the equality  $ (\mathbf{A} - \lambda\mathbf{I})\mathbf{x} =
 \mathbf{0}$
 
 ```{Admonition} Example
