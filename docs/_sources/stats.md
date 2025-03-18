@@ -238,6 +238,8 @@ The covariance matrix decomposition $\mathbf{A} = \mathbf{PDP}^\top$ isolates th
 Since singular values are square roots of the eigenvalues, they also represent variance: the larger the singular value, the larger the intrinsic variance of the variable.
 ```
 
+
+
 ```{code-cell}
 ---
 tags: ["remove-input"]
@@ -247,6 +249,7 @@ from myst_nb import glue
 
 import numpy as np
 import matplotlib.pyplot as plt
+import warnings
 plt.rcParams['text.usetex'] = True
 plt.rcParams['text.latex.preamble'] = r'\usepackage{{amsmath}}'
 plt.rcParams.update({'font.size': 18})
@@ -254,35 +257,39 @@ plt.rcParams.update({'font.size': 18})
 
 diagdataset = np.random.multivariate_normal(np.array([0.5,-0.5]),np.array([[3.,0.],[0.,0.75]]), size=100).T
 dataset     = np.random.multivariate_normal(np.array([0.5,-0.5]),np.array([[3,1.],[1.,0.75]]), size=100).T
-fig,axis = plt.subplots(ncols=2,nrows=2)
-axis[0,0].scatter(diagdataset[0],diagdataset[1]) 
-axis[0,1].scatter(dataset[0],dataset[1]) 
-axis[0,0].axis('equal')
-axis[0,1].axis('equal')
-axis[0,0].set_xlim(-4,4)
-axis[0,1].set_xlim(-4,4)
-axis[0,0].set_ylim(-4,4)
-axis[0,1].set_ylim(-4,4)
-vals,vecs = np.linalg.eigh(np.cov(diagdataset))
-svecs = vecs[:,0]*vals[0],  vecs[:,1]*vals[1]
-#axis[0,0].quiver(0.5, -0.5, svecs[0][0],svecs[0][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
-#axis[0,0].quiver(0.5, -0.5, svecs[1][0],svecs[1][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
-axis[0,0].quiver(0.5, -0.5, 3,0,angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
-axis[0,0].quiver(0.5, -0.5, 0,0.75,angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
-axis[0,0].set_xticklabels([])
-axis[0,0].set_yticklabels([])
-vals,vecs = np.linalg.eigh(np.cov(dataset))
-svecs = vecs[:,0]*vals[0],  vecs[:,1]*vals[1]
-axis[0,1].quiver(0.5, -0.5, svecs[0][0],svecs[0][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
-axis[0,1].quiver(0.5, -0.5, svecs[1][0],svecs[1][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
-axis[0,1].set_xticklabels([])
-axis[0,1].set_yticklabels([])
-axis[1,0].text(0.4,0.7,r'$\begin{bmatrix} 3 & 0\\ 0 & \frac{3}{4} \end{bmatrix}$')
-axis[1,0].axis('off')
-axis[1,1].text(0.4,0.7,r'$\begin{bmatrix} 3 & 1\\ 1 & \frac{3}{4} \end{bmatrix}$')
-axis[1,1].axis('off')
 
-glue("plot",fig,display=False)
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    fig,axis = plt.subplots(ncols=2,nrows=2)
+    axis[0,0].scatter(diagdataset[0],diagdataset[1]) 
+    axis[0,1].scatter(dataset[0],dataset[1]) 
+    axis[0,0].axis('equal')
+    axis[0,1].axis('equal')
+    axis[0,0].set_xlim(-4,4)
+    axis[0,1].set_xlim(-4,4)
+    axis[0,0].set_ylim(-4,4)
+    axis[0,1].set_ylim(-4,4)
+    vals,vecs = np.linalg.eigh(np.cov(diagdataset))
+    svecs = vecs[:,0]*vals[0],  vecs[:,1]*vals[1]
+    #axis[0,0].quiver(0.5, -0.5, svecs[0][0],svecs[0][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
+    #axis[0,0].quiver(0.5, -0.5, svecs[1][0],svecs[1][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
+    axis[0,0].quiver(0.5, -0.5, 3,0,angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
+    axis[0,0].quiver(0.5, -0.5, 0,0.75,angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
+    axis[0,0].set_xticklabels([])
+    axis[0,0].set_yticklabels([])
+    vals,vecs = np.linalg.eigh(np.cov(dataset))
+    svecs = vecs[:,0]*vals[0],  vecs[:,1]*vals[1]
+    axis[0,1].quiver(0.5, -0.5, svecs[0][0],svecs[0][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
+    axis[0,1].quiver(0.5, -0.5, svecs[1][0],svecs[1][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
+    axis[0,1].set_xticklabels([])
+    axis[0,1].set_yticklabels([])
+    axis[1,0].text(0.4,0.7,r'$\begin{bmatrix} 3 & 0\\ 0 & \frac{3}{4} \end{bmatrix}$')
+    axis[1,0].axis('off')
+    axis[1,1].text(0.4,0.7,r'$\begin{bmatrix} 3 & 1\\ 1 & \frac{3}{4} \end{bmatrix}$')
+    axis[1,1].axis('off')
+
+    glue("plot",fig,display=False)
 ```
 This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
  The left plot is a dataset whose covariance matrix is diagonal : the covariance between variables is zero and the eigenvalues are found on the diagonal of the actual covariance matrix.
