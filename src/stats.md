@@ -242,14 +242,15 @@ Since singular values are square roots of the eigenvalues, they also represent v
 
 ```{code-cell}
 ---
-tags: ["remove-input"]
+tags: ["remove-input","remove-stderr"]
 align: center
 ---	
 from myst_nb import glue
 
 import numpy as np
 import matplotlib.pyplot as plt
-import warnings
+
+
 plt.rcParams['text.usetex'] = True
 plt.rcParams['text.latex.preamble'] = r'\usepackage{{amsmath}}'
 plt.rcParams.update({'font.size': 18})
@@ -266,10 +267,10 @@ with warnings.catch_warnings():
     axis[0,1].scatter(dataset[0],dataset[1]) 
     axis[0,0].axis('equal')
     axis[0,1].axis('equal')
-    axis[0,0].set_xlim(-4,4)
-    axis[0,1].set_xlim(-4,4)
-    axis[0,0].set_ylim(-4,4)
-    axis[0,1].set_ylim(-4,4)
+    axis[0,0].set_xlim(-5,5)
+    axis[0,1].set_xlim(-5,5)
+    axis[0,0].set_ylim(-5,5)
+    axis[0,1].set_ylim(-5,5)
     vals,vecs = np.linalg.eigh(np.cov(diagdataset))
     svecs = vecs[:,0]*vals[0],  vecs[:,1]*vals[1]
     #axis[0,0].quiver(0.5, -0.5, svecs[0][0],svecs[0][1],angles='xy', scale_units='xy', scale=1, color='red',linewidth=4.)
