@@ -244,9 +244,9 @@ x1  = [-0.5,(0.5**2)/5]
 x2  = [2,(2**2)/5]  
 p1  = axes.plot(x,fx,label="f(x)")
 p2  = axes.plot([-0.5,2],[(0.5**2)/5,(2**2)/5])
-t1  = axes.text(x1[0],-0.5,"$x_1$",verticalalignment="top", horizontalalignment="center")
-t2  = axes.text(x2[0],-0.5,"$x_2$",verticalalignment="top", horizontalalignment="center")
-t3 = axes.text(1,-0.5,"$t \, x_1 + (1-t)  \, x_2 $", verticalalignment="top",horizontalalignment="center")
+t1  = axes.text(x1[0],-0.5,r"$x_1$",verticalalignment="top", horizontalalignment="center")
+t2  = axes.text(x2[0],-0.5,r"$x_2$",verticalalignment="top", horizontalalignment="center")
+t3 = axes.text(1,-0.5,r"$t \, x_1 + (1-t)  \, x_2 $", verticalalignment="top",horizontalalignment="center")
 
 p = axes.plot([x1[0], x1[0]],[-0.5,x1[1]],'--',color="gray", linewidth=0.5)
 p = axes.plot([x2[0], x2[0]],[-0.5,x2[1]],'--',color="gray", linewidth=0.5)
@@ -260,8 +260,8 @@ p = axes.plot([1,1],[-0.5,yline],'--',color="gray", linewidth=0.5)
 p = axes.plot([-1,1],[1/5,1/5],'--',color="gray",linewidth=0.5)
 p = axes.plot([-1,1],[yline,yline],'--',color="gray",linewidth=0.5)
 
-t = axes.text(-1,1/5,"$f(t\, x_1 + (1-t) \, x_2)$", horizontalalignment="right")
-t = axes.text(-1,yline,"$t\, f(x_1) + (1-t) \, f(x_2)$", horizontalalignment="right")
+t = axes.text(-1,1/5,r"$f(t\, x_1 + (1-t) \, x_2)$", horizontalalignment="right")
+t = axes.text(-1,yline,r"$t\, f(x_1) + (1-t) \, f(x_2)$", horizontalalignment="right")
 
 axes.set_xlim(-1,3)
 axes.set_ylim(-0.25,2.5)

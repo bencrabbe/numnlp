@@ -249,11 +249,6 @@ from myst_nb import glue
 
 import numpy as np
 import matplotlib.pyplot as plt
-import warnings
-import logging
-mpl_logger = logging.getLogger('matplotlib')
-mpl_logger.setLevel(logging.WARNING)
-warnings.filterwarnings("ignore")
 
 
 plt.rcParams['text.usetex'] = True
