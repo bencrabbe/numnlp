@@ -661,18 +661,7 @@ Since singular values are square roots of the eigenvalues, they also represent v
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">diagdataset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.75</span><span class="p">]]),</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">dataset</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.75</span><span class="p">]]),</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">fig</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;warnings&#39; is not defined
-</pre></div>
-</div>
+<img alt="_images/95a6a750e38f0ad3cbe54ea14f4caa10c9ee31db4cff98cf6877e12f20cdcd87.png" src="_images/95a6a750e38f0ad3cbe54ea14f4caa10c9ee31db4cff98cf6877e12f20cdcd87.png" />
 </div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
@@ -753,6 +742,9 @@ It entails that few words are highly frequent and most of the vocabulary has low
 It is a typical Zipf pattern. The x axis is ordered according to the word rank and y axis is the word frequency (logarithmic scale).</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/028145073ffa565d418141fa666760f989a9d63b7727fc91bb0ab85dec798c70.png" src="_images/028145073ffa565d418141fa666760f989a9d63b7727fc91bb0ab85dec798c70.png" />
+</div>
 </div>
 <p>The <strong>TF-IDF</strong>  aims at filling term document matrices by transforming the raw frequency counts.
 The transformation builds on two submetrics: True Frequency and Inverse Document Frequency.</p>
@@ -781,6 +773,9 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 <p>Observe the IDF function for a collection <span class="math notranslate nohighlight">\(D\)</span> of 100 documents. The more a word occurs in many different documents the more the IDF function downweights  its True Frequency towards 0</p>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/a8619dbd74d40760e53540f2a660a52b0e62ef382e5a727f139d4eee9faf2c1a.png" src="_images/a8619dbd74d40760e53540f2a660a52b0e62ef382e5a727f139d4eee9faf2c1a.png" />
+</div>
 </div>
 </section>
 <section id="example-in-python">
@@ -846,6 +841,25 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.0188059  0.         0.        ]
+ [0.         0.         0.         0.033025   0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.02201667 0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.01289548 0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.02654951 0.        ]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>that’s it ! We have both the term document matrix with TF-IDF values and the SVD decomposition.</p>
 <section id="lsa-and-visualisation">
@@ -888,6 +902,9 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ebd2a1c1428eada505a30380966fd6f3b474c5151ffe430b707e1bf2607f7a26.png" src="_images/ebd2a1c1428eada505a30380966fd6f3b474c5151ffe430b707e1bf2607f7a26.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -932,6 +949,9 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/3c500a7f4bd7928ed03190cbf5c937b652693e85f5b5d4ca867219c789df0b13.png" src="_images/3c500a7f4bd7928ed03190cbf5c937b652693e85f5b5d4ca867219c789df0b13.png" />
+</div>
 </div>
 </section>
 <section id="topic-analysis">
@@ -949,6 +969,9 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 <span class="n">title</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Latent topics in the document &quot;Milky Way&quot;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/258f099f178fc1bcaeb399c7cc1d22039e21bbddbec8535e00ba2393dcba730d.png" src="_images/258f099f178fc1bcaeb399c7cc1d22039e21bbddbec8535e00ba2393dcba730d.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -971,6 +994,33 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;* Topic-9 top </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> terms *&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">score</span><span class="p">,</span><span class="n">term</span> <span class="ow">in</span>  <span class="nb">sorted</span><span class="p">(</span><span class="n">scored_terms</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">k</span><span class="p">]:</span>
    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">term</span><span class="si">}</span><span class="s1"> : </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
+tropical : 0.36839841922770267
+typhoon : 0.21396866178059312
+cyclones : 0.18516057520108034
+computer : 0.16711066967663138
+cyclone : 0.14559177025207395
+linguistics : 0.14208147199131135
+pacific : 0.13867651423149652
+air : 0.12264670561967216
+debris : 0.11753565382209974
+warning : 0.10119341389288045
+
+* Topic-9 top 10 terms *
+computer : 0.4341543293563953
+theory : 0.23344825325179405
+design : 0.17508618993884556
+science : 0.12763056923642238
+understand : 0.11672412662589703
+security : 0.11672412662589703
+process : 0.11672412662589703
+principles : 0.11672412662589703
+learning : 0.11672412662589703
+humans : 0.11672412662589703
 </pre></div>
 </div>
 </div>

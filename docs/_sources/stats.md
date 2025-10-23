@@ -249,7 +249,7 @@ from myst_nb import glue
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+import warnings
 
 plt.rcParams['text.usetex'] = True
 plt.rcParams['text.latex.preamble'] = r'\usepackage{{amsmath}}'

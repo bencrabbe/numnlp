@@ -1364,8 +1364,8 @@ From there we derive the hessian:
 $$
 \mathbf{H}_f = 
 \begin{bmatrix}
-2 & 2x+3 + 2y\\ 
-2x + 3 + 2y & 2
+2y & 2x+3 + 2y\\ 
+2x + 3 + 2y & 2x
 \end{bmatrix}
 =
 \begin{bmatrix}
