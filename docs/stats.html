@@ -661,7 +661,7 @@ Since singular values are square roots of the eigenvalues, they also represent v
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/204fad6a94261ec9b0c4a1613dc9cc26c6c5c083560c26069991c3bbc949b4cd.png" src="_images/204fad6a94261ec9b0c4a1613dc9cc26c6c5c083560c26069991c3bbc949b4cd.png" />
+<img alt="_images/673cdd27e0d8e120585d8b174602dc23bcc10eaea52edf06d7c4eb7c940b8563.png" src="_images/673cdd27e0d8e120585d8b174602dc23bcc10eaea52edf06d7c4eb7c940b8563.png" />
 </div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
@@ -842,20 +842,20 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.01360829 0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.00808763 0.00957999 0.         0.         0.
+  0.         0.         0.         0.         0.         0.0190466
   0.         0.         0.        ]
  [0.         0.         0.         0.         0.         0.
   0.         0.         0.         0.         0.         0.
-  0.         0.02654951 0.        ]
- [0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.12403283 0.         0.
-  0.         0.         0.        ]
- [0.         0.         0.         0.         0.         0.
+  0.         0.         0.02603894]
+ [0.         0.         0.         0.         0.01471766 0.
   0.         0.         0.         0.         0.         0.
-  0.0188059  0.         0.        ]
- [0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.02067214 0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.00874695 0.
+  0.         0.         0.         0.         0.00766399 0.
+  0.         0.0157788  0.        ]
+ [0.         0.         0.         0.033025   0.         0.
+  0.         0.         0.         0.         0.         0.
   0.         0.         0.        ]]
 </pre></div>
 </div>
@@ -904,7 +904,7 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/384e24d06bc3de192583ce84b98c00c3248467bf94d0dbe631fecb772f2244a4.png" src="_images/384e24d06bc3de192583ce84b98c00c3248467bf94d0dbe631fecb772f2244a4.png" />
+<img alt="_images/41a17b25009a26601db0f2565f0a06a9ccb855c6d89fefa06ca32a4419b202f2.png" src="_images/41a17b25009a26601db0f2565f0a06a9ccb855c6d89fefa06ca32a4419b202f2.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -950,7 +950,7 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/57bc9570ab5c6b8fabbb0ec5099544a700fcd5b26892a631492604f8a63999fe.png" src="_images/57bc9570ab5c6b8fabbb0ec5099544a700fcd5b26892a631492604f8a63999fe.png" />
+<img alt="_images/14db8569c7194538dff4af053cdb24fd2f170c1c2732f38f02f9c16d92da3078.png" src="_images/14db8569c7194538dff4af053cdb24fd2f170c1c2732f38f02f9c16d92da3078.png" />
 </div>
 </div>
 </section>
@@ -971,7 +971,7 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/456fafd1e6404ae9e9a9a5a1a6e17a25c80984516667d39940ad3a45f64352eb.png" src="_images/456fafd1e6404ae9e9a9a5a1a6e17a25c80984516667d39940ad3a45f64352eb.png" />
+<img alt="_images/b286e321b57023c051e78023234ff8a8b5e2816889b2f442bb4e845080d880d1.png" src="_images/b286e321b57023c051e78023234ff8a8b5e2816889b2f442bb4e845080d880d1.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -999,28 +999,28 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
-linguistics : 0.2937360935051703
-ai : 0.19552783653730865
-computer : 0.18384006657900867
-language : 0.16614296954089047
-debris : 0.15670080899340388
-finite : 0.14102422897639594
-roswell : 0.13058400749450322
-study : 0.12607484174626984
-beer : 0.11665182786499376
-practical : 0.11015103506443888
+tropical : 0.19054058004401336
+typhoon : 0.11611622648190681
+cyclones : 0.09313394490155551
+cyclone : 0.07666420163148005
+pacific : 0.07463135945995121
+warning : 0.05575608420660903
+wine : 0.049893290151923786
+typhoons : 0.04181706315495677
+northwest : 0.04181706315495677
+low : 0.04181706315495677
 
 * Topic-9 top 10 terms *
-tsunamis : 0.32748763644957035
-tsunami : 0.32748763644957035
-series : 0.23298530031981324
-waves : 0.21832509096638023
-large : 0.1722802726055426
-generated : 0.13771315168379533
-harry : 0.11947698062793848
-ocean : 0.11627361437560915
-resemble : 0.10916254548319011
-normal : 0.10916254548319011
+tsunamis : 0.32748763644956824
+tsunami : 0.32748763644956824
+series : 0.23298530031981798
+waves : 0.21832509096637878
+large : 0.17228027260554202
+generated : 0.137713151683795
+harry : 0.11947698062794247
+ocean : 0.11627361437560851
+resemble : 0.10916254548318939
+normal : 0.10916254548318939
 </pre></div>
 </div>
 </div>
