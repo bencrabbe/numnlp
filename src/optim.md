@@ -1885,3 +1885,47 @@ def hessian(x):
 minx = newton(np.array([2,-2]),grad,hessian)
 print('minimum found',minx)
 ```
+
+## Exercises
+
+
+**Exercise 1** Find the first derivative function of the following functions. 
+
+1. $f(x) = 1 + x^2$
+2. $f(x) = x^2+ x - 7$
+3. $f(x) = x^2+x+1$
+4. $f(x) = 4x^3-3x^2+2x-1$
+5. $f(x) = \frac{1}{4} x^4 + \frac{1}{3}x^3 + \frac{1}{2}x^2$
+6. $f(x) = (3x-5)^3$
+7. $f(x) = -6\exp(2x+1) - \log(3x+2)$
+8. $f(x) = \log \left[ (x+1)^2 (x+2)^3 \right]$
+9. $f(x) = \log \left[ (x-1)^2 (x+1)^3 (x+3)^4 \right]$
+10. $f(x) = \sum_{i=1}^{10} (x-3)^2$
+
+Check your answers with `sympy`
+
+**Exercise 2** Find the minima of the following quadratic (convex) functions with the analytic method
+1. $f(x) = 2x^2+x-1$
+2. $f(x) = x^2-6x+15$
+3. $f(x) = 4x^2-49$
+4. $f(x) = 25x^2-10x+5$
+5. $f(x) = 16x^2-24x+7$
+
+Read `sympy` docs and find a function that allows you to check your answers.
+
+
+
+**Exercise 3** Find all the partial derivative functions for the following
+multivariate functions:
+
+1. $f(x,y) = x + 2y + 3$
+2. $f(x,y) = x^2+y^2$
+3. $f(x,y) = x^3 + xy + y^3$
+4. $f(x,y,z) = xy +yz$
+5. $f(x_1,x_2,x_3) = \log\prod_{i=1}^3 (x_i-2)^2$
+
+Check your answers with `sympy`
+
+**Exercise 4**
+Evaluate the gradient of each of the functions of exercise 3 at the
+points $(-1,-1), (0,1), (1,2), (2,1)$
