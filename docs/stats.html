@@ -661,7 +661,7 @@ Since singular values are square roots of the eigenvalues, they also represent v
 </div>
 <div class="cell tag_remove-input tag_remove-stderr docutils container">
 <div class="cell_output docutils container">
-<img alt="_images/f454d2c0b64bad8ec0da7db9dcdfab9cfefb917309a5935dcf06d9c375b8a99e.png" src="_images/f454d2c0b64bad8ec0da7db9dcdfab9cfefb917309a5935dcf06d9c375b8a99e.png" />
+<img alt="_images/bdd1641ade4ce0fcbee8320a471403967e01fb000762b0c69022378e4a742a5a.png" src="_images/bdd1641ade4ce0fcbee8320a471403967e01fb000762b0c69022378e4a742a5a.png" />
 </div>
 </div>
 <p>This figure illlustrates the scatter plots of two bivariate data sets together with their respective covariance matrices. The red arrows are the eigenvectors of the covariance matrix scaled by their eigenvalues.
@@ -842,21 +842,21 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.         0.         0.         0.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.         0.01621587 0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.01829764 0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.02067214 0.         0.
+  0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
   0.         0.         0.         0.         0.01289548 0.
   0.         0.         0.        ]
  [0.         0.         0.         0.         0.         0.
   0.         0.         0.         0.         0.         0.
-  0.         0.01975395 0.01799021]
- [0.         0.         0.         0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.02417902]
- [0.         0.         0.         0.033025   0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.         0.        ]
- [0.         0.00808763 0.00963735 0.         0.         0.
-  0.         0.         0.         0.         0.         0.
-  0.         0.0157788  0.        ]]
+  0.0188059  0.         0.        ]]
 </pre></div>
 </div>
 </div>
@@ -904,7 +904,7 @@ Let <span class="math notranslate nohighlight">\(c:W\times D\mapsto \mathbb{N}\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/790bda1598ef8e5ebb23731335f0ac38bca68b352fa92f2e72b4ee4f022bfc6b.png" src="_images/790bda1598ef8e5ebb23731335f0ac38bca68b352fa92f2e72b4ee4f022bfc6b.png" />
+<img alt="_images/ade7092c01510e3ca2fdd4cd19d014fbf818181e3643a31e94ccfd6d25d661af.png" src="_images/ade7092c01510e3ca2fdd4cd19d014fbf818181e3643a31e94ccfd6d25d661af.png" />
 </div>
 </div>
 <p>These 2D plots use only the first 2 singular values of SVD. This drops a lot of variance from the original high dimensional data
@@ -950,7 +950,7 @@ and are to be viewed as mirrors of high dimensional data but as distorting mirro
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7a7189c14f68fa16d73e3f93b2609857e5f3190273359c5be064477af77b668f.png" src="_images/7a7189c14f68fa16d73e3f93b2609857e5f3190273359c5be064477af77b668f.png" />
+<img alt="_images/a624845a4fe360f631c1736dc09da1f5806224f22a2b28b2a8b43742e537d03c.png" src="_images/a624845a4fe360f631c1736dc09da1f5806224f22a2b28b2a8b43742e537d03c.png" />
 </div>
 </div>
 </section>
@@ -971,7 +971,7 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/37245935f7fbd9b15d1244e75cdd843565bbe9345c196d446c44375384881015.png" src="_images/37245935f7fbd9b15d1244e75cdd843565bbe9345c196d446c44375384881015.png" />
+<img alt="_images/1c3374ff09390640a49ad4609b4341a363ea3e0163bcd82567fb8b5b4dbbf128.png" src="_images/1c3374ff09390640a49ad4609b4341a363ea3e0163bcd82567fb8b5b4dbbf128.png" />
 </div>
 </div>
 <p>Now how do we interpret these latent topics ? For the <em>topic documents matrix</em> <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span> each line represents a latent topic vector while for the <em>term-topic matrix</em> <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> each <em>i</em>-th column represents the latent topic corresponding to the <em>i</em>-th line in <span class="math notranslate nohighlight">\(\mathbf{V}^\top\)</span>. We can get elements of interpretation of the latent topic by retrieving terms with the highest scores in the topic.  Here we attempt to get an interpretation for topic-3 and topic-9.</p>
@@ -999,28 +999,28 @@ Each element of a document vector (a column of the <em>topic-document matrix</em
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Topic-3 top 10 terms *
-linguistics : 0.32668340246028293
-ai : 0.2117995995081869
-computer : 0.2019041212775285
-language : 0.18436296825350118
-beer : 0.15969056054609948
-finite : 0.15928289474046964
-study : 0.13989754526140277
-practical : 0.12250627592260607
-theoretical : 0.10951427475785291
-state : 0.10618859649364641
+tropical : 0.14581912770000072
+typhoon : 0.08782605059856814
+cyclones : 0.07177572557569263
+cyclone : 0.05841129457464221
+wine : 0.05675458346458275
+pacific : 0.05656183549923639
+warning : 0.04201942382530274
+solar : 0.038401531774175726
+typhoons : 0.03151456786897706
+northwest : 0.03151456786897706
 
 * Topic-9 top 10 terms *
-ai : 0.18149458582189093
+ai : 0.18149458582187522
 tropical : 0.09600879894112643
-typhoon : 0.07680100071537778
-computer : 0.07463184841585106
-artificial : 0.05541521403929408
-pacific : 0.04736112031094324
-intelligence : 0.04699897703696764
-theory : 0.04524603333125212
-cyclone : 0.04320244991412605
-beer : 0.041128404057916707
+typhoon : 0.07680100071537717
+computer : 0.07463184841585029
+artificial : 0.0554152140392906
+pacific : 0.047361120310942924
+intelligence : 0.04699897703696423
+theory : 0.04524603333125176
+cyclone : 0.04320244991412589
+beer : 0.041128404057916346
 </pre></div>
 </div>
 </div>

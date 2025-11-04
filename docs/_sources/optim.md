@@ -1927,5 +1927,5 @@ multivariate functions:
 Check your answers with `sympy`
 
 **Exercise 4**
-Evaluate the gradient of each of the functions of exercise 3 at the
+Evaluate the gradient of each of the 3 first functions of exercise 3 at the
 points $(-1,-1), (0,1), (1,2), (2,1)$
